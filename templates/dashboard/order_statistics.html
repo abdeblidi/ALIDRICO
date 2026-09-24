@@ -1,0 +1,672 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}إحصائيات الطلبات{% endblock %}
+{% block page_title %}إحصائيات الطلبات والمبيعات{% endblock %}
+
+{% block extra_css %}
+<style>
+    .stats-filter {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 1.35rem;
+        height: 100%;
+    }
+
+    .stats-card h6 {
+        color: var(--text-muted);
+        margin-bottom: .5rem;
+    }
+
+    .stats-card h3 {
+        color: #fff;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .stats-card .small-value {
+        color: var(--text-muted);
+        font-size: .8rem;
+        margin-top: .35rem;
+    }
+
+    .chart-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .chart-card-header {
+        background: linear-gradient(
+            135deg,
+            var(--primary-color),
+            var(--secondary-color)
+        );
+        color: #fff;
+        padding: 1rem 1.25rem;
+        font-weight: 700;
+    }
+
+    .chart-card-body {
+        padding: 1.25rem;
+    }
+
+    .table-custom {
+        width: 100%;
+        color: #fff;
+        border-collapse: collapse;
+    }
+
+    .table-custom th,
+    .table-custom td {
+        padding: .9rem;
+        border-bottom: 1px solid var(--border-color);
+        text-align: right;
+    }
+
+    .table-custom th {
+        color: var(--accent-color);
+        font-weight: 700;
+    }
+
+    .table-custom td {
+        color: var(--text-light);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-muted);
+    }
+
+    .empty-state i {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: .75rem;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     KPIs
+===================================================== -->
+
+<div class="row g-4 mb-4">
+
+    <!-- إجمالي الطلبات -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-receipt me-2"></i>
+                إجمالي الطلبات
+            </h6>
+
+            <h3>
+                {{ total_orders|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- طلبات السلة -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-cart-check me-2"></i>
+                طلبات السلة
+            </h6>
+
+            <h3>
+                {{ total_orders|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- إجمالي القطع المباعة -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-box-seam me-2"></i>
+                إجمالي القطع المباعة
+            </h6>
+
+            <h3>
+                {{ products_sold|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- إجمالي المبيعات -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-currency-dollar me-2"></i>
+                إجمالي المبيعات
+            </h6>
+
+            <h3>
+                {{ products_revenue|default:"0.00" }} DZD
+            </h3>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STATUS + REVENUE DETAILS
+===================================================== -->
+
+<div class="row g-4 mb-4">
+
+    <!-- طلبات جديدة -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                طلبات جديدة
+            </h6>
+
+            <h3>
+                {{ new_orders|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- قيد المعالجة -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                قيد المعالجة
+            </h6>
+
+            <h3>
+                {{ processing_orders|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- مكتملة -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                مكتملة
+            </h6>
+
+            <h3>
+                {{ completed_orders|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- ملغاة -->
+    <div class="col-xl-3 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                ملغاة
+            </h6>
+
+            <h3>
+                {{ cancelled_orders|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FINANCIAL DETAILS
+===================================================== -->
+
+<div class="row g-4 mb-4">
+
+    <!-- إجمالي المبيعات اليومية -->
+    <div class="col-xl-4 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-calendar-day me-2"></i>
+                إجمالي المبيعات اليومية
+            </h6>
+
+            <h3>
+                {{ daily_revenue_total|default:"0.00" }} DZD
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- التوصيل -->
+    <div class="col-xl-4 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-truck me-2"></i>
+                إجمالي التوصيل
+            </h6>
+
+            <h3>
+                {{ delivery_revenue|default:"0.00" }} DZD
+            </h3>
+
+        </div>
+    </div>
+
+
+    <!-- المنتجات المختلفة -->
+    <div class="col-xl-4 col-md-6">
+        <div class="stats-card">
+
+            <h6>
+                <i class="bi bi-boxes me-2"></i>
+                المنتجات المختلفة المباعة
+            </h6>
+
+            <h3>
+                {{ unique_products_sold|default:"0" }}
+            </h3>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CURRENT MONTH DAILY STATISTICS + STATUS
+===================================================== -->
+
+<div class="row g-4">
+
+    <!-- إحصائيات الأيام للشهر الحالي -->
+    <div class="col-xl-8">
+
+        <div class="chart-card">
+
+            <div class="chart-card-header">
+
+                <i class="bi bi-calendar3 me-2"></i>
+
+                المبيعات اليومية لشهر {{ current_month }}
+
+            </div>
+
+            <div class="chart-card-body table-responsive">
+
+                <table class="table-custom">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                اليوم
+                            </th>
+
+                            <th>
+                                عدد الطلبات
+                            </th>
+
+                            <th>
+                                المبيعات (DZD)
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="dailyStatsBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- حالات الطلبات -->
+    <div class="col-xl-4">
+
+        <div class="chart-card">
+
+            <div class="chart-card-header">
+
+                <i class="bi bi-pie-chart me-2"></i>
+
+                حالات الطلبات
+
+            </div>
+
+            <div class="chart-card-body">
+
+                <div style="height:330px; position:relative;">
+
+                    <canvas
+                        id="orderStatusChart"
+                    ></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MONTHLY STATISTICS
+===================================================== -->
+
+<div class="row g-4 mt-1">
+
+    <div class="col-12">
+
+        <div class="chart-card">
+
+            <div class="chart-card-header">
+
+                <i class="bi bi-calendar3 me-2"></i>
+
+                الإحصائيات الشهرية
+
+            </div>
+
+            <div class="chart-card-body table-responsive">
+
+                <table class="table-custom">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                الشهر
+                            </th>
+
+                            <th>
+                                عدد الطلبات
+                            </th>
+
+                            <th>
+                                المبيعات (DZD)
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="monthlyStatsBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<script>
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        /* =================================================
+           CURRENT MONTH DAILY DATA
+        ================================================= */
+
+        const dailyLabels =
+            {{ daily_labels|default:"[]"|safe }};
+
+        const dailyOrders =
+            {{ daily_orders|default:"[]"|safe }};
+
+        const dailySales =
+            {{ daily_revenue|default:"[]"|safe }};
+
+
+        /* =================================================
+           STATUS DATA
+        ================================================= */
+
+        const statusLabels = [
+            'جديدة',
+            'قيد المعالجة',
+            'مكتملة',
+            'ملغاة'
+        ];
+
+        const statusData = [
+            {{ new_orders|default:"0" }},
+            {{ processing_orders|default:"0" }},
+            {{ completed_orders|default:"0" }},
+            {{ cancelled_orders|default:"0" }}
+        ];
+
+
+        /* =================================================
+           STATUS DOUGHNUT
+        ================================================= */
+
+        const statusCanvas =
+            document.getElementById(
+                'orderStatusChart'
+            );
+
+        if (statusCanvas) {
+
+            new Chart(
+                statusCanvas.getContext('2d'),
+                {
+
+                    type: 'doughnut',
+
+                    data: {
+
+                        labels: statusLabels,
+
+                        datasets: [
+
+                            {
+
+                                data: statusData,
+
+                                backgroundColor: [
+
+                                    'rgba(243, 156, 18, 0.8)',
+
+                                    'rgba(0, 188, 212, 0.8)',
+
+                                    'rgba(39, 174, 96, 0.8)',
+
+                                    'rgba(231, 76, 60, 0.8)'
+
+                                ],
+
+                                borderColor:
+                                    '#1b2838',
+
+                                borderWidth: 2
+
+                            }
+
+                        ]
+
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        plugins: {
+
+                            legend: {
+
+                                position: 'bottom',
+
+                                labels: {
+
+                                    color: '#fff',
+
+                                    font: {
+                                        family: 'Cairo'
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           CURRENT MONTH DAILY TABLE
+        ================================================= */
+
+        const dailyStatsBody =
+            document.getElementById(
+                'dailyStatsBody'
+            );
+
+        if (dailyStatsBody) {
+
+            dailyLabels.forEach(
+                function (day, index) {
+
+                    const orders =
+                        dailyOrders[index] || 0;
+
+                    const sales =
+                        dailySales[index] || 0;
+
+                    const row =
+                        document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${day}</td>
+                        <td>${orders}</td>
+                        <td>${Number(sales).toFixed(2)} DZD</td>
+                    `;
+
+                    dailyStatsBody.appendChild(row);
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           MONTHLY DATA
+        ================================================= */
+
+        const monthlyLabels =
+            {{ monthly_labels|default:"[]"|safe }};
+
+        const monthlyOrders =
+            {{ monthly_orders|default:"[]"|safe }};
+
+        const monthlySales =
+            {{ monthly_revenue|default:"[]"|safe }};
+
+
+        const monthlyStatsBody =
+            document.getElementById(
+                'monthlyStatsBody'
+            );
+
+        if (monthlyStatsBody) {
+
+            monthlyLabels.forEach(
+                function (month, index) {
+
+                    const orders =
+                        monthlyOrders[index] || 0;
+
+                    const sales =
+                        monthlySales[index] || 0;
+
+                    const row =
+                        document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${month}</td>
+                        <td>${orders}</td>
+                        <td>${Number(sales).toFixed(2)} DZD</td>
+                    `;
+
+                    monthlyStatsBody.appendChild(row);
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

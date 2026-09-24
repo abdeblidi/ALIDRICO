@@ -1,0 +1,584 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate 'التصنيفات' %} | ALIDRICO{% endblock %}
+
+{% block extra_css %}
+
+<style>
+
+    .categories-grid {
+        padding: 2rem 0 4rem;
+    }
+
+
+    .category-card-large {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+
+    .category-card-large::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+
+        background: linear-gradient(
+            90deg,
+            var(--accent-color),
+            var(--secondary-color)
+        );
+
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+    }
+
+
+    .category-card-large:hover::before {
+        transform: scaleX(1);
+    }
+
+
+    .category-card-large:hover {
+        transform: translateY(-8px);
+
+        box-shadow:
+            0 25px 50px rgba(0,0,0,0.4);
+
+        border-color:
+            var(--accent-color);
+
+        color: inherit;
+    }
+
+
+    /* =====================================================
+       ICON / IMAGE BOX
+    ====================================================== */
+
+    .category-card-large .icon-box {
+
+        width: 90px;
+        height: 90px;
+
+        background: linear-gradient(
+            135deg,
+            var(--primary-color) 0%,
+            var(--secondary-color) 100%
+        );
+
+        border-radius: 20px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin: 0 auto 1.5rem;
+
+        font-size: 2.2rem;
+
+        color: #fff;
+
+        transition: all 0.3s ease;
+
+        overflow: hidden;
+    }
+
+
+    /*
+        صورة التصنيف
+
+        نستخدم contain حتى تظهر الصورة كاملة
+        ولا تخرج من الإطار.
+    */
+
+    .category-card-large .icon-box img {
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+
+        border-radius: 20px;
+
+        display: block;
+    }
+
+
+    .category-card-large:hover .icon-box {
+
+        transform:
+            rotate(5deg)
+            scale(1.1);
+
+        box-shadow:
+            0 10px 30px rgba(0,188,212,0.3);
+    }
+
+
+    .category-card-large h4 {
+
+        font-weight: 700;
+
+        margin-bottom: 0.75rem;
+
+        color: var(--heading-color);
+    }
+
+
+    .category-card-large .description {
+
+        color: var(--text-muted);
+
+        font-size: 0.9rem;
+
+        margin-bottom: 1rem;
+    }
+
+
+    .category-card-large .product-count {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        background:
+            rgba(0,188,212,0.1);
+
+        color:
+            var(--accent-color);
+
+        padding:
+            0.4rem 1rem;
+
+        border-radius:
+            20px;
+
+        font-size:
+            0.85rem;
+
+        font-weight:
+            600;
+    }
+
+
+    .category-card-large .product-count i {
+
+        margin-left:
+            0.3rem;
+    }
+
+
+    .category-card-large .arrow {
+
+        position:
+            absolute;
+
+        bottom:
+            1.5rem;
+
+        left:
+            1.5rem;
+
+        color:
+            var(--accent-color);
+
+        opacity:
+            0;
+
+        transform:
+            translateX(-10px);
+
+        transition:
+            all 0.3s ease;
+    }
+
+
+    .category-card-large:hover .arrow {
+
+        opacity:
+            1;
+
+        transform:
+            translateX(0);
+    }
+
+
+    .empty-categories {
+
+        background: var(--card-bg);
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 16px;
+
+        padding: 4rem 2rem;
+
+        text-align: center;
+    }
+
+
+    .empty-categories i {
+
+        font-size: 4rem;
+
+        color: var(--text-muted);
+
+        opacity: 0.6;
+    }
+
+
+    .empty-categories h4 {
+
+        color: var(--heading-color);
+
+        margin-top: 1rem;
+
+        margin-bottom: 0.5rem;
+    }
+
+
+    .empty-categories p {
+
+        color: var(--text-muted);
+
+        margin-bottom: 0;
+    }
+
+
+    /* =====================================================
+       PAGINATION
+    ====================================================== */
+
+    .pagination-custom {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 0.5rem;
+
+        margin-top: 3rem;
+
+        flex-wrap: wrap;
+    }
+
+
+    .pagination-custom .page-link {
+
+        background: var(--card-bg);
+
+        border: 1px solid var(--border-color);
+
+        color: var(--text-light);
+
+        border-radius: 8px;
+
+        padding: 0.5rem 1rem;
+
+        text-decoration: none;
+
+        transition: all 0.3s ease;
+    }
+
+
+    .pagination-custom .page-link:hover {
+
+        background: var(--accent-color);
+
+        color: #fff;
+
+        border-color: var(--accent-color);
+    }
+
+
+    .pagination-custom .page-link.active {
+
+        background: var(--accent-color);
+
+        color: #fff;
+
+        border-color: var(--accent-color);
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     BREADCRUMB
+====================================================== -->
+
+<div class="breadcrumb-wrapper">
+
+    <div class="container">
+
+        <h1>
+            {% translate "تصنيفات المكونات" %}
+        </h1>
+
+        <nav aria-label="breadcrumb">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+
+                    <a href="{% url 'catalog:home' %}">
+                        {% translate "الرئيسية" %}
+                    </a>
+
+                </li>
+
+                <li class="breadcrumb-item active">
+
+                    {% translate "التصنيفات" %}
+
+                </li>
+
+            </ol>
+
+        </nav>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CATEGORIES
+====================================================== -->
+
+<section class="categories-grid">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <h2>
+                {% translate "جميع التصنيفات" %}
+            </h2>
+
+            <p>
+                {% translate "اختر التصنيف المناسب لتصفح المنتجات" %}
+            </p>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            {% for category in categories %}
+
+
+            <div class="col-lg-4 col-md-6">
+
+
+                <a
+                    href="{% url 'catalog:category_products' category.slug %}"
+                    class="category-card-large"
+                >
+
+
+                    <!-- =================================================
+                         IMAGE / ICON
+                    ================================================== -->
+
+                    <div class="icon-box">
+
+                        {% if category.image %}
+
+                            <img
+                                src="{{ category.image.url }}"
+                                alt="{{ category.name }}"
+                            >
+
+                        {% else %}
+
+                            <i
+                                class="bi {{ category.icon|default:'bi-cpu' }}"
+                            ></i>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- =================================================
+                         CATEGORY NAME
+                    ================================================== -->
+
+                    <h4>
+
+                        {{ category.name }}
+
+                    </h4>
+
+
+                    <!-- =================================================
+                         DESCRIPTION
+                    ================================================== -->
+
+                    <p class="description">
+
+                        {% if category.description %}
+                            {{ category.description }}
+                        {% else %}
+                            {% translate "تصفح مجموعة واسعة من المكونات الإلكترونية في هذا التصنيف" %}
+                        {% endif %}
+
+                    </p>
+
+
+                    <!-- =================================================
+                         PRODUCT COUNT
+                    ================================================== -->
+
+                    <span class="product-count">
+
+                        <i class="bi bi-box-seam"></i>
+
+                        {{ category.products.count|default:0 }}
+
+                        {% translate "منتج" %}
+
+                    </span>
+
+
+                    <!-- =================================================
+                         ARROW
+                    ================================================== -->
+
+                    <div class="arrow">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                    </div>
+
+
+                </a>
+
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="empty-categories">
+
+                    <i class="bi bi-folder-x"></i>
+
+                    <h4>
+                        {% translate "لا توجد تصنيفات حالياً" %}
+                    </h4>
+
+                    <p>
+                        {% translate "سيتم عرض التصنيفات هنا عند إضافتها من لوحة الإدارة." %}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <!-- =====================================================
+             PAGINATION
+        ====================================================== -->
+
+        {% if categories.has_other_pages %}
+
+        <div class="pagination-custom">
+
+            {% if categories.has_previous %}
+
+                <a
+                    href="?page={{ categories.previous_page_number }}"
+                    class="page-link"
+                >
+                    <i class="bi bi-chevron-right"></i>
+
+                    
+                </a>
+
+            {% endif %}
+
+
+            {% for num in categories.paginator.page_range %}
+
+                {% if categories.number == num %}
+
+                    <span class="page-link active">
+                        {{ num }}
+                    </span>
+
+                {% else %}
+
+                    <a
+                        href="?page={{ num }}"
+                        class="page-link"
+                    >
+                        {{ num }}
+                    </a>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            {% if categories.has_next %}
+
+                <a
+                    href="?page={{ categories.next_page_number }}"
+                    class="page-link"
+                >
+                    
+
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

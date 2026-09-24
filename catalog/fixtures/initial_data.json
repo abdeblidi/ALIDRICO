@@ -1,0 +1,635 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Diodes",
+      "slug": "diodes",
+      "description": "General purpose, Schottky, Zener, LED and power diodes",
+      "icon": "bi-diagram-2",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Resistors",
+      "slug": "resistors",
+      "description": "Fixed, variable, SMD and resistor networks",
+      "icon": "bi-resistor",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Capacitors",
+      "slug": "capacitors",
+      "description": "Ceramic, electrolytic, tantalum and film capacitors",
+      "icon": "bi-battery",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Transistors",
+      "slug": "transistors",
+      "description": "NPN, PNP, MOSFET, IGBT and JFET transistors",
+      "icon": "bi-cpu",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "LEDs",
+      "slug": "leds",
+      "description": "Various colors, RGB, SMD, high power and LED strips",
+      "icon": "bi-lightbulb",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Integrated Circuits",
+      "slug": "integrated-circuits",
+      "description": "ICs, voltage regulators, op-amps and converters",
+      "icon": "bi-motherboard",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Arduino / ESP32",
+      "slug": "arduino-esp32",
+      "description": "Arduino boards, ESP32, WiFi/Bluetooth modules",
+      "icon": "bi-usb-symbol",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+      "name": "Microcontrollers",
+      "slug": "microcontrollers",
+      "description": "AVR, PIC, ARM, STM32 and TI microcontrollers",
+      "icon": "bi-chip",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+      "name": "Connectors",
+      "slug": "connectors",
+      "description": "Connectors, sockets, pin headers and terminals",
+      "icon": "bi-plugin",
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "1N4007 Diode",
+      "slug": "1n4007-diode",
+      "part_number": "1N4007",
+      "category": 1,
+      "description": "General purpose rectifier diode. 1000V 1A. Ideal for rectification and reverse current protection applications.",
+      "short_description": "General purpose rectifier diode 1000V 1A",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "15.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "1N5819 Schottky Diode",
+      "slug": "1n5819-schottky-diode",
+      "part_number": "1N5819",
+      "category": 1,
+      "description": "Schottky barrier diode. 40V 1A. Low forward voltage drop ideal for fast switching applications.",
+      "short_description": "Schottky diode 40V 1A",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "25.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "1N4148 Signal Diode",
+      "slug": "1n4148-signal-diode",
+      "part_number": "1N4148",
+      "category": 1,
+      "description": "High speed signal diode. 100V 200mA. Most commonly used in digital and switching circuits.",
+      "short_description": "Signal diode 100V 200mA",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "12.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "10kΩ Resistor",
+      "slug": "10k-resistor",
+      "part_number": "10K-1/4W",
+      "category": 2,
+      "description": "10 kilo-ohm 1/4 watt 5% carbon film resistor. Most commonly used in electronic circuits.",
+      "short_description": "10kΩ 1/4W 5% resistor",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "5.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "220Ω Resistor",
+      "slug": "220r-resistor",
+      "part_number": "220R-1/4W",
+      "category": 2,
+      "description": "220 ohm 1/4 watt 5% carbon film resistor. Common for LED current limiting.",
+      "short_description": "220Ω 1/4W 5% resistor",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "5.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "100µF Capacitor",
+      "slug": "100uf-capacitor",
+      "part_number": "100uF-25V",
+      "category": 3,
+      "description": "100 microfarad 25V electrolytic capacitor. Ideal for power supply filtering and decoupling.",
+      "short_description": "100µF 25V electrolytic capacitor",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "15.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "100nF Ceramic",
+      "slug": "100nf-ceramic",
+      "part_number": "100nF-50V",
+      "category": 3,
+      "description": "100 nanofarad 50V ceramic disc capacitor. Used for high frequency decoupling.",
+      "short_description": "100nF 50V ceramic capacitor",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "8.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "BC547 Transistor",
+      "slug": "bc547-transistor",
+      "part_number": "BC547",
+      "category": 4,
+      "description": "NPN general purpose transistor. Popular for switching and amplification circuits.",
+      "short_description": "NPN transistor for general purpose",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "18.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "2N2222 Transistor",
+      "slug": "2n2222-transistor",
+      "part_number": "2N2222",
+      "category": 4,
+      "description": "NPN switching transistor. 800mA collector current. High speed switching applications.",
+      "short_description": "NPN switching transistor 800mA",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "22.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Red LED 5mm",
+      "slug": "red-led-5mm",
+      "part_number": "LED-5MM-R",
+      "category": 5,
+      "description": "Red 5mm LED high brightness. 20mA forward current. 620-625nm wavelength.",
+      "short_description": "Red LED 5mm high brightness",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "10.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "Blue LED 5mm",
+      "slug": "blue-led-5mm",
+      "part_number": "LED-5MM-B",
+      "category": 5,
+      "description": "Blue 5mm LED high brightness. 20mA forward current. 460-465nm wavelength.",
+      "short_description": "Blue LED 5mm high brightness",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "10.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "name": "ATmega328P",
+      "slug": "atmega328p",
+      "part_number": "ATmega328P",
+      "category": 8,
+      "description": "8-bit AVR microcontroller. 32KB flash, 2KB SRAM, 1KB EEPROM. Used in Arduino UNO.",
+      "short_description": "8-bit AVR microcontroller 32KB",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "350.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "name": "PIC16F877A",
+      "slug": "pic16f877a",
+      "part_number": "PIC16F877A",
+      "category": 8,
+      "description": "8-bit PIC microcontroller. 14KB flash, 368B RAM. 40-pin DIP package.",
+      "short_description": "8-bit PIC microcontroller 14KB",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "280.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+      "name": "Arduino UNO R3",
+      "slug": "arduino-uno-r3",
+      "part_number": "ARD-UNO-R3",
+      "category": 7,
+      "description": "Arduino UNO R3 board with ATmega328P. USB cable included. Perfect for beginners.",
+      "short_description": "Arduino UNO R3 development board",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "2500.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "name": "ESP32 DevKit",
+      "slug": "esp32-devkit",
+      "part_number": "ESP32-DEVKIT",
+      "category": 7,
+      "description": "ESP32 development board with WiFi and Bluetooth. Dual core processor. 30 pins.",
+      "short_description": "ESP32 WiFi/Bluetooth dev board",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "1800.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "name": "LM7805 Regulator",
+      "slug": "lm7805-regulator",
+      "part_number": "LM7805",
+      "category": 6,
+      "description": "5V positive voltage regulator. 1.5A output current. TO-220 package. Input up to 35V.",
+      "short_description": "5V voltage regulator 1.5A",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "45.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 17,
+    "fields": {
+      "name": "NE555 Timer",
+      "slug": "ne555-timer",
+      "part_number": "NE555",
+      "category": 6,
+      "description": "Precision timer IC. Astable and monostable modes. DIP-8 package.",
+      "short_description": "Precision timer IC DIP-8",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "35.0"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 18,
+    "fields": {
+      "name": "Male Pin Header",
+      "slug": "male-pin-header",
+      "part_number": "HDR-M-40",
+      "category": 9,
+      "description": "40-pin male pin header strip. 2.54mm pitch. Breakable into smaller sections.",
+      "short_description": "40-pin male header 2.54mm",
+      "is_featured": true,
+      "is_active": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "price": "25.0"
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "name": "Type",
+      "value": "Rectifier Diode",
+      "order": 0
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "name": "Max Reverse Voltage",
+      "value": "1000V",
+      "order": 1
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "name": "Forward Current",
+      "value": "1.0A",
+      "order": 2
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 4,
+    "fields": {
+      "product": 1,
+      "name": "Forward Voltage",
+      "value": "1.1V @ 1A",
+      "order": 3
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 5,
+    "fields": {
+      "product": 1,
+      "name": "Package",
+      "value": "DO-41",
+      "order": 4
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 6,
+    "fields": {
+      "product": 1,
+      "name": "Operating Temp",
+      "value": "-55°C to +175°C",
+      "order": 5
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 7,
+    "fields": {
+      "product": 8,
+      "name": "Type",
+      "value": "NPN Transistor",
+      "order": 0
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 8,
+    "fields": {
+      "product": 8,
+      "name": "VCEO",
+      "value": "45V",
+      "order": 1
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 9,
+    "fields": {
+      "product": 8,
+      "name": "IC Max",
+      "value": "100mA",
+      "order": 2
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 10,
+    "fields": {
+      "product": 8,
+      "name": "Package",
+      "value": "TO-92",
+      "order": 3
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 11,
+    "fields": {
+      "product": 12,
+      "name": "Architecture",
+      "value": "8-bit AVR",
+      "order": 0
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 12,
+    "fields": {
+      "product": 12,
+      "name": "Flash Memory",
+      "value": "32KB",
+      "order": 1
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 13,
+    "fields": {
+      "product": 12,
+      "name": "SRAM",
+      "value": "2KB",
+      "order": 2
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 14,
+    "fields": {
+      "product": 12,
+      "name": "EEPROM",
+      "value": "1KB",
+      "order": 3
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 15,
+    "fields": {
+      "product": 12,
+      "name": "Clock Speed",
+      "value": "16MHz",
+      "order": 4
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 16,
+    "fields": {
+      "product": 4,
+      "name": "Resistance",
+      "value": "10kΩ",
+      "order": 0
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 17,
+    "fields": {
+      "product": 4,
+      "name": "Power Rating",
+      "value": "1/4W",
+      "order": 1
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 18,
+    "fields": {
+      "product": 4,
+      "name": "Tolerance",
+      "value": "±5%",
+      "order": 2
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 19,
+    "fields": {
+      "product": 6,
+      "name": "Capacitance",
+      "value": "100µF",
+      "order": 0
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 20,
+    "fields": {
+      "product": 6,
+      "name": "Voltage Rating",
+      "value": "25V",
+      "order": 1
+    }
+  },
+  {
+    "model": "catalog.specification",
+    "pk": 21,
+    "fields": {
+      "product": 6,
+      "name": "Type",
+      "value": "Electrolytic",
+      "order": 2
+    }
+  }
+]

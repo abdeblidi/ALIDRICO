@@ -1,0 +1,591 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}{% translate "إتمام الطلب" %} - ALIDRICO{% endblock %}
+
+{% block content %}
+<style>
+  .order-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+
+  .order-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .order-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .product-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .product-img-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-info {
+    flex: 1;
+  }
+
+  .product-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 12px 0;
+  }
+
+  .meta-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #4b5563;
+  }
+
+  .meta-line strong {
+    color: #6b7280;
+    font-weight: 500;
+    min-width: 110px;
+  }
+
+  .meta-line .value {
+    color: #111827;
+    font-weight: 500;
+  }
+
+  .price-tag {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .stock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .stock-badge.in {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .stock-badge.out {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .form-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 16px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group.full {
+    grid-column: 1 / -1;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .required {
+    color: #dc2626;
+  }
+
+  .optional {
+    color: #9ca3af;
+    font-size: 12px;
+  }
+
+  .form-control-custom {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #111827;
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    transition: border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+
+  .form-control-custom:focus {
+    border-color: #111827;
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+  }
+
+  .form-control-custom::placeholder {
+    color: #9ca3af;
+  }
+
+  select.form-control-custom {
+    cursor: pointer;
+  }
+
+  select.form-control-custom option {
+    color: #111827;
+    background: #fff;
+  }
+
+  textarea.form-control-custom {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .qty-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #111827;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    line-height: 1;
+  }
+
+  .qty-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+
+  .qty-input {
+    width: 80px;
+    text-align: center;
+  }
+
+  .stock-info {
+    color: #6b7280;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .summary-box {
+    margin-top: 24px;
+    padding: 18px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  .summary-row .value {
+    color: #111827;
+    font-weight: 600;
+  }
+
+  .summary-row.total {
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 16px;
+    color: #111827;
+    font-weight: 700;
+  }
+
+  .summary-row.total .value {
+    font-size: 20px;
+    color: #111827;
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 13px 36px;
+    border-radius: 10px;
+    border: none;
+    background: #111827;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    font-family: inherit;
+  }
+
+  .submit-btn:hover {
+    opacity: 0.85;
+  }
+
+  .submit-btn:active {
+    transform: scale(0.98);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .back-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+
+  .back-btn:hover {
+    background: #f3f4f6;
+    color: #111827;
+  }
+
+  .alert-warning {
+    padding: 16px;
+    border-radius: 10px;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    color: #92400e;
+    font-size: 15px;
+  }
+
+  @media (max-width: 640px) {
+
+    .cart-item-row {
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .cart-item-info {
+      flex: 1 1 calc(100% - 92px);
+      min-width: 0;
+    }
+
+    .cart-item-total {
+      width: 100%;
+      text-align: right;
+      white-space: normal;
+      padding-top: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .meta-line {
+      flex-wrap: wrap;
+      gap: 4px 8px;
+    }
+
+    .meta-line strong {
+      min-width: auto;
+    }
+
+    .product-row {
+      flex-direction: column;
+    }
+
+    .product-img-wrap {
+      width: 100%;
+      height: 200px;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+      grid-column: auto;
+    }
+
+    .order-card {
+      padding: 20px;
+    }
+  }
+</style>
+
+<div class="order-page" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+  <div class="order-card">
+
+    <h2 class="order-title">
+      <i class="bi bi-bag-check"></i>
+      {% translate "إتمام الطلب" %}
+    </h2>
+
+    <div class="product-row" style="display:block;">
+
+      <div class="form-section-title">
+        🛒 {% translate "محتويات السلة" %}
+      </div>
+
+      {% for item in items %}
+
+      <div class="cart-item-row" style="
+          display:flex;
+          align-items:center;
+          gap:16px;
+          padding:14px 0;
+          border-bottom:1px solid #f3f4f6;
+        ">
+        <div style="
+            width:80px;
+            height:80px;
+            border-radius:10px;
+            background:#f9fafb;
+            border:1px solid #e5e7eb;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+            overflow:hidden;
+          ">
+          {% if item.product.image %}
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+            style="width:100%;height:100%;object-fit:contain;">
+          {% else %}
+          <i class="bi bi-cpu" style="font-size:2rem;color:#9ca3af;"></i>
+          {% endif %}
+        </div>
+
+        <div class="cart-item-info" style="flex:1;min-width:0;">
+          <div class="product-name" style="font-size:17px;margin-bottom:6px;">
+            {{ item.product.name }}
+          </div>
+
+          <div class="meta-line" style="margin-bottom:4px;">
+            <strong>{% translate "الكمية:" %}</strong>
+            <span class="value">{{ item.quantity }}</span>
+          </div>
+
+          <div class="meta-line" style="margin-bottom:0;">
+            <strong>{% translate "سعر الوحدة:" %}</strong>
+            <span class="value">{{ item.unit_price|floatformat:2 }} DZD</span>
+          </div>
+        </div>
+
+        <div class="cart-item-total" style="font-weight:700;color:#111827;">
+          {{ item.subtotal|floatformat:2 }} DZD
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <form method="POST" action="{% url 'catalog:cart_checkout' %}" id="order-form">
+      {% csrf_token %}
+
+      <div class="form-section-title">
+        📋 {% translate "معلومات الطلب" %}
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="full_name">
+            {% translate "الاسم الكامل" %}
+            <span class="required">*</span>
+          </label>
+
+          <input type="text" id="full_name" name="full_name" class="form-control-custom"
+            value="{{ full_name|default:'' }}" placeholder="{% translate "أدخل اسمك الكامل" %}" maxlength="100"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">
+            {% translate "رقم الهاتف" %}
+            <span class="required">*</span>
+          </label>
+
+          <input type="tel" id="phone" name="phone" class="form-control-custom" value="{{ phone|default:'' }}"
+            placeholder="{% translate "مثال: 05 XX XX XX XX" %}" maxlength="20" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            {% translate "البريد الإلكتروني" %}
+            <span class="optional">({% translate "اختياري" %})</span>
+          </label>
+
+          <input type="email" id="email" name="email" class="form-control-custom" value="{{ email|default:'' }}"
+            placeholder="{% translate "مثال: example@email.com" %}">
+        </div>
+
+        <div class="form-group">
+          <label for="wilaya">
+            {% translate "الولاية" %}
+            <span class="required">*</span>
+          </label>
+
+          <select id="wilaya" name="wilaya" class="form-control-custom" required>
+            <option value="">
+              {% translate "اختر الولاية" %}
+            </option>
+
+            {% for wilaya in wilayas %}
+            <option value="{{ wilaya.id }}" data-delivery-price="{{ wilaya.delivery_price|unlocalize }}">
+              {{ wilaya.code }} - {{ wilaya.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label for="note">
+            {% translate "ملاحظة" %}
+            <span class="optional">({% translate "اختياري" %})</span>
+          </label>
+
+          <textarea id="note" name="note" class="form-control-custom" rows="4" placeholder="{% translate "أي معلومات إضافية تريد إرسالها..." %}">{{ note|default:'' }}</textarea>
+        </div>
+
+      </div>
+
+      <div class="summary-box">
+
+        <div class="summary-row">
+          <span>{% translate "سعر المنتجات" %}</span>
+          <span class="value" id="products-total">
+            {{ products_total|floatformat:2 }} DZD
+          </span>
+        </div>
+
+        <div class="summary-row">
+          <span>{% translate "سعر التوصيل" %}</span>
+          <span class="value" id="delivery-total">
+            0.00 DZD
+          </span>
+        </div>
+
+        <div class="summary-row total">
+          <span>{% translate "الإجمالي" %}</span>
+          <span class="value" id="grand-total">
+            {{ products_total|floatformat:2 }} DZD
+          </span>
+        </div>
+
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        ✓ {% translate "تأكيد الطلب" %}
+      </button>
+
+      <a href="{% url 'catalog:cart' %}" class="back-btn">
+        {% translate "العودة إلى السلة" %}
+      </a>
+
+    </form>
+  </div>
+</div>
+
+{% if items %}
+<script>
+  const PRODUCTS_TOTAL = Number("{{ products_total|default:0|unlocalize }}");
+
+  const wilayaSelect = document.getElementById("wilaya");
+  const deliveryTotal = document.getElementById("delivery-total");
+  const grandTotal = document.getElementById("grand-total");
+
+  function updateTotal() {
+    let deliveryPrice = 0;
+
+    if (wilayaSelect.value) {
+      const selectedOption =
+        wilayaSelect.options[wilayaSelect.selectedIndex];
+
+      deliveryPrice =
+        Number(selectedOption.dataset.deliveryPrice) || 0;
+    }
+
+    const grandTotalValue =
+      PRODUCTS_TOTAL + deliveryPrice;
+
+    deliveryTotal.textContent =
+      deliveryPrice.toFixed(2) + " DZD";
+
+    grandTotal.textContent =
+      grandTotalValue.toFixed(2) + " DZD";
+  }
+
+  wilayaSelect.addEventListener("change", updateTotal);
+
+  updateTotal();
+</script>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,2614 @@
+{% load static %}
+{% load i18n %}
+ 
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE }}" dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+ 
+<head>
+ 
+    <meta charset="UTF-8">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('site-theme');
+            const theme = savedTheme || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+ 
+    <title>
+        {% block title %}
+        ALIDRICO ELECTRONICS STORE
+        {% endblock %}
+    </title>
+ <link rel="icon" type="image/png" href="{% static 'img/logo3.png' %}">
+ 
+    <!-- Bootstrap 5 -->
+ 
+    {% if request.LANGUAGE_CODE == 'ar' %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    {% else %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    {% endif %}
+ 
+ 
+    <!-- Bootstrap Icons -->
+ 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+ 
+ 
+    <!-- Google Fonts -->
+ 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+ 
+ 
+    <style>
+        :root {
+            /* Dark mode = current design */
+            --primary-color: #1a237e;
+            --secondary-color: #3949ab;
+            --accent-color: #00bcd4;
+            --dark-bg: #0d1b2a;
+            --card-bg: #1b2838;
+            --surface-bg: #162536;
+            --text-light: #e0e1dd;
+            --text-muted: #ffffff;
+            --heading-color: #ffffff;
+            --border-color: #2a3f54;
+            --hover-bg: #243447;
+            --input-bg: #132334;
+            --navbar-start: #1a237e;
+            --navbar-end: #3949ab;
+            --navbar-text: #ffffff;
+            --navbar-muted: rgba(255, 255, 255, 0.85);
+            --footer-start: #0a1628;
+            --footer-end: #0d1b2a;
+            --shadow-color: rgba(0, 0, 0, 0.28);
+        }
+
+        html[data-theme="light"] {
+            /* Light mode */
+            --primary-color: #2456a6;
+            --secondary-color: #4d78c7;
+            --accent-color: #008fa3;
+            --dark-bg: #f3f7fb;
+            --card-bg: #ffffff;
+            --surface-bg: #f8fbff;
+            --text-light: #243447;
+            --text-muted: #5f6f82;
+            --heading-color: #172554;
+            --border-color: #d7e1ec;
+            --hover-bg: #edf5fc;
+            --input-bg: #ffffff;
+            --navbar-start: #eaf3ff;
+            --navbar-end: #dceaff;
+            --navbar-text: #17315f;
+            --navbar-muted: #385276;
+            --footer-start: #dbe9f8;
+            --footer-end: #edf5fc;
+            --shadow-color: rgba(36, 68, 105, 0.14);
+        }
+ 
+ 
+        /* =====================================================
+           RESET
+        ====================================================== */
+ 
+        * {
+ 
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           BODY
+        ====================================================== */
+ 
+        body {
+ 
+            font-family:
+                'Cairo',
+                sans-serif;
+ 
+            background-color:
+                var(--dark-bg);
+ 
+            color:
+                var(--text-light);
+ 
+            min-height:
+                100vh;
+ 
+            line-height:
+                1.7;
+ 
+        }
+ 
+ 
+
+        /* Orbit-style top information bar — uses the site's existing theme colors */
+        .site-topbar { background: linear-gradient(135deg, var(--navbar-start), var(--navbar-end)); color: var(--navbar-text); border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px var(--shadow-color); font-size: .86rem; }
+        .site-topbar .topbar-inner { min-height: 42px; display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; }
+        .site-topbar .topbar-item { display:inline-flex; align-items:center; gap:.4rem; padding:.35rem .9rem; color:var(--navbar-text); text-decoration:none; white-space:nowrap; border-inline-end:1px solid rgba(255,255,255,.22); }
+        .site-topbar .topbar-item:last-child { border-inline-end:0; }
+        .site-topbar .topbar-item i { color:var(--accent-color); font-size:1.05rem; }
+        .site-topbar .topbar-item:hover { color:var(--navbar-text); background:rgba(255,255,255,.07); }
+        html[data-theme="light"] .site-topbar .topbar-item { border-inline-end-color:rgba(36,86,166,.16); }
+        @media (max-width:575.98px) { .site-topbar .topbar-inner{min-height:auto;padding:.2rem 0} .site-topbar .topbar-item{padding:.3rem .5rem;font-size:.74rem;border-inline-end:0} .site-topbar .topbar-item i{font-size:.9rem} }
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+ 
+        .navbar {
+ 
+            background:
+                linear-gradient(135deg,
+                    var(--navbar-start) 0%,
+                    var(--navbar-end) 100%);
+ 
+            padding:
+                0.8rem 0;
+ 
+            box-shadow:
+                0 4px 20px var(--shadow-color);
+ 
+        }
+ 
+ 
+        .navbar-brand {
+ 
+            font-weight:
+                800;
+ 
+            font-size:
+                1.35rem;
+ 
+            color:
+                var(--navbar-text) !important;
+ 
+            display:
+                flex;
+ 
+            flex-direction:
+                row-reverse;
+ 
+            align-items:
+                center;
+ 
+            gap:
+                10px;
+ 
+            white-space:
+                nowrap;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           LOGO
+        ====================================================== */
+        .navbar-brand img {
+            height: 86px;
+            width: auto;
+            max-width: 360px;
+            object-fit: contain;
+            display: block;
+            background: transparent !important;
+        }
+
+
+        /* =====================================================
+           NAVBAR LAYOUT — reference
+        ====================================================== */
+        .navbar > .container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* الشعار في أقصى اليمين مثل الصورة المرجعية */
+        .navbar-brand {
+            flex: 0 0 auto;
+            flex-shrink: 0;
+            margin-left: 0.35rem;
+            margin-right: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .navbar-collapse {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+      
+        .navbar-nav {
+            align-items: center;
+            gap: 0;
+        }
+
+        .navbar-nav .nav-link {
+            white-space: nowrap;
+        }
+
+        .navbar .search-box {
+            flex: 0 0 auto;
+            margin-right: 0.8rem;
+        }
+
+
+        /* =====================================================
+           REFERENCE HEADER OVERRIDES
+           الحفاظ على شكل الصورة: شريط أزرق، شعار كبير يميناً،
+           والقائمة بجانبه بدون فراغ أبيض حول الشعار.
+        ====================================================== */
+
+        .navbar .container {
+            max-width: 1320px;
+        }
+
+        .navbar-brand img {
+            background: transparent !important;
+        }
+
+        .navbar-brand {
+            line-height: 1;
+        }
+
+        .navbar-nav {
+            margin-right: 0 !important;
+            margin-left: auto !important;
+        }
+
+        /* =====================================================
+           NAV LINKS
+        ====================================================== */
+ 
+        .nav-link {
+ 
+            color:
+                var(--navbar-muted) !important;
+ 
+            font-weight:
+                500;
+ 
+            padding:
+                0.5rem 1rem !important;
+ 
+            border-radius:
+                8px;
+ 
+            transition:
+                all 0.3s ease;
+ 
+        }
+ 
+ 
+        .nav-link:hover,
+        .nav-link.active {
+ 
+            color:
+                #fff !important;
+ 
+            background:
+                rgba(255, 255, 255, 0.1);
+ 
+        }
+ 
+ 
+        /* =====================================================
+           LANGUAGE SWITCHER
+        ====================================================== */
+ 
+        .language-switcher {
+            margin-right: 0.8rem;
+        }
+ 
+        .language-switcher .dropdown-toggle {
+            color: var(--navbar-muted);
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 0.45rem 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+ 
+        .language-switcher .dropdown-toggle:hover,
+        .language-switcher .dropdown-toggle:focus {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: none;
+        }
+ 
+        /* Native language menu: does not depend on Bootstrap JS */
+        .language-switcher {
+            position: relative;
+        }
+ 
+        .language-switcher .language-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            z-index: 1050;
+        }
+ 
+        .language-switcher .language-menu.show {
+            display: block;
+        }
+ 
+        .language-switcher .language-toggle {
+            cursor: pointer;
+        }
+ 
+        .language-switcher .dropdown-menu {
+            min-width: 150px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--card-bg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            padding: 0.4rem;
+        }
+ 
+        .language-switcher .dropdown-item {
+            color: var(--text-light);
+            border-radius: 7px;
+            padding: 0.55rem 0.8rem;
+            transition: all 0.2s ease;
+        }
+ 
+        .language-switcher .dropdown-item:hover {
+            color: #fff;
+            background: var(--hover-bg);
+        }
+ 
+        @media (max-width: 991px) {
+            .language-switcher {
+                margin: 0.5rem 0;
+            }
+        }
+ 
+ 
+        /* =====================================================
+           SEARCH
+        ====================================================== */
+ 
+        .search-box {
+ 
+            position:
+                relative;
+ 
+        }
+ 
+ 
+        .search-box input {
+ 
+            background:
+                rgba(255, 255, 255, 0.1);
+ 
+            border:
+                1px solid rgba(255, 255, 255, 0.2);
+ 
+            color:
+                #fff;
+ 
+            border-radius:
+                25px;
+ 
+            padding:
+                0.5rem 1rem 0.5rem 2.5rem;
+ 
+            width:
+                250px;
+ 
+            transition:
+                all 0.3s ease;
+ 
+        }
+ 
+ 
+        .search-box input::placeholder {
+ 
+            color:
+                rgba(255, 255, 255, 0.5);
+ 
+        }
+ 
+ 
+        .search-box input:focus {
+ 
+            background:
+                rgba(255, 255, 255, 0.15);
+ 
+            border-color:
+                var(--accent-color);
+ 
+            outline:
+                none;
+ 
+            width:
+                300px;
+ 
+        }
+ 
+ 
+        .search-box i {
+ 
+            position:
+                absolute;
+ 
+            left:
+                12px;
+ 
+            top:
+                50%;
+ 
+            transform:
+                translateY(-50%);
+ 
+            color:
+                rgba(255, 255, 255, 0.5);
+ 
+        }
+ 
+ 
+        /* =====================================================
+           BUTTONS
+        ====================================================== */
+ 
+        .btn-primary-custom {
+ 
+            background:
+                linear-gradient(135deg,
+                    var(--accent-color) 0%,
+                    #008ba3 100%);
+ 
+            border:
+                none;
+ 
+            color:
+                #fff;
+ 
+            padding:
+                0.6rem 1.5rem;
+ 
+            border-radius:
+                8px;
+ 
+            font-weight:
+                600;
+ 
+            transition:
+                all 0.3s ease;
+ 
+        }
+ 
+ 
+        .btn-primary-custom:hover {
+ 
+            transform:
+                translateY(-2px);
+ 
+            box-shadow:
+                0 8px 25px rgba(0, 188, 212, 0.3);
+ 
+            color:
+                #fff;
+ 
+        }
+ 
+ 
+        .btn-outline-custom {
+ 
+            border:
+                2px solid var(--accent-color);
+ 
+            color:
+                var(--accent-color);
+ 
+            padding:
+                0.6rem 1.5rem;
+ 
+            border-radius:
+                8px;
+ 
+            font-weight:
+                600;
+ 
+            transition:
+                all 0.3s ease;
+ 
+            background:
+                transparent;
+ 
+        }
+ 
+ 
+        .btn-outline-custom:hover {
+ 
+            background:
+                var(--accent-color);
+ 
+            color:
+                #fff;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           PRODUCT CARDS
+        ====================================================== */
+ 
+        .card-custom {
+ 
+            background:
+                var(--card-bg);
+ 
+            border:
+                1px solid var(--border-color);
+ 
+            border-radius:
+                16px;
+ 
+            overflow:
+                hidden;
+ 
+            transition:
+                all 0.3s ease;
+ 
+            height:
+                100%;
+ 
+        }
+ 
+ 
+        .card-custom:hover {
+ 
+            transform:
+                translateY(-8px);
+ 
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.4);
+ 
+            border-color:
+                var(--accent-color);
+ 
+        }
+ 
+ 
+        /* =====================================================
+           PRODUCT IMAGE
+        ====================================================== */
+ 
+        .card-custom .card-img-wrapper {
+ 
+            height:
+                200px;
+ 
+            width:
+                100%;
+ 
+            overflow:
+                hidden;
+ 
+            background:
+                linear-gradient(135deg,
+                    #1a237e20 0%,
+                    #3949ab20 100%);
+ 
+            display:
+                flex;
+ 
+            align-items:
+                center;
+ 
+            justify-content:
+                center;
+ 
+            position:
+                relative;
+ 
+        }
+ 
+ 
+        .card-custom .card-img-wrapper img {
+ 
+            width:
+                100%;
+ 
+            height:
+                100%;
+ 
+            max-width:
+                100%;
+ 
+            max-height:
+                100%;
+ 
+            object-fit:
+                contain;
+ 
+            object-position:
+                center;
+ 
+            display:
+                block;
+ 
+            padding:
+                1rem;
+ 
+            box-sizing:
+                border-box;
+ 
+            transition:
+                transform 0.3s ease;
+ 
+        }
+ 
+ 
+        .card-custom:hover .card-img-wrapper img {
+ 
+            transform:
+                scale(1.05);
+ 
+        }
+ 
+ 
+        /* =====================================================
+           CARD BODY
+        ====================================================== */
+ 
+        .card-custom .card-body {
+ 
+            padding:
+                1.5rem;
+ 
+        }
+ 
+ 
+        .card-custom .card-title {
+ 
+            font-weight:
+                700;
+ 
+            color:
+                var(--text-light);
+ 
+            margin-bottom:
+                0.5rem;
+ 
+        }
+ 
+ 
+        .card-custom .card-text {
+ 
+            color:
+                var(--text-muted);
+ 
+            font-size:
+                0.9rem;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           PART NUMBER
+        ====================================================== */
+ 
+        .part-number {
+ 
+            display:
+                inline-block;
+ 
+            background:
+                rgba(0, 188, 212, 0.15);
+ 
+            color:
+                var(--accent-color);
+ 
+            padding:
+                0.2rem 0.8rem;
+ 
+            border-radius:
+                20px;
+ 
+            font-size:
+                0.8rem;
+ 
+            font-weight:
+                600;
+ 
+            font-family:
+                'Courier New',
+                monospace;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           CATEGORY CARDS
+        ====================================================== */
+ 
+        .category-card {
+ 
+            background:
+                var(--card-bg);
+ 
+            border:
+                1px solid var(--border-color);
+ 
+            border-radius:
+                16px;
+ 
+            padding:
+                2rem;
+ 
+            text-align:
+                center;
+ 
+            transition:
+                all 0.3s ease;
+ 
+            cursor:
+                pointer;
+ 
+            text-decoration:
+                none;
+ 
+            color:
+                inherit;
+ 
+            display:
+                block;
+ 
+        }
+ 
+ 
+        .category-card:hover {
+ 
+            transform:
+                translateY(-5px);
+ 
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.3);
+ 
+            border-color:
+                var(--accent-color);
+ 
+            color:
+                inherit;
+ 
+        }
+ 
+ 
+        .category-card .icon-wrapper {
+ 
+            width:
+                70px;
+ 
+            height:
+                70px;
+ 
+            background:
+                linear-gradient(135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%);
+ 
+            border-radius:
+                50%;
+ 
+            display:
+                flex;
+ 
+            align-items:
+                center;
+ 
+            justify-content:
+                center;
+ 
+            margin:
+                0 auto 1rem;
+ 
+            font-size:
+                1.8rem;
+ 
+            color:
+                #fff;
+ 
+        }
+ 
+ 
+        .category-card h5 {
+ 
+            font-weight:
+                700;
+ 
+            margin-bottom:
+                0.5rem;
+ 
+        }
+ 
+ 
+        .category-card p {
+ 
+            color:
+                var(--text-muted);
+ 
+            font-size:
+                0.9rem;
+ 
+            margin:
+                0;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           SECTION HEADERS
+        ====================================================== */
+ 
+        .section-header {
+ 
+            text-align:
+                center;
+ 
+            margin-bottom:
+                3rem;
+ 
+        }
+ 
+ 
+        .section-header h2 {
+ 
+            font-weight:
+                800;
+ 
+            color:
+                #fff;
+ 
+            margin-bottom:
+                0.5rem;
+ 
+        }
+ 
+ 
+        .section-header p {
+ 
+            color:
+                var(--text-muted);
+ 
+        }
+ 
+ 
+        .section-header .line {
+ 
+            width:
+                60px;
+ 
+            height:
+                4px;
+ 
+            background:
+                linear-gradient(90deg,
+                    var(--accent-color),
+                    var(--secondary-color));
+ 
+            border-radius:
+                2px;
+ 
+            margin:
+                1rem auto 0;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+ 
+        footer {
+ 
+            background:
+                linear-gradient(135deg,
+                    var(--footer-start) 0%,
+                    var(--footer-end) 100%);
+ 
+            border-top:
+                1px solid var(--border-color);
+ 
+            padding:
+                3rem 0 1rem;
+ 
+            margin-top:
+                4rem;
+ 
+        }
+ 
+ 
+        footer h5 {
+ 
+            color:
+                var(--heading-color);
+ 
+            font-weight:
+                700;
+ 
+            margin-bottom:
+                1.5rem;
+ 
+        }
+ 
+ 
+        footer a {
+ 
+            color:
+                var(--text-muted);
+ 
+            text-decoration:
+                none;
+ 
+            transition:
+                color 0.3s ease;
+ 
+        }
+ 
+ 
+        footer a:hover {
+ 
+            color:
+                var(--accent-color);
+ 
+        }
+ 
+ 
+        footer .social-links a {
+ 
+            display:
+                inline-flex;
+ 
+            align-items:
+                center;
+ 
+            justify-content:
+                center;
+ 
+            width:
+                40px;
+ 
+            height:
+                40px;
+ 
+            background:
+                var(--card-bg);
+ 
+            border-radius:
+                50%;
+ 
+            margin-left:
+                0.5rem;
+ 
+            border:
+                1px solid var(--border-color);
+ 
+            transition:
+                all 0.3s ease;
+ 
+        }
+ 
+ 
+        footer .social-links a:hover {
+ 
+            background:
+                var(--accent-color);
+ 
+            border-color:
+                var(--accent-color);
+ 
+            color:
+                #fff;
+ 
+            transform:
+                translateY(-3px);
+ 
+        }
+ 
+ 
+        /* =====================================================
+           COMPANY DESCRIPTION
+        ====================================================== */
+ 
+        footer .company-description {
+ 
+            color:
+                var(--text-muted) !important;
+ 
+            margin-bottom:
+                1rem;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           ALL MUTED TEXT
+        ====================================================== */
+ 
+        .text-muted {
+ 
+            color:
+                var(--text-muted) !important;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           WHITE HORIZONTAL LINE
+        ====================================================== */
+ 
+        hr.border-secondary {
+ 
+            border-color:
+                var(--border-color) !important;
+ 
+            opacity:
+                1;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           BREADCRUMB
+        ====================================================== */
+ 
+        .breadcrumb-wrapper {
+ 
+            background:
+                linear-gradient(135deg,
+                    var(--primary-color) 0%,
+                    var(--secondary-color) 100%);
+ 
+            padding:
+                2rem 0;
+ 
+            margin-bottom:
+                3rem;
+ 
+        }
+ 
+ 
+        .breadcrumb-wrapper h1 {
+ 
+            font-weight:
+                800;
+ 
+            color:
+                #fff;
+ 
+            margin:
+                0;
+ 
+        }
+ 
+ 
+        .breadcrumb-wrapper .breadcrumb {
+ 
+            background:
+                none;
+ 
+            padding:
+                0;
+ 
+            margin:
+                0.5rem 0 0;
+ 
+        }
+ 
+ 
+        .breadcrumb-wrapper .breadcrumb-item,
+        .breadcrumb-wrapper .breadcrumb-item a {
+ 
+            color:
+                rgba(255, 255, 255, 0.75);
+ 
+        }
+ 
+ 
+        .breadcrumb-wrapper .breadcrumb-item.active {
+ 
+            color:
+                #fff;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           ANIMATIONS
+        ====================================================== */
+ 
+        @keyframes fadeInUp {
+ 
+            from {
+ 
+                opacity:
+                    0;
+ 
+                transform:
+                    translateY(30px);
+ 
+            }
+ 
+            to {
+ 
+                opacity:
+                    1;
+ 
+                transform:
+                    translateY(0);
+ 
+            }
+ 
+        }
+ 
+ 
+        .animate-fade-in {
+ 
+            animation:
+                fadeInUp 0.6s ease forwards;
+ 
+        }
+ 
+ 
+        /* =====================================================
+           THEME SWITCHER
+        ====================================================== */
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            margin-right: 0.7rem;
+            padding: 0.45rem 0.75rem;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.10);
+            color: var(--navbar-muted);
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.18);
+            color: var(--navbar-text);
+            border-color: rgba(255,255,255,0.35);
+        }
+
+        .theme-toggle i {
+            font-size: 1rem;
+        }
+
+        /* =====================================================
+           NAVBAR TOGGLER / HAMBURGER
+        ====================================================== */
+        .navbar-toggler {
+            width: 52px;
+            height: 46px;
+            padding: 0;
+            border: 1px solid rgba(255,255,255,0.30);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.10);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(0,188,212,0.18) !important;
+        }
+
+        .custom-toggler-icon {
+            width: 25px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .custom-toggler-icon span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--navbar-text);
+            transition: all 0.25s ease;
+        }
+
+        html[data-theme="light"] .navbar-toggler {
+            background: rgba(255,255,255,0.72);
+            border-color: rgba(36,86,166,0.25);
+        }
+
+        html[data-theme="light"] .custom-toggler-icon span {
+            background: var(--navbar-text);
+        }
+
+        /* Keep navbar tools inside the collapsed navigation on tablets/phones. */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                flex-basis: 100%;
+            }
+
+            .navbar-collapse .theme-toggle,
+            .navbar-collapse .language-switcher,
+            .navbar-collapse .search-box {
+                flex-shrink: 0;
+            }
+        }
+
+        /* Light mode: navbar, text, forms and common Bootstrap surfaces */
+        html[data-theme="light"] body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        html[data-theme="light"] .navbar {
+            background: linear-gradient(135deg, var(--navbar-start), var(--navbar-end));
+        }
+
+        html[data-theme="light"] .navbar-toggler {
+            border-color: rgba(23,49,95,0.25);
+        }
+
+        html[data-theme="light"] .navbar-toggler-icon {
+            filter: brightness(0) saturate(100%) invert(18%) sepia(28%) saturate(1100%) hue-rotate(180deg) brightness(82%);
+        }
+
+        html[data-theme="light"] .nav-link {
+            color: var(--navbar-muted) !important;
+        }
+
+        html[data-theme="light"] .nav-link:hover,
+        html[data-theme="light"] .nav-link.active {
+            color: var(--navbar-text) !important;
+            background: rgba(36,86,166,0.10);
+        }
+
+        html[data-theme="light"] .language-switcher .dropdown-toggle {
+            color: var(--navbar-muted);
+            background: rgba(255,255,255,0.55);
+            border-color: rgba(36,86,166,0.18);
+        }
+
+        html[data-theme="light"] .language-switcher .dropdown-toggle:hover,
+        html[data-theme="light"] .language-switcher .dropdown-toggle:focus {
+            color: var(--navbar-text);
+            background: rgba(255,255,255,0.8);
+            border-color: rgba(36,86,166,0.28);
+        }
+
+        html[data-theme="light"] .theme-toggle {
+            color: var(--navbar-text);
+            background: rgba(255,255,255,0.55);
+            border-color: rgba(36,86,166,0.18);
+        }
+
+        html[data-theme="light"] .theme-toggle:hover {
+            background: rgba(255,255,255,0.85);
+            border-color: rgba(36,86,166,0.30);
+        }
+
+        html[data-theme="light"] .search-box input {
+            background: rgba(255,255,255,0.78);
+            border-color: rgba(36,86,166,0.18);
+            color: var(--heading-color);
+        }
+
+        html[data-theme="light"] .search-box input::placeholder {
+            color: #718096;
+        }
+
+        html[data-theme="light"] .search-box i {
+            color: #6b7d92;
+        }
+
+        html[data-theme="light"] .search-box input:focus {
+            background: #ffffff;
+        }
+
+        html[data-theme="light"] .language-switcher .dropdown-menu {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        html[data-theme="light"] .language-switcher .dropdown-item {
+            color: var(--text-light);
+        }
+
+        html[data-theme="light"] .language-switcher .dropdown-item:hover {
+            color: var(--heading-color);
+            background: var(--hover-bg);
+        }
+
+        html[data-theme="light"] .breadcrumb-wrapper {
+            background: linear-gradient(135deg, #dceaff 0%, #edf5fc 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        html[data-theme="light"] .breadcrumb-wrapper h1 {
+            color: var(--heading-color);
+        }
+
+        html[data-theme="light"] .breadcrumb-wrapper .breadcrumb-item,
+        html[data-theme="light"] .breadcrumb-wrapper .breadcrumb-item a {
+            color: #53677f;
+        }
+
+        html[data-theme="light"] .breadcrumb-wrapper .breadcrumb-item.active {
+            color: var(--heading-color);
+        }
+
+        html[data-theme="light"] footer {
+            background: linear-gradient(135deg, var(--footer-start), var(--footer-end));
+        }
+
+        html[data-theme="light"] footer a {
+            color: var(--text-muted);
+        }
+
+        html[data-theme="light"] footer h5 {
+            color: var(--heading-color);
+        }
+
+        html[data-theme="light"] footer .social-links a {
+            background: rgba(255,255,255,0.65);
+            color: var(--text-light);
+        }
+
+        html[data-theme="light"] footer .company-description,
+        html[data-theme="light"] .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        /* Page-specific light-mode corrections */
+        html[data-theme="light"] .hero-section {
+            background: linear-gradient(135deg, #eef6ff 0%, #dceaff 50%, #f4f9ff 100%) !important;
+        }
+
+        html[data-theme="light"] .hero-title,
+        html[data-theme="light"] .section-header h2,
+        html[data-theme="light"] .category-card h5,
+        html[data-theme="light"] .service-card h5,
+        html[data-theme="light"] .cta-section h2 {
+            color: var(--heading-color) !important;
+        }
+
+        html[data-theme="light"] .hero-subtitle,
+        html[data-theme="light"] .hero-stat .label,
+        html[data-theme="light"] .section-header p,
+        html[data-theme="light"] .category-card p {
+            color: var(--text-muted) !important;
+        }
+
+        html[data-theme="light"] .hero-image .floating-card,
+        html[data-theme="light"] .card-custom,
+        html[data-theme="light"] .category-card,
+        html[data-theme="light"] .service-card {
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        html[data-theme="light"] .cta-section {
+            background: linear-gradient(135deg, #dbeafe 0%, #cfe1fb 100%) !important;
+            border: 1px solid var(--border-color);
+        }
+
+        html[data-theme="light"] .cta-section p {
+            color: #53677f !important;
+        }
+
+        html[data-theme="light"] .card-custom .card-title,
+        html[data-theme="light"] .product-info h1,
+        html[data-theme="light"] .tech-info-card h5,
+        html[data-theme="light"] .specs-card .table,
+        html[data-theme="light"] .products-header h4,
+        html[data-theme="light"] .filter-sidebar h5,
+        html[data-theme="light"] .empty-products h4,
+        html[data-theme="light"] .search-header h4,
+        html[data-theme="light"] .no-results h4,
+        html[data-theme="light"] .product-card-compact .product-details h5,
+        html[data-theme="light"] .cart-item-info h5,
+        html[data-theme="light"] .cart-subtotal,
+        html[data-theme="light"] .cart-summary h4,
+        html[data-theme="light"] .summary-total,
+        html[data-theme="light"] .empty-cart h3,
+        html[data-theme="light"] .success-card h2,
+        html[data-theme="light"] .order-details h4 {
+            color: var(--heading-color) !important;
+        }
+
+        html[data-theme="light"] .specs-card .table tr:hover td {
+            background: var(--hover-bg);
+            color: var(--text-light);
+        }
+
+        html[data-theme="light"] .product-thumbnail,
+        html[data-theme="light"] .pinout-diagram,
+        html[data-theme="light"] .tech-info-card pre,
+        html[data-theme="light"] .cart-item-image,
+        html[data-theme="light"] .quantity-form input,
+        html[data-theme="light"] .quantity-btn,
+        html[data-theme="light"] .summary-box {
+            background: var(--surface-bg);
+            color: var(--text-light);
+        }
+
+        html[data-theme="light"] .product-card-compact,
+        html[data-theme="light"] .search-header,
+        html[data-theme="light"] .filter-sidebar,
+        html[data-theme="light"] .empty-products,
+        html[data-theme="light"] .cart-card,
+        html[data-theme="light"] .cart-summary,
+        html[data-theme="light"] .success-card,
+        html[data-theme="light"] .specs-card,
+        html[data-theme="light"] .tech-info-card {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+        }
+
+        html[data-theme="light"] .search-header .search-form input,
+        html[data-theme="light"] .subcategory-select,
+        html[data-theme="light"] .sort-select {
+            background: var(--input-bg);
+            color: var(--text-light);
+            border-color: var(--border-color);
+        }
+
+        html[data-theme="light"] .search-header .search-form input::placeholder {
+            color: #7b8796;
+        }
+
+        html[data-theme="light"] .search-header .search-form input:focus {
+            background: #fff;
+        }
+
+        html[data-theme="light"] .filter-group h6,
+        html[data-theme="light"] .filter-group .form-check-label,
+        html[data-theme="light"] .pagination-custom .page-link,
+        html[data-theme="light"] .filter-toggle-btn,
+        html[data-theme="light"] .sort-select {
+            color: var(--text-light);
+        }
+
+        html[data-theme="light"] .filter-group .form-check-input,
+        html[data-theme="light"] .subcategory-select,
+        html[data-theme="light"] .sort-select {
+            background-color: var(--input-bg);
+        }
+
+        html[data-theme="light"] .pagination-custom .page-link {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+        }
+
+        html[data-theme="light"] .pagination-custom .page-link:hover {
+            background: var(--hover-bg);
+        }
+
+        html[data-theme="light"] .product-card-compact .product-details p,
+        html[data-theme="light"] .product-card-compact .arrow-icon,
+        html[data-theme="light"] .no-results p,
+        html[data-theme="light"] .no-results .suggestions h6,
+        html[data-theme="light"] .search-header .results-info {
+            color: var(--text-muted) !important;
+        }
+
+        html[data-theme="light"] .filter-overlay {
+            background: rgba(15, 23, 42, 0.28);
+        }
+
+        @media (max-width: 991.98px) {
+            .theme-toggle {
+                width: 100%;
+                margin: 0.4rem 0;
+            }
+        }
+
+
+        /* =====================================================
+           NAVBAR TOOLS — SEARCH + THEME
+           البحث والوضع يبقيان ظاهرين داخل الـ navbar.
+        ====================================================== */
+        .navbar-tools {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            flex: 0 0 auto;
+            margin-right: 0.7rem;
+        }
+
+        .navbar-tools .search-box {
+            margin: 0;
+        }
+
+        .navbar-tools .theme-toggle {
+            margin: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-tools {
+                width: 100%;
+                flex-basis: 100%;
+                order: 2;
+                margin: 0.55rem 0 0;
+            }
+
+            .navbar-tools .theme-toggle {
+                width: auto;
+                min-width: 130px;
+                min-height: 44px;
+                margin: 0;
+            }
+
+            .navbar-tools .search-box {
+                flex: 1 1 auto;
+                width: auto;
+                margin: 0;
+            }
+
+            .navbar-tools .search-box input,
+            .navbar-tools .search-box input:focus {
+                width: 100%;
+            }
+
+            .navbar-collapse {
+                order: 3;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .navbar-tools {
+                gap: 0.5rem;
+                margin-top: 0.55rem;
+            }
+
+            .navbar-tools .theme-toggle {
+                min-width: 118px;
+                padding: 0.45rem 0.65rem;
+            }
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        /* 📱 MOBILE */
+        @media (max-width: 575.98px) {
+
+            .navbar {
+                height: auto !important;
+                min-height: 86px;
+                padding: 0.65rem 0;
+            }
+
+            .navbar > .container {
+                position: relative;
+                flex-wrap: wrap;
+                min-height: 72px;
+            }
+
+            .navbar-toggler {
+                position: relative;
+                z-index: 10;
+                margin-left: 0;
+                width: 48px;
+                height: 44px;
+                padding: 0;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                flex: 0 0 auto;
+            }
+
+            /* LOGO في وسط شاشة الهاتف */
+            .navbar-brand {
+                position: absolute !important;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                height: 72px;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                z-index: 4;
+                font-size: 0.9rem;
+            }
+
+            .navbar-brand img {
+                height: 58px;
+                max-width: 230px;
+            }
+
+            .navbar-collapse {
+                width: 100%;
+                flex-basis: 100%;
+                margin-top: 0.7rem;
+                padding: 0.25rem 0 0.7rem;
+            }
+
+            .navbar-nav {
+                width: 100%;
+            }
+
+            .nav-item,
+            .nav-link {
+                width: 100%;
+            }
+
+            .nav-link {
+                padding: 0.65rem 0.8rem !important;
+            }
+
+            .language-switcher {
+                width: 100%;
+                margin: 0.45rem 0;
+            }
+
+            .language-switcher .dropdown-toggle {
+                width: 100%;
+            }
+
+            .search-box {
+                width: 100%;
+                margin: 0.45rem 0 0;
+            }
+
+            .search-box input,
+            .search-box input:focus {
+                width: 100%;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .card-custom .card-img-wrapper {
+                height: 200px;
+            }
+        }
+
+
+        /* 📱 TABLET */
+        @media (min-width: 576px) and (max-width: 991.98px) {
+
+            .navbar {
+                height: auto !important;
+                min-height: 88px;
+                padding: 0.65rem 0;
+            }
+
+            .navbar > .container {
+                position: relative;
+                flex-wrap: wrap;
+                min-height: 82px;
+            }
+
+            .navbar-brand {
+                position: absolute !important;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                height: 82px;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                z-index: 4;
+            }
+
+            .navbar-brand img {
+                height: 70px;
+                max-width: 290px;
+            }
+
+            .navbar-collapse {
+                width: 100%;
+                flex-basis: 100%;
+                margin-top: 0.7rem;
+                padding: 0.25rem 0 0.7rem;
+            }
+
+            .navbar-nav {
+                width: 100%;
+            }
+
+            .nav-item,
+            .nav-link {
+                width: 100%;
+            }
+
+            .search-box {
+                width: 100%;
+                margin: 0.45rem 0 0;
+            }
+
+            .search-box input,
+            .search-box input:focus {
+                width: 100%;
+            }
+        }
+
+
+        /* 💻 DESKTOP */
+        @media (min-width: 992px) {
+
+            .navbar {
+                height: auto;
+            }
+
+            .navbar-brand img {
+                height: 96px;
+                max-width: 390px;
+            }
+
+            .search-box input {
+                width: 250px;
+            }
+
+            .search-box input:focus {
+                width: 300px;
+            }
+        }
+
+    
+        /* FINAL MOBILE NAVBAR FIX */
+        @media (max-width: 575.98px) {
+            .navbar > .container {
+                min-height: 72px;
+            }
+
+            .navbar-brand {
+                top: 0 !important;
+                height: 72px !important;
+                position: absolute !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .navbar-brand img {
+                height: 58px !important;
+                width: auto !important;
+                max-width: 230px !important;
+            }
+
+            .navbar-toggler {
+                z-index: 20 !important;
+            }
+
+            .navbar-collapse {
+                position: relative;
+                z-index: 3;
+                width: 100%;
+                flex-basis: 100%;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 991.98px) {
+            .navbar > .container {
+                min-height: 82px;
+            }
+
+            .navbar-brand {
+                top: 0 !important;
+                height: 82px !important;
+                position: absolute !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+
+            .navbar-brand img {
+                height: 70px !important;
+                width: auto !important;
+            }
+
+            .navbar-toggler {
+                z-index: 20 !important;
+            }
+        }
+
+        /* SEARCH AUTOCOMPLETE */
+        .search-box {
+            position: relative;
+        }
+
+        .search-autocomplete {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            left: 0;
+            z-index: 2000;
+            display: none;
+            max-height: 360px;
+            overflow-y: auto;
+            padding: 0.35rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 12px 30px var(--shadow-color);
+        }
+
+        .search-autocomplete.show {
+            display: block;
+        }
+
+        .search-autocomplete-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            width: 100%;
+            padding: 0.65rem 0.8rem;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.15s ease;
+        }
+
+        .search-autocomplete-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            flex: 0 0 60px;
+            border-radius: 8px;
+            background: var(--surface-bg);
+            order: 2;
+        }
+
+        .search-autocomplete-info {
+            min-width: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            order: 1;
+            overflow: hidden;
+        }
+
+        .search-autocomplete-name {
+            display: block;
+            font-weight: 700;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .search-autocomplete-part {
+            display: block;
+            margin-top: 0.1rem;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            direction: ltr;
+            text-align: start;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .search-autocomplete-item:hover,
+        .search-autocomplete-item:focus {
+            background: var(--hover-bg);
+            color: var(--heading-color);
+        }
+
+        .search-autocomplete-name {
+            display: block;
+            font-weight: 700;
+        }
+
+        .search-autocomplete-part {
+            display: block;
+            margin-top: 0.1rem;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            direction: ltr;
+            text-align: start;
+        }
+
+        .search-autocomplete-empty {
+            padding: 0.75rem 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* AUTOCOMPLETE MOBILE — aligned with the search box */
+        @media (max-width: 991.98px) {
+            .search-autocomplete {
+                position: absolute;
+                top: calc(100% + 0.5rem);
+                right: 0;
+                left: 0;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 0;
+                z-index: 2000;
+            }
+        }
+
+
+</style>
+ 
+ 
+    {% block extra_css %}{% endblock %}
+ 
+</head>
+ 
+ 
+<body>
+ 
+ 
+    <!-- Orbit-style information bar: added above the existing navbar -->
+    <div class="site-topbar">
+        <div class="container">
+            <div class="topbar-inner">
+                <a class="topbar-item" href="https://maps.app.goo.gl/vztrKBpAw3PFKvbYA" target="_blank" rel="noopener"><i class="bi bi-geo-alt"></i><span>{% translate "العنوان هنا" %}</span></a>
+                <span class="topbar-item"><i class="bi bi-clock"></i><span>{% translate "الأحد - الخميس: 8:30 - 16:30" %}</span></span>
+                <a class="topbar-item" href="tel:0771592502"><i class="bi bi-telephone"></i><span>0771592502</span></a>
+                <a class="topbar-item" href="tel:0540519330"><i class="bi bi-telephone"></i><span>0540519330</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+ 
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+ 
+        <div class="container">
+ 
+ 
+            <a class="navbar-brand" href="{% url 'catalog:home' %}">
+                <img src="{% static 'img/logo2.png' %}"
+                     alt="ALI DRICO ELECTRONICS STORE">
+            </a>
+ 
+ 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="فتح القائمة">
+
+                <span class="custom-toggler-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+
+            </button>
+ 
+ 
+            <!-- SEARCH + THEME: always visible in the navbar -->
+            <div class="navbar-tools">
+                <button type="button"
+                        class="theme-toggle"
+                        id="themeToggle"
+                        aria-label="{% translate "تبديل الوضع" %}"
+                        aria-pressed="false">
+                    <i class="bi bi-sun-fill" id="themeIcon"></i>
+                    <span id="themeLabel">{% translate "الوضع النهاري" %}</span>
+                </button>
+
+                <form class="search-box d-flex"
+                      action="{% url 'catalog:search' %}"
+                      method="GET">
+                    <i class="bi bi-search"></i>
+
+                    <input type="search"
+                           name="q"
+                           placeholder="{% translate 'ابحث عن مكون...' %}"
+                           aria-label="{% translate 'Search' %}"
+                           autocomplete="off">
+
+                    <div class="search-autocomplete"
+                         id="searchAutocomplete"
+                         role="listbox"></div>
+                </form>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+ 
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+ 
+ 
+                    <li class="nav-item">
+ 
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                            href="{% url 'catalog:home' %}">
+ 
+                            <i class="bi bi-house-door me-1"></i>
+ 
+                            {% translate "الرئيسية" %}
+ 
+                        </a>
+ 
+                    </li>
+ 
+ 
+                    <li class="nav-item">
+ 
+                        <a class="nav-link {% if request.resolver_match.url_name == 'categories' %}active{% endif %}"
+                            href="{% url 'catalog:categories' %}">
+ 
+                            <i class="bi bi-grid-3x3-gap me-1"></i>
+ 
+                            {% translate "التصنيفات" %}
+ 
+                        </a>
+ 
+                    </li>
+ 
+ 
+                    <li class="nav-item">
+ 
+                        <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+                            href="{% url 'catalog:products' %}">
+ 
+                            <i class="bi bi-box-seam me-1"></i>
+ 
+                            {% translate "المنتجات" %}
+ 
+                        </a>
+ 
+                    </li>
+ 
+ 
+                    <li class="nav-item">
+ 
+                        <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
+                            href="{% url 'catalog:cart' %}">
+ 
+                            <i class="bi bi-cart3 me-1"></i>
+ 
+                            {% translate "السلة" %}
+ 
+                        </a>
+ 
+                    </li>
+ 
+ 
+                </ul>
+ 
+ 
+                <!-- LANGUAGE SWITCHER -->
+ 
+                <!-- LANGUAGE SWITCHER -->
+
+                <div class="language-switcher">
+
+                    <button
+                        class="btn dropdown-toggle language-toggle"
+                        type="button"
+                        aria-expanded="false"
+                        aria-label="{% translate "اختيار اللغة" %}"
+                    >
+
+                        <i class="bi bi-globe2 me-1"></i>
+
+                        {% if request.LANGUAGE_CODE == 'ar' %}
+                            العربية
+                        {% elif request.LANGUAGE_CODE == 'fr' %}
+                            Français
+                        {% elif request.LANGUAGE_CODE == 'en' %}
+                            English
+                        {% endif %}
+
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-start language-menu" id="languageMenu">
+
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="ar">
+                                <input type="hidden" name="next" value="">
+                                <button type="submit" class="dropdown-item">
+                                    🇩🇿 العربية
+                                </button>
+                            </form>
+                        </li>
+
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="fr">
+                                <input type="hidden" name="next" value="">
+                                <button type="submit" class="dropdown-item">
+                                    🇫🇷 Français
+                                </button>
+                            </form>
+                        </li>
+
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="en">
+                                <input type="hidden" name="next" value="">
+                                <button type="submit" class="dropdown-item">
+                                    🇬🇧 English
+                                </button>
+                            </form>
+                        </li>
+
+                    </ul>
+
+                </div>
+</div>
+ 
+        </div>
+ 
+    </nav>
+ 
+ 
+ 
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+ 
+    <main>
+ 
+        {% block content %}
+ 
+        {% endblock %}
+ 
+    </main>
+ 
+ 
+ 
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="row">
+
+
+                <!-- COMPANY -->
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <h5>
+                        ALIDRICO ELECTRONICS STORE
+                    </h5>
+
+
+                    <p class="company-description">
+
+                        {% translate "ALIDRICO Electronics متخصصة في المكونات الإلكترونية، وإصلاح البطاقات الإلكترونية، وتصنيع لوحات الدوائر المطبوعة (PCB) حسب الطلب. نقوم بإصلاح البطاقات الصناعية، ومغيرات السرعة، وبطاقات مكيفات الهواء، ومصادر الطاقة، ومصادر طاقة أفران الميكروويف، والمثبتات، وبطاقات التحكم، وغيرها من الأنظمة الإلكترونية. نقدم خدمات التشخيص والإصلاح على مستوى المكونات، واستبدال المكونات التالفة. كما نقوم بتصميم وتصنيع لوحات PCB حسب الطلب. ونقوم أيضًا بتحويل لوحات المفاتيح ذات الأغشية أو البلاستيكية إلى أنظمة تحكم بأزرار ضغط حقيقية، بهدف تحسين موثوقية الأجهزة وزيادة متانتها." %}
+
+                    </p>
+
+
+                    <div class="social-links mt-3">
+
+                        <a href="https://www.facebook.com/profile.php?id=100027975117011&mibextid=ZbWKwL" target="_blank">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/elec.tro555?igsi=MWNmb3R2aXE3NGpoOQ==" target="_blank">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+
+                        <a href="https://wa.me/message/OH64UBJXU2SYC1?src=qr" target="_blank">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="col-lg-2 col-md-6 mb-4">
+
+                    <h5>
+                        {% translate "روابط سريعة" %}
+                    </h5>
+
+
+                    <ul class="list-unstyled text-muted">
+
+                        <li class="mb-2">
+                            <a href="{% url 'catalog:home' %}">
+                                {% translate "الرئيسية" %}
+                            </a>
+                        </li>
+
+                        <li class="mb-2">
+                            <a href="{% url 'catalog:categories' %}">
+                                {% translate "التصنيفات" %}
+                            </a>
+                        </li>
+
+                        <li class="mb-2">
+                            <a href="{% url 'catalog:products' %}">
+                                {% translate "المنتجات" %}
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CATEGORIES -->
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+
+                        <h5>
+                            {% translate "التصنيفات" %}
+                        </h5>
+
+                            <ul class="list-unstyled text-muted">
+
+                                {% for category in categories|slice:"5"%}
+                                    <li class="mb-2">
+                                        <a href="{% url 'catalog:category_products' category.slug %}">
+                                            {{ category.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+                    </div>
+
+
+                <!-- CONTACT -->
+
+                <div class="col-lg-3 col-md-6 mb-4">
+
+                    <ul class="list-unstyled text-muted">
+
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt me-2"></i>
+                            <a href="https://maps.app.goo.gl/vztrKBpAw3PFKvbYA" target="_blank">
+                                {% translate "العنوان هنا" %}
+                            </a>
+                        </li>
+
+                        <li class="mb-2">
+                            <i class="bi bi-telephone me-2"></i>
+                            <a class="topbar-item" href="tel:0771592502"><span>0771592502</span></a>
+                        </li>
+
+                        <li class="mb-2">
+                            <i class="bi bi-telephone me-2"></i>
+                            <a class="topbar-item" href="tel:0540519330"><span>0540519330</span></a>
+                        </li>
+
+                        <li class="mb-2">
+                            <i class="bi bi-envelope me-2"></i>
+                            adelec44@gmail.com
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+
+            <hr class="border-secondary">
+
+
+            <div class="text-center text-muted py-2">
+
+                <small>
+                    © 2026 ALI DRICO ELECTRONICS STORE.
+                    {% translate "جميع الحقوق محفوظة." %}
+                </small>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
+ 
+<script>
+(function () {
+    function applyTheme(theme) {
+        const root = document.documentElement;
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('site-theme', theme);
+
+        const button = document.getElementById('themeToggle');
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+
+        if (!button || !icon || !label) return;
+
+        const isLight = theme === 'light';
+        icon.className = isLight ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill';
+        label.textContent = isLight
+            ? '{% translate "الوضع الليلي" %}'
+            : '{% translate "الوضع النهاري" %}';
+
+        button.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+
+        button.setAttribute(
+            'aria-label',
+            isLight
+                ? '{% translate "التبديل إلى الوضع الليلي" %}'
+                : '{% translate "التبديل إلى الوضع النهاري" %}'
+        );
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        applyTheme(current);
+
+        const button = document.getElementById('themeToggle');
+        if (button) {
+            button.addEventListener('click', function () {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+                applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+        }
+    });
+})();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+ 
+    const languageSwitcher =
+        document.querySelector('.language-switcher');
+ 
+    const languageToggle =
+        document.querySelector('.language-toggle');
+ 
+    const languageMenu =
+        document.getElementById('languageMenu');
+ 
+    if (!languageSwitcher || !languageToggle || !languageMenu) {
+        return;
+    }
+ 
+ 
+    /* فتح وإغلاق قائمة اللغات */
+ 
+    languageToggle.addEventListener('click', function (event) {
+ 
+        event.preventDefault();
+        event.stopPropagation();
+ 
+        const isOpen =
+            languageMenu.classList.toggle('show');
+ 
+        languageToggle.setAttribute(
+            'aria-expanded',
+            isOpen ? 'true' : 'false'
+        );
+    });
+ 
+ 
+ 
+    document.addEventListener('click', function (event) {
+ 
+        if (!languageSwitcher.contains(event.target)) {
+ 
+            languageMenu.classList.remove('show');
+ 
+            languageToggle.setAttribute(
+                'aria-expanded',
+                'false'
+            );
+        }
+    });
+ 
+ 
+    /*
+     
+        /fr/products/ -> /products/
+        /en/products/ -> /products/
+        /products/    -> /products/
+    */
+ 
+    const languageForms =
+        languageSwitcher.querySelectorAll('.language-form');
+ 
+    languageForms.forEach(function (form) {
+ 
+        form.addEventListener('submit', function () {
+ 
+            let currentPath =
+                window.location.pathname;
+ 
+            const currentQuery =
+                window.location.search;
+ 
+ 
+            /* إزالة prefix اللغة الحالية */
+ 
+            currentPath =
+                currentPath.replace(
+                    /^\/(fr|en)(?=\/|$)/,
+                    ''
+                );
+ 
+ 
+            /* إذا أصبح المسار فارغًا */
+ 
+            if (currentPath === '') {
+                currentPath = '/';
+            }
+ 
+ 
+            /* الاحتفاظ بـ query parameters */
+ 
+            const nextInput =
+                form.querySelector(
+                    'input[name="next"]'
+                );
+ 
+            if (nextInput) {
+ 
+                nextInput.value =
+                    currentPath + currentQuery;
+ 
+            }
+ 
+        });
+ 
+    });
+ 
+});
+</script>
+ 
+
+<script>
+/* SEARCH AUTOCOMPLETE — uses the existing search view */
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.querySelector('.search-box');
+    if (!searchForm) return;
+
+    const searchInput = searchForm.querySelector('input[name="q"]');
+    const suggestionsBox = document.getElementById('searchAutocomplete');
+    if (!searchInput || !suggestionsBox) return;
+
+    let timer = null;
+    let controller = null;
+
+    function clearSuggestions() {
+        suggestionsBox.innerHTML = '';
+        suggestionsBox.classList.remove('show');
+    }
+
+    function addSuggestion(product) {
+        const link = document.createElement('a');
+        link.className = 'search-autocomplete-item';
+        link.href = product.url;
+        link.setAttribute('role', 'option');
+
+        if (product.image) {
+            const image = document.createElement('img');
+            image.className = 'search-autocomplete-image';
+            image.src = product.image;
+            image.alt = product.name || '';
+            image.loading = 'lazy';
+            link.appendChild(image);
+        }
+
+        const info = document.createElement('div');
+        info.className = 'search-autocomplete-info';
+
+        const name = document.createElement('span');
+        name.className = 'search-autocomplete-name';
+        name.textContent = product.name || '';
+        info.appendChild(name);
+
+        if (product.part_number) {
+            const part = document.createElement('span');
+            part.className = 'search-autocomplete-part';
+            part.textContent = product.part_number;
+            info.appendChild(part);
+        }
+
+        link.appendChild(info);
+        suggestionsBox.appendChild(link);
+    }
+
+    async function loadSuggestions() {
+        const query = searchInput.value.trim();
+        if (!query) {
+            clearSuggestions();
+            return;
+        }
+
+        if (controller) controller.abort();
+        controller = new AbortController();
+
+        try {
+            const url = new URL(searchForm.action, window.location.origin);
+            url.searchParams.set('q', query);
+            url.searchParams.set('suggestions', '1');
+
+            const response = await fetch(url.toString(), {
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                signal: controller.signal
+            });
+
+            if (!response.ok) {
+                clearSuggestions();
+                return;
+            }
+
+            const data = await response.json();
+            suggestionsBox.innerHTML = '';
+
+            if (!data.results || data.results.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'search-autocomplete-empty';
+                empty.textContent = "{% translate 'لا توجد اقتراحات مطابقة' %}";;
+                suggestionsBox.appendChild(empty);
+            } else {
+                data.results.forEach(addSuggestion);
+            }
+
+            suggestionsBox.classList.add('show');
+        } catch (error) {
+            if (error.name !== 'AbortError') clearSuggestions();
+        }
+    }
+
+    searchInput.addEventListener('input', function () {
+        clearTimeout(timer);
+        timer = setTimeout(loadSuggestions, 350);
+    });
+
+    searchInput.addEventListener('focus', function () {
+        if (searchInput.value.trim()) loadSuggestions();
+    });
+
+    searchForm.addEventListener('submit', clearSuggestions);
+
+    document.addEventListener('click', function (event) {
+        if (!searchForm.contains(event.target)) clearSuggestions();
+    });
+});
+</script>
+
+    {% block extra_js %}{% endblock %}
+ 
+ 
+</body>
+ 
+</html>

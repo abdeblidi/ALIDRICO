@@ -1,0 +1,431 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate "السلة" %} | ALIDRICO{% endblock %}
+
+{% block extra_css %}
+<style>
+    .cart-section {
+        padding: 3rem 0 5rem;
+    }
+
+    .cart-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 18px;
+        overflow: hidden;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: 1.25rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .cart-item-image {
+        width: 90px;
+        height: 90px;
+        flex: 0 0 90px;
+        background: var(--dark-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .cart-item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .cart-item-image i {
+        font-size: 2.2rem;
+        color: var(--text-muted);
+    }
+
+    .cart-item-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .cart-item-info h5 {
+        color: var(--heading-color);
+        margin-bottom: 0.35rem;
+        font-weight: 700;
+    }
+
+    .cart-item-info .part-number {
+        color: var(--accent-color);
+        font-family: monospace;
+        font-size: 0.9rem;
+    }
+
+    .cart-item-price {
+        color: #2ecc71;
+        font-weight: 700;
+        margin-top: 0.5rem;
+    }
+
+    .quantity-form {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .quantity-form input {
+        width: 60px;
+        text-align: center;
+        background: var(--dark-bg);
+        color: var(--text-light);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 0.55rem;
+    }
+
+    .quantity-btn {
+        width: 38px;
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--dark-bg);
+        color: var(--text-light);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 1.2rem;
+        line-height: 1;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .quantity-btn:hover {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+    }
+
+    .quantity-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .cart-subtotal {
+        min-width: 130px;
+        text-align: right;
+        color: var(--heading-color);
+        font-weight: 700;
+    }
+
+    .remove-form {
+        margin: 0;
+    }
+
+    .cart-summary {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 18px;
+        padding: 1.5rem;
+        position: sticky;
+        top: 100px;
+    }
+
+    .cart-summary h4 {
+        color: var(--heading-color);
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        color: var(--text-muted);
+    }
+
+    .summary-total {
+        border-top: 1px solid var(--border-color);
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        color: var(--heading-color);
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    .summary-total span:last-child {
+        color: #2ecc71;
+    }
+
+    .empty-cart {
+        text-align: center;
+        padding: 4rem 1.5rem;
+    }
+
+    .empty-cart i {
+        font-size: 4rem;
+        color: var(--text-muted);
+        opacity: 0.5;
+    }
+
+    .empty-cart h3 {
+        color: var(--heading-color);
+        margin-top: 1rem;
+    }
+
+    @media (max-width: 767px) {
+        .cart-item {
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .cart-item-info {
+            min-width: calc(100% - 110px);
+        }
+
+        .quantity-form {
+            margin-left: 105px;
+        }
+
+        .cart-subtotal {
+            margin-left: auto;
+            min-width: auto;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumb-wrapper">
+    <div class="container">
+        <h1>{% translate "السلة" %}</h1>
+
+        <nav aria-label="{% translate 'مسار التنقل' %}">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'catalog:home' %}">
+                        {% translate "الرئيسية" %}
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item active">
+                    {% translate "السلة" %}
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<section class="cart-section">
+    <div class="container">
+
+        {% if items %}
+
+        <div class="row g-4">
+
+            <div class="col-lg-8">
+
+                <div class="cart-card">
+
+                    {% for item in items %}
+
+                    <div class="cart-item">
+
+                        <div class="cart-item-image">
+                            {% if item.product.image %}
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                >
+                            {% else %}
+                                <i class="bi bi-cpu"></i>
+                            {% endif %}
+                        </div>
+
+                        <div class="cart-item-info">
+
+                            <h5>
+                                {{ item.product.name }}
+                            </h5>
+
+                            <div class="part-number">
+                                {{ item.product.part_number }}
+                            </div>
+
+                            <div class="cart-item-price">
+                                {{ item.unit_price|floatformat:2 }} DZD
+                            </div>
+
+                        </div>
+
+                        <form
+                            method="post"
+                            action="{% url 'catalog:cart_update' item.product.id %}"
+                            class="quantity-form"
+                        >
+                            {% csrf_token %}
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                                onclick="changeQuantity(this, -1)"
+                                {% if item.quantity <= 1 %}disabled{% endif %}
+                                title="{% translate 'إنقاص الكمية' %}"
+                                aria-label="{% translate 'إنقاص الكمية' %}"
+                            >
+                                −
+                            </button>
+
+                            <input
+                                type="number"
+                                name="quantity"
+                                value="{{ item.quantity }}"
+                                min="1"
+                                max="{{ item.product.quantity }}"
+                                readonly
+                                aria-label="{% translate 'الكمية' %}"
+                            >
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                                onclick="changeQuantity(this, 1)"
+                                {% if item.quantity >= item.product.quantity %}disabled{% endif %}
+                                title="{% translate 'زيادة الكمية' %}"
+                                aria-label="{% translate 'زيادة الكمية' %}"
+                            >
+                                +
+                            </button>
+                        </form>
+
+                        <div class="cart-subtotal">
+                            {{ item.subtotal|floatformat:2 }} DZD
+                        </div>
+
+                        <form
+                            method="post"
+                            action="{% url 'catalog:cart_remove' item.product.id %}"
+                            class="remove-form"
+                        >
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="btn btn-outline-danger"
+                                title="{% translate 'حذف' %}"
+                            >
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="cart-summary">
+
+                    <h4>
+                        <i class="bi bi-receipt me-2"></i>
+                        {% translate "ملخص الطلب" %}
+                    </h4>
+
+                    <div class="summary-row">
+                        <span>{% translate "عدد المنتجات" %}</span>
+                        <span>{{ cart_count }}</span>
+                    </div>
+
+                    <div class="summary-row summary-total">
+                        <span>{% translate "الإجمالي" %}</span>
+                        <span>{{ total|floatformat:2 }} DZD</span>
+                    </div>
+
+                    <a
+                        href="{% url 'catalog:cart_checkout' %}"
+                        class="btn btn-primary-custom w-100 mt-3"
+                    >
+                        <i class="bi bi-check2-circle me-2"></i>
+                        {% translate "إتمام الطلب" %}
+                    </a>
+
+                    <a
+                        href="{% url 'catalog:products' %}"
+                        class="btn btn-outline-custom w-100 mt-2"
+                    >
+                        <i class="bi bi-arrow-left me-2"></i>
+                        {% translate "مواصلة التسوق" %}
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="cart-card">
+            <div class="empty-cart">
+
+                <i class="bi bi-cart-x"></i>
+
+                <h3>
+                    {% translate "السلة فارغة" %}
+                </h3>
+
+                <p class="text-muted">
+                    {% translate "لم تضف أي منتج إلى السلة بعد." %}
+                </p>
+
+                <a
+                    href="{% url 'catalog:products' %}"
+                    class="btn btn-primary-custom mt-3"
+                >
+                    <i class="bi bi-grid me-2"></i>
+                    {% translate "تصفح المنتجات" %}
+                </a>
+
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+<script>
+function changeQuantity(button, change) {
+    const form = button.closest('form');
+    const input = form.querySelector('input[name="quantity"]');
+
+    let quantity = parseInt(input.value, 10);
+    const min = parseInt(input.min, 10);
+    const max = parseInt(input.max, 10);
+
+    if (Number.isNaN(quantity)) {
+        quantity = min;
+    }
+
+    quantity += change;
+    quantity = Math.max(min, Math.min(max, quantity));
+
+    input.value = quantity;
+    form.submit();
+}
+</script>
+
+{% endblock %}

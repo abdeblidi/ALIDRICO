@@ -1,0 +1,428 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate "تم تأكيد الطلب" %} | ALIDRICO{% endblock %}
+
+{% block extra_css %}
+<style>
+    .success-section {
+        padding: 4rem 0 6rem;
+    }
+
+    .success-card {
+        max-width: 760px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+    }
+
+    .success-icon {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 1.5rem;
+        border-radius: 50%;
+        background: rgba(39, 174, 96, 0.15);
+        border: 2px solid rgba(39, 174, 96, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2ecc71;
+        font-size: 2.8rem;
+    }
+
+    .success-card h2 {
+        color: #fff;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+
+    .success-message {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+    }
+
+    .order-number {
+        display: inline-block;
+        background: rgba(0, 188, 212, 0.1);
+        border: 1px solid rgba(0, 188, 212, 0.25);
+        border-radius: 10px;
+        padding: 0.7rem 1.2rem;
+        margin-bottom: 1.5rem;
+        color: var(--accent-color);
+        font-weight: 700;
+    }
+
+    .order-details {
+        text-align: right;
+        background: var(--dark-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .order-details h4 {
+        color: #fff;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.65rem 0;
+        color: var(--text-muted);
+    }
+
+    .detail-row .label {
+        font-weight: 600;
+    }
+
+    .detail-row .value {
+        color: var(--text-light);
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .total-row {
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .total-row .value {
+        color: #2ecc71;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .grand-total {
+        background: rgba(0, 188, 212, 0.08);
+        border: 1px solid rgba(0, 188, 212, 0.2);
+        border-radius: 14px;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+    }
+
+    .grand-total .detail-row {
+        padding: 0;
+    }
+
+    .grand-total .value {
+        color: #2ecc71;
+        font-size: 1.3rem;
+        font-weight: 800;
+    }
+
+    .next-step {
+        color: var(--text-muted);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+    }
+
+    .next-step i {
+        color: var(--accent-color);
+    }
+
+    .success-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .success-actions a {
+        min-width: 200px;
+    }
+
+    @media (max-width: 576px) {
+        .success-card {
+            padding: 2rem 1.2rem;
+        }
+
+        .detail-row {
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .detail-row .value {
+            text-align: right;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumb-wrapper">
+    <div class="container">
+
+        <h1>
+            {% translate "تأكيد الطلب" %}
+        </h1>
+
+        <nav aria-label="{% translate 'مسار التنقل' %}">
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+                    <a href="{% url 'catalog:home' %}">
+                        {% translate "الرئيسية" %}
+                    </a>
+                </li>
+
+                <li class="breadcrumb-item active">
+                    {% translate "تأكيد الطلب" %}
+                </li>
+
+            </ol>
+        </nav>
+
+    </div>
+</div>
+
+<section class="success-section">
+
+    <div class="container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                <i class="bi bi-check-lg"></i>
+            </div>
+
+            <h2>
+                {% translate "تم إرسال طلبك بنجاح!" %}
+            </h2>
+
+            <p class="success-message">
+                {% translate "شكرًا لك على طلبك. تم استلام طلبك بنجاح وسيتواصل معك فريقنا لتأكيد الطلب ومتابعة عملية التوصيل." %}
+            </p>
+
+            {% if orders %}
+
+                {% for order in orders %}
+
+                    <div class="order-number">
+
+                        <i class="bi bi-receipt me-2"></i>
+
+                        {% translate "رقم الطلب:" %}
+                        #{{ order.id }}
+
+                    </div>
+
+                    <div class="order-details">
+
+                        <h4>
+                            <i class="bi bi-box-seam me-2"></i>
+                            {% translate "تفاصيل الطلب" %}
+                        </h4>
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "الاسم" %}
+                            </span>
+
+                            <span class="value">
+                                {{ order.full_name }}
+                            </span>
+
+                        </div>
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "رقم الهاتف" %}
+                            </span>
+
+                            <span class="value">
+                                {{ order.phone }}
+                            </span>
+
+                        </div>
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "الولاية" %}
+                            </span>
+
+                            <span class="value">
+                                {{ order.wilaya.name }}
+                            </span>
+
+                        </div>
+
+                        <h4 style="margin-top: 1.2rem;">
+                            <i class="bi bi-box-seam me-2"></i>
+                            {% translate "المنتجات" %}
+                        </h4>
+
+                        {% for item in order.items.all %}
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {{ item.product.name }}
+                            </span>
+
+                            <span class="value">
+                                {{ item.quantity }}
+                                ×
+                                {{ item.product_price|floatformat:2 }} DZD
+                            </span>
+
+                        </div>
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "الرقم المرجعي" %}
+                            </span>
+
+                            <span class="value">
+                                {{ item.product.part_number }}
+                            </span>
+
+                        </div>
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "المجموع" %}
+                            </span>
+
+                            <span class="value">
+                                {{ item.total_price|floatformat:2 }} DZD
+                            </span>
+
+                        </div>
+
+                        {% endfor %}
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "سعر المنتجات" %}
+                            </span>
+
+                            <span class="value">
+                                {{ order.products_total|floatformat:2 }} DZD
+                            </span>
+
+                        </div>
+
+                        {% if order.delivery_price %}
+
+                        <div class="detail-row">
+
+                            <span class="label">
+                                {% translate "سعر التوصيل" %}
+                            </span>
+
+                            <span class="value">
+                                {{ order.delivery_price|floatformat:2 }} DZD
+                            </span>
+
+                        </div>
+
+                        {% endif %}
+
+                        <div class="detail-row total-row">
+
+                            <span class="label">
+                                {% translate "الإجمالي" %}
+                            </span>
+
+                            <span class="value">
+                                {{ order.total_price|floatformat:2 }} DZD
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+                <div class="grand-total">
+
+                    <div class="detail-row">
+
+                        <span class="label">
+                            {% translate "الإجمالي الكلي" %}
+                        </span>
+
+                        <span class="value">
+                            {{ grand_total|floatformat:2 }} DZD
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="next-step">
+
+                    <i class="bi bi-check-circle me-2"></i>
+
+                    {% translate "تم استلام طلبك بنجاح." %}
+
+                </div>
+
+            {% endif %}
+
+            <div class="next-step">
+
+                <i class="bi bi-info-circle me-2"></i>
+
+                {% translate "سيتواصل معك فريقنا عبر الهاتف لتأكيد الطلب وترتيب عملية التوصيل." %}
+
+            </div>
+
+            <div class="success-actions">
+
+                <a
+                    href="{% url 'catalog:products' %}"
+                    class="btn btn-primary-custom"
+                >
+
+                    <i class="bi bi-grid me-2"></i>
+
+                    {% translate "مواصلة التسوق" %}
+
+                </a>
+
+                <a
+                    href="{% url 'catalog:home' %}"
+                    class="btn btn-outline-custom"
+                >
+
+                    <i class="bi bi-house me-2"></i>
+
+                    {% translate "الصفحة الرئيسية" %}
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

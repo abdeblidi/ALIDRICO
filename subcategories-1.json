@@ -1,0 +1,984 @@
+{
+    "schema_version": "1.0",
+    "source_url": "https://powerlab.dz/",
+    "subcategories": [
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/cms-diodes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "HAUTE FREQUENCE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/haute-frequence-diodes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "GERMANIUM",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/germanium/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "PONT DE DIODES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/pont-de-diodes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "PUISSANCES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/puissances/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "REDRESSEMENT",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/redressement/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "SCHOTTKY",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/schottky/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "TRANSIL",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/transil/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "DIODES",
+            "name": "ZENERS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/zeners/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "REGULATEURS",
+            "name": "VARIABLE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/regulateurs-composants-actifs/variable/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "REGULATEURS",
+            "name": "FIXES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/regulateurs-composants-actifs/fixes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "REGULATEURS",
+            "name": "VARIABLES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/regulateurs-composants-actifs/variables/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "DRIVER IGBT ET MOSFET",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/driver-igbt-et-mosfet/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "TRANSITORS CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/transitors-cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "2N….3N",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/2n-3n/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "A….Z ( BC.BD BF….)",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/a-z-bc-bd-bf/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "GERMANIUM",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/germanium-transistors/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "HF",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/hf/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "IGBT",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/igbt/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "JAPONAIS 2SA/2SB/2SC/2SD/2SK/2SJ",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/japonais-2sa-2sb-2sc-2sd-2sk-2sj/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "MOSFETS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/mosfets/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "TRANSISTORS",
+            "name": "UJT",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/ujt/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "C.INTEGRES LOGIQUES",
+            "name": "TTL SERIE 54XX ( MILITAIRE )",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/ttl-serie-54xx-militaire/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "C.INTEGRES LOGIQUES",
+            "name": "CMOS 4000 et 4500 DIL",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/cmos-4000-et-4500-dil/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "C.INTEGRES LOGIQUES",
+            "name": "CMOS 4000 et 4500 CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/cmos-4000-et-4500-cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "C.INTEGRES LOGIQUES",
+            "name": "TTL CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/ttl-cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "C.INTEGRES LOGIQUES",
+            "name": "TTL H/HC /HCT DIL",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/ttl-h-hc-hct-dil/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "C.INTEGRES LOGIQUES",
+            "name": "TTL S /LS / ALS / F DIL",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/ttl-s-ls-als-f-dil/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "CIRCUITS DIVERS CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/circuits-divers-cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "CONVERTISSEURS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/convertisseurs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "HF",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/hf-analogiques/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "LM /LF / NE / OP /SN /TL /ULN",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/lm-lf-ne-op-sn-tl-uln/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "MEMOIRES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/memoires/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "MICROCONTROLEURS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/microcontroleurs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "MICROPROCESSEURS - INTERFACES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/microprocesseurs-interfaces/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "ANALOGIQUES",
+            "name": "TBA..TEA..TDA",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/tba-tea-tda/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES FIXES",
+            "name": "CTN - CTP",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-fixes/ctn-ctp/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES FIXES",
+            "name": "RESISTANCES BOBINES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-fixes/resistances-bobines/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES FIXES",
+            "name": "RESISTANCES CARBONE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-fixes/resistances-carbone/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES FIXES",
+            "name": "RESISTANCES CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-fixes/resistances-cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES FIXES",
+            "name": "VARISTANCES - PARAFOUDRES-SCHUNT",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-fixes/varistances-parafoudres/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES VARIABLES",
+            "name": "POTENTIOMETRES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-variables/potentiometres-resistances-variables/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "RESISTANCES VARIABLES",
+            "name": "POTENTIOMETRES DE TABLEAU",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-variables/potentiometres/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "NON POLARISES CERAMIQUES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/non-polarises-ceramiques/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "NON POLARISES MKT MKS MKP…",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/non-polarises-mkt-mks-mkp/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "POLARISES CHIMIQUES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/polarises-chimiques/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "POLARISES CHIMIQUES DE PUISSANCE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/polarises-chimiques-de-puissance/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "TANTALES GOUTTE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/tantales-goutte/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "CONDENSATEURS",
+            "name": "VARIABLES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/variables-condensateurs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "SELFS",
+            "name": "SELFS AXIALES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/selfs/selfs-axiales/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "SELFS",
+            "name": "SELFS CMS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/selfs/selfs-cms/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "SELFS",
+            "name": "SELFS DE PUISSANCE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/selfs/selfs-de-puissance/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "SELFS",
+            "name": "SELFS RADIALES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/selfs/selfs-radiales/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "HAUTE FREQUENCE",
+            "name": "ANTENNES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/haute-frequence/antennes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "HAUTE FREQUENCE",
+            "name": "FERRITES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/haute-frequence/ferrites/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "category": "HAUTE FREQUENCE",
+            "name": "QUARTZS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/haute-frequence/quartzs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "COMMUNICATIONS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/communications/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "GPS - GSM - GPRS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/gps-gsm-gprs-capteurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "MODULES RELAIS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/modules-relais/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "BIOMETRIQUES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/biometriques-capteurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "COURANT",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/courant/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "GAZ",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/gaz-capteurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "PRESSION",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/pression-capteurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "ACCELEROMETRES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/accelerometres/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "BOUSSOLES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/boussoles/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "CAMERAS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/cameras/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "CHOCS ET VIBRATIONS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/chocs-et-vibrations/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "COULEURS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/couleurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "COURANT ET TENSION",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/courant-et-tension/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "DEBIMETRES ET POMPES A EAU",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/debimetres/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "DISTANCE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/distance/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "EFFET HALL",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/effet-hall/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "ENCODEURS ROTATIFS ET JOYTICK",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/encodeurs-rotatifs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "FORCE ET FLEXION",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/force-et-flexion/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "GYROSCOPES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/gyroscopes/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "INFRAROUGE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/infrarouge/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "KIT DE CAPTEURS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/kit-de-capteurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "LUMIERES et BRUIT",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/lumieres/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "MOUVEMENT",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/mouvement/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "PH",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/ph/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "PROXIMITE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/proximite/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "PULSATIONS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/pulsations/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "RFID - NFC",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/rfid-nfc/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "TEMPERATURE -HUMIDITE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/temperature-humidite/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "ULTRASONS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/ultasons/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CAPTEURS",
+            "name": "ULTRAVIOLET",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/ultraviolet/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES ARDUINO ORIGINALES",
+            "name": "Cartes compatibles UNO",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-originales/carte-compatible-uno/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES ARDUINO ORIGINALES",
+            "name": "Cartes compatibles MEGA",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-originales/cartes-compatibles-mega/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES ARDUINO COMPATIBLES",
+            "name": "CARTE COMPATIBLE NANO",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-compatibles/cartes-compatibles-nano/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES ARDUINO COMPATIBLES",
+            "name": "Cartes Compatibles DUE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-compatibles/carte-due-compatible/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES ARDUINO COMPATIBLES",
+            "name": "Cartes Compatibles LEONARDO",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-compatibles/cartes-arduino-leonardo/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "RASPBERRY PI",
+            "name": "ACCESSOIRES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/accessoires-cartes-raspberry-pi/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "RASPBERRY PI",
+            "name": "AFFICHAGE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/affichage/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "RASPBERRY PI",
+            "name": "CAMERAS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/cameras-cartes-raspberry-pi/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "RASPBERRY PI",
+            "name": "CARTES RASPBERRY PI",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/cartes-raspberry-pi-cartes-raspberry-pi/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "RASPBERRY PI",
+            "name": "SHIELDS ET INTERFACES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/schields-et-interfaces/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "RASPBERRY PI",
+            "name": "STARTER KIT",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/starter-kit/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES STM-32",
+            "name": "AUTRES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-stm-32/autres/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "CARTES STM-32",
+            "name": "NUCLEO",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-stm-32/nucleo/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "AUTRES CARTES BASE LINUX",
+            "name": "DSP",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/dsp/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "AUTRES CARTES BASE LINUX",
+            "name": "BASE ZYNQ",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/base-zynq/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "AUTRES CARTES BASE LINUX",
+            "name": "BEAGLEBONE",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/beaglebone/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "AUTRES CARTES BASE LINUX",
+            "name": "NVIDIA JETSON",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/nvidia-jetson/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "AUTRES CARTES BASE LINUX",
+            "name": "CARTES DIVERS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/pc-duino/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "AUTRES CARTES BASE LINUX",
+            "name": "PMOD",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/pmod/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "PROGRAMMATEURS",
+            "name": "PIC",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/programmateurs/pic/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "PROGRAMMATEURS",
+            "name": "TINY AVR",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/programmateurs/tiny-avr/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "PROGRAMMATEURS",
+            "name": "UNIVERSEL",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/programmateurs/universel/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "category": "COMPILATEURS",
+            "name": "PIC",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/prototypage-grove-gravity/pic-prototypage-grove-gravity/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS COAXIAUX",
+            "name": "ADAPTATEURS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-coaxiaux/adaptateurs/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS COAXIAUX",
+            "name": "BNC",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-coaxiaux/bnc/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS COAXIAUX",
+            "name": "SMA",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-coaxiaux/sma/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS COAXIAUX",
+            "name": "SMB",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-coaxiaux/smb/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS COAXIAUX",
+            "name": "TNC",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-coaxiaux/tnc/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS BANANES",
+            "name": "2MM - 4MM ISOLES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-bananes/2mm-4mm-isoles/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS BANANES",
+            "name": "2MM -4MM NON ISOLES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-bananes/2mm-4mm-non-isoles/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS BANANES",
+            "name": "PINCES CROCODILE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-bananes/pinces-crocodile/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS BANANES",
+            "name": "POINTES DE TEST",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-bananes/pointes-de-test/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS INFORMATIQUES",
+            "name": "JST",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-informatiques/jst/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS INFORMATIQUES",
+            "name": "SUB-D + CAPOT",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-informatiques/sub-d/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS INFORMATIQUES",
+            "name": "TELEPHONE ET RESEAU",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-informatiques/telephone-et-reseau/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS INFORMATIQUES",
+            "name": "USB - HDMI",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-informatiques/usb-hdmi/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "CONNECTEURS SPECIAUX",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/connecteurs-speciaux/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "DISSIPATEURS THERMIQUE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/dissipateurs-thermique/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "GX12",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/gx12/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "BARETTES SECABLES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/barettes-secables/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "BORNIERS A VIS ENFICHABLES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/borniers-a-vis-enfichables/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "BORNIERS A VIS STANDARDS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/borniers-a-vis-standards/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "GRIPPE FIL",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/grippe-fil/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "HE10",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/he10/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "PLAQUES D'ESSAIS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/plaques-dessais/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "SUPPORTS C.I LYRE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/supports-c-i-lyre/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "SUPPORTS C.I TULIPE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/supports-c-i-tulipe/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CONNECTEURS DIVERS",
+            "name": "SUPPORTS PLCC",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/supports-plcc/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS BANAANE 2MM",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-banaane-2mm/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS BANANE 4MM",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-banane-4mm/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS BNC",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-bnc/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS CROCODILE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-crocodile/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS DIVERS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-divers/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS MULTIMETRES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-multimetres/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CORDONS DE MESURE",
+            "name": "CORDONS SMA",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/cordons-sma/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CABLES ET ACCESSOIRES",
+            "name": "CABLE DB9",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cables-et-accessoires/cable-db9/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CABLES ET ACCESSOIRES",
+            "name": "CABLE USB",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cables-et-accessoires/cable-usb/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CABLES ET ACCESSOIRES",
+            "name": "COLIERS ET EMBOUT",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cables-et-accessoires/coliers-et-embout/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CABLES ET ACCESSOIRES",
+            "name": "FILS EN NAPPES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cables-et-accessoires/fils-en-nappes/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "CABLES ET ACCESSOIRES",
+            "name": "GAINE THERMORETRACTABLE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cables-et-accessoires/gaine-thermoretractable/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "RELAIS",
+            "name": "RELAIS REED",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/relais/relais-reed/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "RELAIS",
+            "name": "RELAIS STANDARDS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/relais/relais-standards/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "category": "RELAIS",
+            "name": "RELAIS STATIQUES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/relais/relais-statiques/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "category": "IMPRIMANTES 3D",
+            "name": "SHIELDS CNC",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/imprimantes-et-scanners-3d/shields-cnc/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "category": "IMPRIMANTES 3D",
+            "name": "BOBINES FILS D'IMPRESSION",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/imprimantes-et-scanners-3d/bobines-fils-dimpression/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "category": "IMPRIMANTES 3D",
+            "name": "MACHINES CNC",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/imprimantes-et-scanners-3d/machines-cnc/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "category": "TRNASFORMATEURS",
+            "name": "TRANSFORMATEUR D'IMPULSION",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/trnasformateurs/transformateur-dimpulsion/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "category": "TRNASFORMATEURS",
+            "name": "TRANSFORMATEUR TORIQUE",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/trnasformateurs/transformateur-torique/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "category": "TRNASFORMATEURS",
+            "name": "TRANSFORMATEURS MOULES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/trnasformateurs/transformateurs-moules/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "category": "TRNASFORMATEURS",
+            "name": "TRANSFORMATEURS STANDARDS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/trnasformateurs/transformateurs-standards/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "category": "AFFICHEURS",
+            "name": "AFFICHEURS DE TABLEAU",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/afficheurs-de-tableau/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "category": "AFFICHEURS",
+            "name": "7 SEGMENTS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/7-segments/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "category": "AFFICHEURS",
+            "name": "LCD GRAPHIQUES",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/lcd-graphiques/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "category": "AFFICHEURS",
+            "name": "LCD STANDARD",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/lcd-standard/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "category": "AFFICHEURS",
+            "name": "OLED",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/oled/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "category": "AFFICHEURS",
+            "name": "TFT",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/tft/"
+        }
+    ]
+}

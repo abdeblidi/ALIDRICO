@@ -1,0 +1,1049 @@
+# fr translations for ElecCatalog.
+msgid ""
+msgstr ""
+"Project-Id-Version:  ElecCatalog\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 21:47+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: fr <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: .\templates\base.html:1951
+msgid "ابحث عن مكون..."
+msgstr "Rechercher un composant..."
+
+#: .\templates\base.html:1952
+msgid "Search"
+msgstr "Rechercher"
+
+#: .\templates\base.html:1973 .\templates\base.html:2187
+#: .\templates\cart.html:216 .\templates\cart_order_success.html:181
+#: .\templates\categories.html:251 .\templates\home.html:5
+#: .\templates\product_detail.html:747 .\templates\products.html:238
+#: .\templates\search_results.html:245
+msgid "الرئيسية"
+msgstr "Accueil"
+
+#: .\templates\base.html:1987 .\templates\base.html:2196
+#: .\templates\base.html:2223 .\templates\categories.html:5
+#: .\templates\categories.html:258 .\templates\product_detail.html:756
+#: .\templates\products.html:246 .\templates\products.html:332
+msgid "التصنيفات"
+msgstr "Catégories"
+
+#: .\templates\base.html:2001 .\templates\base.html:2205
+#: .\templates\cart_order_success.html:271 .\templates\products.html:5
+#: .\templates\products.html:231 .\templates\products.html:257
+msgid "المنتجات"
+msgstr "Produits"
+
+#: .\templates\base.html:2015 .\templates\cart.html:5 .\templates\cart.html:210
+#: .\templates\cart.html:221
+msgid "السلة"
+msgstr "Panier"
+
+#: .\templates\base.html:2035
+msgid "اختيار اللغة"
+msgstr "Choisir la langue"
+
+#: .\templates\base.html:2134
+msgid ""
+"منصتك المتخصصة في عرض وكتالوج المكونات الإلكترونية. نقدم لك مجموعة واسعة من "
+"المكونات الإلكترونية عالية الجودة."
+msgstr ""
+"Votre plateforme spécialisée dans la présentation et le catalogue des "
+"composants électroniques. Nous vous proposons une large gamme de composants "
+"électroniques de haute qualité."
+
+#: .\templates\base.html:2177
+msgid "روابط سريعة"
+msgstr "Liens rapides"
+
+#: .\templates\base.html:2233 .\templates\categories.html:462
+#: .\templates\home.html:1028 .\templates\search_results.html:321
+#: .\templates\search_results.html:485
+msgid "Resistors"
+msgstr "Résistances"
+
+#: .\templates\base.html:2242 .\templates\categories.html:505
+#: .\templates\home.html:1052 .\templates\search_results.html:325
+#: .\templates\search_results.html:489
+msgid "Capacitors"
+msgstr "Condensateurs"
+
+#: .\templates\base.html:2251 .\templates\categories.html:548
+#: .\templates\home.html:1076 .\templates\search_results.html:329
+#: .\templates\search_results.html:493
+msgid "Transistors"
+msgstr "Transistors"
+
+#: .\templates\base.html:2260 .\templates\categories.html:634
+#: .\templates\home.html:1124
+msgid "Integrated Circuits"
+msgstr "Circuits intégrés"
+
+#: .\templates\base.html:2284
+msgid "العنوان هنا"
+msgstr "Adresse ici"
+
+#: .\templates\base.html:2330
+msgid "جميع الحقوق محفوظة."
+msgstr "Tous droits réservés."
+
+#: .\templates\base.html:2561
+msgid "لا توجد اقتراحات مطابقة"
+msgstr "Aucune suggestion correspondante"
+
+# | msgid "عرض التفاصيل"
+#: .\templates\cart.html:212 .\templates\cart_order_success.html:176
+#: .\templates\product_detail.html:740
+msgid "مسار التنقل"
+msgstr "Fil d’Ariane"
+
+#: .\templates\cart.html:282 .\templates\cart.html:283
+#, fuzzy
+#| msgid "تحديث الكمية"
+msgid "إنقاص الكمية"
+msgstr "Mettre à jour la quantité"
+
+#: .\templates\cart.html:295
+msgid "الكمية"
+msgstr "Quantité"
+
+#: .\templates\cart.html:303 .\templates\cart.html:304
+#, fuzzy
+#| msgid "تحديث الكمية"
+msgid "زيادة الكمية"
+msgstr "Mettre à jour la quantité"
+
+#: .\templates\cart.html:324
+msgid "حذف"
+msgstr "Supprimer"
+
+#: .\templates\cart.html:344
+msgid "ملخص الطلب"
+msgstr "Résumé de la commande"
+
+#: .\templates\cart.html:348
+msgid "عدد المنتجات"
+msgstr "Nombre de produits"
+
+#: .\templates\cart.html:353 .\templates\cart_checkout.html:508
+#: .\templates\cart_order_success.html:347
+msgid "الإجمالي"
+msgstr "Total"
+
+#: .\templates\cart.html:362 .\templates\cart_checkout.html:7
+#: .\templates\cart_checkout.html:359
+msgid "إتمام الطلب"
+msgstr "Passer la commande"
+
+#: .\templates\cart.html:370 .\templates\cart_order_success.html:405
+msgid "مواصلة التسوق"
+msgstr "Continuer les achats"
+
+#: .\templates\cart.html:387
+msgid "السلة فارغة"
+msgstr "Le panier est vide"
+
+#: .\templates\cart.html:391
+msgid "لم تضف أي منتج إلى السلة بعد."
+msgstr "Vous n’avez encore ajouté aucun produit au panier."
+
+#: .\templates\cart.html:399 .\templates\home.html:854
+msgid "تصفح المنتجات"
+msgstr "Parcourir les produits"
+
+# | msgid "للكميات الكبيرة."
+#: .\templates\cart_checkout.html:365
+#, fuzzy
+#| msgid "معلومات الطلب"
+msgid "محتويات السلة"
+msgstr "Informations sur la commande"
+
+#: .\templates\cart_checkout.html:403
+#, fuzzy
+#| msgid "الكمية"
+msgid "الكمية:"
+msgstr "Quantité"
+
+# | msgid "اختيار اللغة"
+#: .\templates\cart_checkout.html:408
+msgid "سعر الوحدة:"
+msgstr "Prix unitaire :"
+
+# | msgid "للكميات الكبيرة."
+#: .\templates\cart_checkout.html:425
+msgid "معلومات الطلب"
+msgstr "Informations sur la commande"
+
+#: .\templates\cart_checkout.html:432
+msgid "الاسم الكامل"
+msgstr "Nom complet"
+
+#: .\templates\cart_checkout.html:437
+msgid "أدخل اسمك الكامل"
+msgstr "Entrez votre nom complet"
+
+#: .\templates\cart_checkout.html:443 .\templates\cart_order_success.html:248
+msgid "رقم الهاتف"
+msgstr "Numéro de téléphone"
+
+#: .\templates\cart_checkout.html:448
+msgid "مثال: 05 XX XX XX XX"
+msgstr "Exemple : 05 XX XX XX XX"
+
+# | msgid "المكونات الإلكترونية"
+#: .\templates\cart_checkout.html:453
+msgid "البريد الإلكتروني"
+msgstr "E-mail"
+
+# | msgid "اختيار اللغة"
+#: .\templates\cart_checkout.html:454 .\templates\cart_checkout.html:483
+msgid "اختياري"
+msgstr "Facultatif"
+
+#: .\templates\cart_checkout.html:458
+msgid "مثال: example@email.com"
+msgstr "Exemple : example@email.com"
+
+#: .\templates\cart_checkout.html:463 .\templates\cart_order_success.html:260
+msgid "الولاية"
+msgstr "Wilaya"
+
+# | msgid "اختيار اللغة"
+#: .\templates\cart_checkout.html:469
+msgid "اختر الولاية"
+msgstr "Sélectionnez la wilaya"
+
+#: .\templates\cart_checkout.html:482
+msgid "ملاحظة"
+msgstr "Remarque"
+
+#: .\templates\cart_checkout.html:486
+msgid "أي معلومات إضافية تريد إرسالها..."
+msgstr "Toute information supplémentaire que vous souhaitez envoyer..."
+
+# | msgid "تصفح المنتجات"
+#: .\templates\cart_checkout.html:494 .\templates\cart_order_success.html:319
+msgid "سعر المنتجات"
+msgstr "Prix des produits"
+
+# | msgid "عرض التفاصيل"
+#: .\templates\cart_checkout.html:501 .\templates\cart_order_success.html:333
+msgid "سعر التوصيل"
+msgstr "Frais de livraison"
+
+#: .\templates\cart_checkout.html:517 .\templates\cart_order_success.html:173
+#: .\templates\cart_order_success.html:186
+msgid "تأكيد الطلب"
+msgstr "Confirmation de la commande"
+
+#: .\templates\cart_checkout.html:521
+msgid "العودة إلى السلة"
+msgstr "Retour au panier"
+
+#: .\templates\cart_order_success.html:5
+msgid "تم تأكيد الطلب"
+msgstr "Commande confirmée"
+
+#: .\templates\cart_order_success.html:206
+msgid "تم إرسال طلبك بنجاح!"
+msgstr "Votre commande a été envoyée avec succès !"
+
+#: .\templates\cart_order_success.html:210
+msgid ""
+"شكرًا لك على طلبك. تم استلام طلبك بنجاح وسيتواصل معك فريقنا لتأكيد الطلب "
+"ومتابعة عملية التوصيل."
+msgstr ""
+"Merci pour votre commande. Votre commande a bien été reçue et notre équipe "
+"vous contactera pour la confirmer et organiser la livraison."
+
+#: .\templates\cart_order_success.html:221
+msgid "رقم الطلب:"
+msgstr "Numéro de commande :"
+
+# | msgid "توصيل سريع"
+#: .\templates\cart_order_success.html:230
+msgid "تفاصيل الطلب"
+msgstr "Détails de la commande"
+
+#: .\templates\cart_order_success.html:236
+msgid "الاسم"
+msgstr "Nom"
+
+#: .\templates\cart_order_success.html:293
+msgid "الرقم المرجعي"
+msgstr "Référence"
+
+#: .\templates\cart_order_success.html:305
+msgid "المجموع"
+msgstr ""
+
+#: .\templates\cart_order_success.html:365
+#, fuzzy
+#| msgid "الإجمالي"
+msgid "الإجمالي الكلي"
+msgstr "Total"
+
+#: .\templates\cart_order_success.html:382
+msgid "تم استلام طلبك بنجاح."
+msgstr "Votre commande a bien été reçue."
+
+#: .\templates\cart_order_success.html:392
+msgid "سيتواصل معك فريقنا عبر الهاتف لتأكيد الطلب وترتيب عملية التوصيل."
+msgstr ""
+"Notre équipe vous contactera par téléphone pour confirmer la commande et "
+"organiser la livraison."
+
+# | msgid "الرئيسية"
+#: .\templates\cart_order_success.html:416
+msgid "الصفحة الرئيسية"
+msgstr "Page d’accueil"
+
+#: .\templates\categories.html:241 .\templates\home.html:923
+msgid "تصنيفات المكونات"
+msgstr "Catégories de composants"
+
+#: .\templates\categories.html:284
+msgid "جميع التصنيفات"
+msgstr "Toutes les catégories"
+
+#: .\templates\categories.html:288
+msgid "اختر التصنيف المناسب لتصفح المنتجات"
+msgstr "Choisissez une catégorie pour parcourir les produits"
+
+#: .\templates\categories.html:358
+msgid "تصفح مجموعة واسعة من المكونات الإلكترونية في هذا التصنيف"
+msgstr ""
+"Découvrez une large gamme de composants électroniques dans cette catégorie"
+
+#: .\templates\categories.html:375 .\templates\categories.html:432
+#: .\templates\categories.html:475 .\templates\categories.html:518
+#: .\templates\categories.html:561 .\templates\categories.html:604
+#: .\templates\categories.html:647 .\templates\categories.html:690
+#: .\templates\categories.html:733 .\templates\categories.html:776
+msgid "منتج"
+msgstr "Produit"
+
+#: .\templates\categories.html:419 .\templates\home.html:1004
+#: .\templates\search_results.html:317 .\templates\search_results.html:481
+#: .\templates\search_results.html:528 .\templates\search_results.html:566
+#: .\templates\search_results.html:604 .\templates\search_results.html:642
+#: .\templates\search_results.html:680 .\templates\search_results.html:718
+msgid "Diodes"
+msgstr "Diodes"
+
+#: .\templates\categories.html:424
+msgid "ديودات عامة الاستخدام، شوتكي، زينر، LED، وديودات الطاقة"
+msgstr "Diodes à usage général, Schottky, Zener, LED et diodes de puissance"
+
+#: .\templates\categories.html:467
+msgid "مقاومات ثابتة، متغيرة، SMD، وشبكات المقاومات"
+msgstr ""
+"Résistances fixes et variables, résistances SMD et réseaux de résistances"
+
+#: .\templates\categories.html:510
+msgid "مكثفات كهربائية، سيراميك، إلكتروليتية، تنتالوم، وفيلم"
+msgstr ""
+"Condensateurs électriques, céramiques, électrolytiques, au tantale et à film"
+
+#: .\templates\categories.html:553
+msgid "ترانزستورات NPN، PNP، MOSFET، IGBT، وJFET"
+msgstr "Transistors NPN, PNP, MOSFET, IGBT et JFET"
+
+#: .\templates\categories.html:591 .\templates\home.html:1100
+msgid "LEDs"
+msgstr "LED"
+
+#: .\templates\categories.html:596
+msgid "LEDs بألوان مختلفة، RGB، SMD، عالية القدرة، وشريط LED"
+msgstr "LED de différentes couleurs, RGB, SMD, haute puissance et bandes LED"
+
+#: .\templates\categories.html:639
+msgid "دوائر متكاملة، منظمات الجهد، مضخمات العمليات، ومحولات"
+msgstr ""
+"Circuits intégrés, régulateurs de tension, amplificateurs opérationnels et "
+"convertisseurs"
+
+#: .\templates\categories.html:677 .\templates\home.html:1148
+msgid "Arduino / ESP32"
+msgstr "Arduino / ESP32"
+
+#: .\templates\categories.html:682
+msgid "لوحات Arduino، ESP32، وحدات WiFi/Bluetooth، وملحقات"
+msgstr "Cartes Arduino et ESP32, modules WiFi/Bluetooth et accessoires"
+
+#: .\templates\categories.html:720 .\templates\home.html:1172
+msgid "Microcontrollers"
+msgstr "Microcontrôleurs"
+
+#: .\templates\categories.html:725
+msgid "متحكمات دقيقة AVR، PIC، ARM، STM32، وTI"
+msgstr "Microcontrôleurs AVR, PIC, ARM, STM32 et TI"
+
+# | msgid "Capacitors"
+#: .\templates\categories.html:763
+msgid "Connectors"
+msgstr "Connecteurs"
+
+#: .\templates\categories.html:768
+msgid "موصلات، مقابس، رؤوس دبوسية، ومحطات طرفية"
+msgstr "Connecteurs, prises, barrettes à broches et borniers"
+
+#: .\templates\home.html:833
+msgid "اكتشف عالم"
+msgstr "Découvrez l'univers des"
+
+#: .\templates\home.html:836
+msgid "المكونات الإلكترونية"
+msgstr "composants électroniques"
+
+# | msgid ""
+# | "منصتك المتخصصة في عرض وكتالوج المكونات الإلكترونية. نقدم لك مجموعة واسعة "
+# | "من المكونات الإلكترونية عالية الجودة."
+#: .\templates\home.html:844
+msgid ""
+"منصتك المتخصصة في عرض وكتالوج المكونات الإلكترونية. تصفح آلاف المكونات، اطلع "
+"على مواصفاتها التقنية، وتواصل معنا للحصول على أفضل العروض."
+msgstr ""
+"Votre plateforme spécialisée dans la présentation et le catalogue des "
+"composants électroniques. Parcourez des milliers de composants, consultez "
+"leurs spécifications techniques et contactez-nous pour profiter de nos "
+"meilleures offres."
+
+#: .\templates\home.html:882 .\templates\home.html:1713
+msgid "جودة مضمونة"
+msgstr "Qualité garantie"
+
+#: .\templates\home.html:893 .\templates\home.html:1685
+msgid "توصيل سريع"
+msgstr "Livraison rapide"
+
+#: .\templates\home.html:927
+msgid "تصفح المكونات حسب الفئة"
+msgstr "Parcourir les composants par catégorie"
+
+#: .\templates\home.html:974 .\templates\home.html:1008
+#: .\templates\home.html:1032 .\templates\home.html:1056
+#: .\templates\home.html:1080 .\templates\home.html:1104
+#: .\templates\home.html:1128 .\templates\home.html:1152
+#: .\templates\home.html:1176
+msgid " منتج"
+msgstr " Produits"
+
+#: .\templates\home.html:1207
+msgid "منتجات مميزة"
+msgstr "Produits en vedette"
+
+#: .\templates\home.html:1211
+msgid "أهم المكونات الإلكترونية المتوفرة لدينا"
+msgstr "Les principaux composants électroniques que nous proposons"
+
+#: .\templates\home.html:1278 .\templates\home.html:1345
+#: .\templates\home.html:1405 .\templates\home.html:1465
+#: .\templates\home.html:1525 .\templates\product_detail.html:1351
+#: .\templates\product_detail.html:1403 .\templates\product_detail.html:1444
+#: .\templates\product_detail.html:1486 .\templates\product_detail.html:1528
+#: .\templates\products.html:679
+msgid "عرض التفاصيل"
+msgstr "Voir les détails"
+
+# | msgid "مثالي لتطبيقات التحويل والحماية."
+#: .\templates\home.html:1336
+msgid "ديود عام الاستخدام 1000V 1A، مثالي لتطبيقات التحويل والحماية."
+msgstr ""
+"Diode à usage général 1000V 1A, idéale pour les applications de commutation "
+"et de protection."
+
+# | msgid "الأكثر استخداماً في الدوائر الإلكترونية."
+#: .\templates\home.html:1396
+#, python-format
+msgid "مقاوم 10 كيلو أوم 1/4 واط 5%%، الأكثر استخداماً في الدوائر الإلكترونية."
+msgstr ""
+"Résistance 10 kΩ 1/4 W 5%%, couramment utilisée dans les circuits "
+"électroniques."
+
+# | msgid "مكثف كهربائي 100 ميكروفاراد 25V،"
+#: .\templates\home.html:1456
+msgid "مكثف كهربائي 100 ميكروفاراد 25V، مثالي لتصفية التيار."
+msgstr ""
+"Condensateur électrolytique 100 µF 25V, idéal pour le filtrage du courant."
+
+# | msgid "شائع في الدوائر التبديلية والتضخيم."
+#: .\templates\home.html:1516
+msgid "ترانزستور NPN للأغراض العامة، شائع في الدوائر التبديلية والتضخيم."
+msgstr ""
+"Transistor NPN à usage général, couramment utilisé dans les circuits de "
+"commutation et d'amplification."
+
+#: .\templates\home.html:1547 .\templates\products.html:716
+msgid "عرض جميع المنتجات"
+msgstr "Voir tous les produits"
+
+#: .\templates\home.html:1573
+msgid "خدماتنا"
+msgstr "Nos services"
+
+#: .\templates\home.html:1577
+msgid "ما نوفره لعملائنا"
+msgstr "Ce que nous offrons à nos clients"
+
+#: .\templates\home.html:1601
+msgid "بحث متقدم"
+msgstr "Recherche avancée"
+
+# | msgid "ابحث عن المكونات بالاسم أو الرقم المرجعي"
+#: .\templates\home.html:1607
+msgid ""
+"ابحث عن المكونات بالاسم أو الرقم المرجعي أو المواصفات التقنية بسهولة وسرعة."
+msgstr ""
+"Recherchez facilement et rapidement des composants par nom, référence ou "
+"spécifications techniques."
+
+#: .\templates\home.html:1629
+msgid "Datasheets"
+msgstr "Fiches techniques"
+
+# | msgid "اطلع على Datasheets كاملة لجميع المكونات"
+#: .\templates\home.html:1635
+msgid "اطلع على Datasheets كاملة لجميع المكونات مع إمكانية التحميل المباشر."
+msgstr ""
+"Consultez les fiches techniques complètes de tous les composants avec "
+"téléchargement direct."
+
+#: .\templates\home.html:1657
+msgid "دعم فني"
+msgstr "Support technique"
+
+# | msgid "فريق متخصص جاهز لمساعدتك في اختيار"
+#: .\templates\home.html:1663
+msgid "فريق متخصص جاهز لمساعدتك في اختيار المكونات المناسبة لمشروعك."
+msgstr ""
+"Une équipe spécialisée est prête à vous aider à choisir les composants "
+"adaptés à votre projet."
+
+#: .\templates\home.html:1691
+msgid "نوفر خدمة توصيل سريعة لجميع الطلبات إلى مختلف المناطق."
+msgstr ""
+"Nous proposons une livraison rapide pour toutes les commandes vers "
+"différentes régions."
+
+# | msgid "مع ضمان الجودة والأداء."
+#: .\templates\home.html:1719
+#, python-format
+msgid "جميع المكونات أصلية 100%% مع ضمان الجودة والأداء."
+msgstr ""
+"Tous les composants sont 100%% authentiques, avec une garantie de qualité et "
+"de performance."
+
+#: .\templates\home.html:1741
+msgid "أسعار تنافسية"
+msgstr "Prix compétitifs"
+
+# | msgid "أفضل الأسعار في السوق مع عروض خاصة"
+#: .\templates\home.html:1747
+msgid "أفضل الأسعار في السوق مع عروض خاصة للكميات الكبيرة."
+msgstr ""
+"Les meilleurs prix du marché avec des offres spéciales pour les grandes "
+"quantités."
+
+#: .\templates\home.html:1773
+msgid "هل تبحث عن مكون إلكتروني محدد؟"
+msgstr "Vous recherchez un composant électronique spécifique ?"
+
+#: .\templates\home.html:1778
+msgid "فريقنا جاهز لمساعدتك في العثور على ما تحتاجه"
+msgstr "Notre équipe est prête à vous aider à trouver ce dont vous avez besoin"
+
+# | msgid "توصيل سريع"
+#: .\templates\product_detail.html:5 .\templates\product_detail.html:736
+msgid "تفاصيل المنتج"
+msgstr "Détails du produit"
+
+#: .\templates\product_detail.html:857 .\templates\product_detail.html:865
+msgid "مخطط الأرجل"
+msgstr "Schéma de brochage"
+
+#: .\templates\product_detail.html:897
+msgid "ديودات"
+msgstr "Diodes"
+
+#: .\templates\product_detail.html:940
+msgid "وحدة"
+msgstr "Unité"
+
+# | msgid "تصفح المنتجات"
+#: .\templates\product_detail.html:982 .\templates\product_detail.html:992
+msgid "تحميل ورقة البيانات"
+msgstr "Télécharger la fiche technique"
+
+#: .\templates\product_detail.html:1010
+msgid "إضافة إلى السلة"
+msgstr "Ajouter au panier"
+
+#: .\templates\product_detail.html:1025 .\templates\product_detail.html:1215
+msgid "غير متوفر"
+msgstr "Indisponible"
+
+#: .\templates\product_detail.html:1050
+msgid "المواصفات التقنية"
+msgstr "Spécifications techniques"
+
+# | msgid "جميع التصنيفات"
+#: .\templates\product_detail.html:1088
+msgid "نوع المكون"
+msgstr "Type de composant"
+
+#: .\templates\product_detail.html:1092
+msgid "ديود مقوم"
+msgstr "Diode redresseuse"
+
+#: .\templates\product_detail.html:1101
+msgid "الجهد العكسي القصوي (VRRM)"
+msgstr "Tension inverse maximale (VRRM)"
+
+#: .\templates\product_detail.html:1114
+msgid "التيار الأمامي المتوسط (IF)"
+msgstr "Courant direct moyen (IF)"
+
+#: .\templates\product_detail.html:1127
+msgid "سقوط الجهد الأمامي (VF)"
+msgstr "Chute de tension directe (VF)"
+
+#: .\templates\product_detail.html:1140
+msgid "التيار العكسي (IR)"
+msgstr "Courant inverse (IR)"
+
+#: .\templates\product_detail.html:1153
+msgid "التردد"
+msgstr "Fréquence"
+
+# | msgid "جميع التصنيفات"
+#: .\templates\product_detail.html:1166
+msgid "نوع التغليف"
+msgstr "Type de boîtier"
+
+#: .\templates\product_detail.html:1179
+msgid "درجة حرارة التشغيل"
+msgstr "Température de fonctionnement"
+
+# | msgid "للكميات الكبيرة."
+#: .\templates\product_detail.html:1192
+msgid "الشركة المصنعة"
+msgstr "Fabricant"
+
+#: .\templates\product_detail.html:1196
+msgid "عدة مصنعين"
+msgstr "Plusieurs fabricants"
+
+#: .\templates\product_detail.html:1205
+msgid "الحالة"
+msgstr "État"
+
+#: .\templates\product_detail.html:1213
+msgid "متوفر"
+msgstr "Disponible"
+
+# | msgid "للكميات الكبيرة."
+#: .\templates\product_detail.html:1249
+msgid "معلومات تقنية إضافية"
+msgstr "Informations techniques supplémentaires"
+
+#: .\templates\product_detail.html:1283
+msgid "منتجات ذات صلة"
+msgstr "Produits associés"
+
+#: .\templates\product_detail.html:1287
+msgid "قد يهمك أيضاً"
+msgstr "Vous pourriez également être intéressé par"
+
+#: .\templates\product_detail.html:1395 .\templates\product_detail.html:1436
+msgid "ديود"
+msgstr "Diode"
+
+#: .\templates\product_detail.html:1478
+msgid "شوتكي"
+msgstr "Schottky"
+
+# | msgid "ديود عام الاستخدام 1000V 1A،"
+#: .\templates\product_detail.html:1520
+msgid "ديود إشارة"
+msgstr "Diode de signal"
+
+# | msgid "التصنيفات"
+#: .\templates\products.html:293
+msgid "التصفية"
+msgstr "Filtrer"
+
+# | msgid "تصفح المنتجات"
+#: .\templates\products.html:312
+msgid "تصفية المنتجات"
+msgstr "Filtrer les produits"
+
+# | msgid "التصنيفات"
+#: .\templates\products.html:356
+msgid "لا توجد تصنيفات."
+msgstr "Aucune catégorie."
+
+#: .\templates\products.html:371
+msgid "التصنيف الفرعي"
+msgstr "Sous-catégorie"
+
+#: .\templates\products.html:377 .\templates\products.html:894
+msgid "كل التصنيفات الفرعية"
+msgstr "Toutes les sous-catégories"
+
+#: .\templates\products.html:411
+msgid "الترتيب"
+msgstr "Trier par"
+
+#: .\templates\products.html:420
+msgid "الأحدث"
+msgstr "Plus récent"
+
+#: .\templates\products.html:427
+msgid "الأقدم"
+msgstr "Plus ancien"
+
+#: .\templates\products.html:434
+msgid "أبجدي (أ-ي)"
+msgstr "Alphabétique (A-Z)"
+
+#: .\templates\products.html:441
+msgid "أبجدي (ي-أ)"
+msgstr "Alphabétique (Z-A)"
+
+#: .\templates\products.html:448
+msgid "السعر: الأقل أولاً"
+msgstr "Prix : du moins cher au plus cher"
+
+#: .\templates\products.html:455
+msgid "السعر: الأعلى أولاً"
+msgstr "Prix : du plus cher au moins cher"
+
+# | msgid "جميع التصنيفات"
+#: .\templates\products.html:473
+msgid "تطبيق التصفية"
+msgstr "Appliquer les filtres"
+
+#: .\templates\products.html:487
+msgid "إزالة الفلاتر"
+msgstr "Effacer les filtres"
+
+#: .\templates\products.html:520
+msgid "جميع المنتجات"
+msgstr "Tous les produits"
+
+#: .\templates\products.html:531
+msgid "منتج متاح"
+msgstr "Produit disponible"
+
+#: .\templates\products.html:547
+msgid "تصفية"
+msgstr "Filtrer"
+
+# | msgid "تصفح المنتجات"
+#: .\templates\products.html:704
+msgid "لم يتم العثور على منتجات"
+msgstr "Aucun produit trouvé"
+
+#: .\templates\products.html:708
+msgid "جرب تغيير الفلاتر أو إزالة بعض شروط البحث."
+msgstr ""
+"Essayez de modifier les filtres ou de supprimer certains critères de "
+"recherche."
+
+#: .\templates\search_results.html:250
+msgid "البحث"
+msgstr "Recherche"
+
+#: .\templates\search_results.html:268
+msgid "نتائج البحث عن:"
+msgstr "Résultats de recherche pour :"
+
+#: .\templates\search_results.html:275
+msgid "تم العثور على"
+msgstr "Trouvé"
+
+#: .\templates\search_results.html:275
+msgid "نتيجة"
+msgstr "résultat"
+
+# | msgid "هل تبحث عن مكون إلكتروني محدد؟"
+#: .\templates\search_results.html:288
+msgid "ابحث عن مكون إلكتروني..."
+msgstr "Rechercher un composant électronique..."
+
+#: .\templates\search_results.html:297
+msgid "بحث"
+msgstr "Rechercher"
+
+#: .\templates\search_results.html:313 .\templates\search_results.html:477
+msgid "الكل"
+msgstr "Tous"
+
+#: .\templates\search_results.html:333 .\templates\search_results.html:497
+msgid "ICs"
+msgstr "CI"
+
+#: .\templates\search_results.html:514
+msgid "1N4007 Diode"
+msgstr "Diode 1N4007"
+
+#: .\templates\search_results.html:532
+msgid "ديود عام الاستخدام 1000V 1A،"
+msgstr "Diode à usage général 1000V 1A,"
+
+# | msgid "مثالي لتطبيقات التحويل والحماية."
+#: .\templates\search_results.html:533
+msgid "مثالي لتطبيقات التحويل والحماية من التيار العكسي."
+msgstr ""
+"Idéale pour les applications de commutation et la protection contre les "
+"courants inverses."
+
+#: .\templates\search_results.html:552
+msgid "1N4001 Diode"
+msgstr "Diode 1N4001"
+
+# | msgid "ديود عام الاستخدام 1000V 1A،"
+#: .\templates\search_results.html:570
+msgid "ديود عام الاستخدام 50V 1A،"
+msgstr "Diode à usage général 50V 1A,"
+
+#: .\templates\search_results.html:571
+msgid "مناسب للدوائر ذات الجهد المنخفض."
+msgstr "Convient aux circuits basse tension."
+
+#: .\templates\search_results.html:590
+msgid "1N5408 Diode"
+msgstr "Diode 1N5408"
+
+# | msgid "ديود عام الاستخدام 1000V 1A،"
+#: .\templates\search_results.html:608
+msgid "ديود قدرة عالية 1000V 3A،"
+msgstr "Diode de puissance 1000V 3A,"
+
+# | msgid "مثالي لتطبيقات التحويل والحماية."
+#: .\templates\search_results.html:609
+msgid "مناسب لتطبيقات الطاقة والتحويل العالية."
+msgstr "Convient aux applications de puissance et de commutation."
+
+#: .\templates\search_results.html:628
+msgid "1N5819 Schottky Diode"
+msgstr "Diode Schottky 1N5819"
+
+# | msgid "ديود عام الاستخدام 1000V 1A،"
+#: .\templates\search_results.html:646
+msgid "ديود شوتكي 40V 1A،"
+msgstr "Diode Schottky 40V 1A,"
+
+# | msgid "مثالي لتطبيقات التحويل والحماية."
+#: .\templates\search_results.html:647
+msgid "سقوط جهد منخفض مثالي لتطبيقات التبديل السريع."
+msgstr ""
+"Faible chute de tension, idéale pour les applications de commutation rapide."
+
+#: .\templates\search_results.html:666
+msgid "FR107 Fast Recovery Diode"
+msgstr "Diode à récupération rapide FR107"
+
+# | msgid "ديود عام الاستخدام 1000V 1A،"
+#: .\templates\search_results.html:684
+msgid "ديود استرداد سريع 1000V 1A،"
+msgstr "Diode à récupération rapide 1000V 1A,"
+
+# | msgid "مثالي لتطبيقات التحويل والحماية."
+#: .\templates\search_results.html:685
+msgid "مثالي للتطبيقات عالية التردد."
+msgstr "Idéale pour les applications haute fréquence."
+
+#: .\templates\search_results.html:704
+msgid "1N4148 Signal Diode"
+msgstr "Diode de signal 1N4148"
+
+# | msgid "ديود عام الاستخدام 1000V 1A،"
+#: .\templates\search_results.html:722
+msgid "ديود إشارة سريع 100V 200mA،"
+msgstr "Diode de signal rapide 100V 200mA,"
+
+# | msgid "الأكثر استخداماً في الدوائر الإلكترونية."
+#: .\templates\search_results.html:723
+msgid "الأكثر استخداماً في الدوائر الرقمية والتبديل."
+msgstr "Couramment utilisée dans les circuits numériques et de commutation."
+
+#: .\templates\search_results.html:768
+msgid "لم يتم العثور على نتائج"
+msgstr "Aucun résultat trouvé"
+
+#: .\templates\search_results.html:772
+msgid "جرب البحث باستخدام كلمات مختلفة أو تحقق من الإملاء"
+msgstr "Essayez une autre recherche ou vérifiez l’orthographe"
+
+#: .\templates\search_results.html:778
+msgid "اقتراحات:"
+msgstr "Suggestions :"
+
+#~ msgid "تواصل معنا"
+#~ msgstr "Contactez-nous"
+
+# | msgid "تواصل معنا"
+#~ msgid "تواصل معنا الآن"
+#~ msgstr "Contactez-nous maintenant"
+
+# | msgid "تصفح المنتجات"
+#~ msgid "طلب المنتج"
+#~ msgstr "Commander le produit"
+
+#~ msgid "الرقم المرجعي:"
+#~ msgstr "Référence :"
+
+# | msgid "للكميات الكبيرة."
+#~ msgid "الكمية المتوفرة:"
+#~ msgstr "Quantité disponible :"
+
+#~ msgid "المتوفر حاليًا:"
+#~ msgstr "Disponible actuellement :"
+
+# | msgid "عرض جميع المنتجات"
+#~ msgid "العودة إلى المنتج"
+#~ msgstr "Retour au produit"
+
+#~ msgid "هذا المنتج غير متوفر حاليًا."
+#~ msgstr "Ce produit n'est actuellement pas disponible."
+
+# | msgid "المنتجات"
+#~ msgid "المنتج"
+#~ msgstr "Produit"
+
+#~ msgid ""
+#~ "ديود عام الاستخدام (General Purpose Rectifier Diode) بجهد عكسي قدره 1000 "
+#~ "فولت وتيار أمامي 1 أمبير. يُستخدم على نطاق واسع في تطبيقات التحويل، "
+#~ "الحماية من التيار العكسي، ودوائر التقوية. يتميز بأداء موثوق وتكلفة منخفضة "
+#~ "مما يجعله الخيار المثالي للمشاريع الإلكترونية المتنوعة."
+#~ msgstr ""
+#~ "Diode redresseuse à usage général (General Purpose Rectifier Diode) avec "
+#~ "une tension inverse de 1000 V et un courant direct de 1 A. Elle est "
+#~ "largement utilisée dans les applications de commutation, la protection "
+#~ "contre les courants inverses et les circuits d'amplification. Elle offre "
+#~ "des performances fiables et un faible coût, ce qui en fait un choix idéal "
+#~ "pour divers projets électroniques."
+
+#~ msgid "الجهد العكسي التكراري الأقصى"
+#~ msgstr "Tension inverse répétitive maximale"
+
+#~ msgid "متوسط التيار الأمامي المقوم"
+#~ msgstr "Courant direct moyen redressé"
+
+#~ msgid "تيار الاندفاع الأمامي الأقصى غير التكراري"
+#~ msgstr "Courant de pointe direct maximal non répétitif"
+
+#~ msgid "درجة حرارة وصلة التشغيل"
+#~ msgstr "Température de jonction de fonctionnement"
+
+#~ msgid "درجة حرارة التخزين"
+#~ msgstr "Température de stockage"
+
+# | msgid "جميع التصنيفات"
+#~| msgid "نوع التغليف"
+#~ msgid "موضع التركيب"
+#~ msgstr "Position de montage"
+
+#~ msgid "أي موضع"
+#~ msgstr "Toute position"
+
+#~ msgid "الوزن"
+#~ msgstr "Poids"
+
+#~ msgid "حوالي"
+#~ msgstr "Environ"
+
+#~ msgid "لا توجد أنواع تغليف."
+#~ msgstr "Aucun type de boîtier."
+
+#~ msgid "Pinout Diagram"
+#~ msgstr "Schéma de brochage"
+
+#~ msgid "مقاوم 10 كيلو أوم 1/4 واط 5%،"
+#~ msgstr "Résistance 10 kΩ 1/4 W 5 %,"
+
+#~ msgid "مثالي لتصفية التيار."
+#~ msgstr "idéal pour le filtrage du courant."
+
+#~ msgid "ترانزستور NPN للأغراض العامة،"
+#~ msgstr "Transistor NPN à usage général,"
+
+#~ msgid "أو المواصفات التقنية بسهولة وسرعة."
+#~ msgstr "ou par spécifications techniques facilement et rapidement."
+
+#~ msgid "مع إمكانية التحميل المباشر."
+#~ msgstr "avec téléchargement direct."
+
+#~ msgid "المكونات المناسبة لمشروعك."
+#~ msgstr "les composants adaptés à votre projet."
+
+#~ msgid "جميع المكونات أصلية 100%"
+#~ msgstr "Tous les composants sont 100 % authentiques"
+msgid "لا يوجد وصف"
+msgstr "Aucune description disponible"
+msgid "ALIDRICO Electronics متخصصة في المكونات الإلكترونية، وإصلاح البطاقات الإلكترونية، وتصنيع لوحات الدوائر المطبوعة (PCB) حسب الطلب. نقوم بإصلاح البطاقات الصناعية، ومغيرات السرعة، وبطاقات مكيفات الهواء، ومصادر الطاقة، ومصادر طاقة أفران الميكروويف، والمثبتات، وبطاقات التحكم، وغيرها من الأنظمة الإلكترونية. نقدم خدمات التشخيص والإصلاح على مستوى المكونات، واستبدال المكونات التالفة. كما نقوم بتصميم وتصنيع لوحات PCB حسب الطلب. ونقوم أيضًا بتحويل لوحات المفاتيح ذات الأغشية أو البلاستيكية إلى أنظمة تحكم بأزرار ضغط حقيقية، بهدف تحسين موثوقية الأجهزة وزيادة متانتها."
+
+msgstr "ALIDRICO Electronics est spécialisée dans les composants électroniques, la réparation de cartes électroniques et la fabrication de circuits imprimés (PCB) sur mesure. Nous réparons les cartes industrielles, les variateurs de vitesse, les cartes de climatiseurs, les alimentations, les alimentations de micro-ondes, les stabilisateurs, les cartes de commande et autres systèmes électroniques. Nous assurons le diagnostic et la réparation au niveau des composants ainsi que le remplacement des composants défectueux. Nous concevons et fabriquons également des circuits imprimés (PCB) sur mesure. Nous transformons aussi les claviers à membrane ou en plastique en systèmes de commande équipés de véritables boutons-poussoirs afin d'améliorer la fiabilité et la durabilité des appareils."
+#: .\templates\products.html
+msgid "كل التصنيفات"
+msgstr "Toutes les catégories"
+
+#: .\templates\products.html
+msgid "تصنيف محدد"
+msgstr "Catégorie sélectionnée"
+#: .\templates\products.html
+msgid "تصنيف فرعي محدد"
+msgstr "Sous-catégorie sélectionnée"
+#: .\templates\products.html
+msgid "لا توجد تصنيفات فرعية"
+msgstr "Aucune sous-catégorie"
+#: .\templates\base.html
+msgid "الوضع الليلي"
+msgstr "Mode sombre"
+#: .\templates\base.html
+msgid "الوضع النهاري"
+msgstr "Mode clair"
+#: .\templates\base.html
+msgid "التبديل إلى الوضع الليلي"
+msgstr "Passer au mode sombre"
+#: .\templates\base.html
+msgid "التبديل إلى الوضع النهاري"
+msgstr "Passer au mode clair"
+#: .\templates\base.html
+msgid "تبديل الوضع"
+msgstr "Changer de mode"
+msgid "أهم تصنيفات المكونات"
+msgstr "Principales catégories de composants"
+msgid "🛒 محتويات السلة"
+msgstr "🛒 Contenu du panier"
+msgid "رسوم التوصيل"
+msgstr "Frais de livraison"
+msgid "إنقاص الكمية"
+msgstr "Decrease Quantity"
+
+msgid "زيادة الكمية"
+msgstr "Increase Quantity"
+
+msgid "محتويات السلة"
+msgstr "Cart Contents"
+
+msgid "الكمية:"
+msgstr "Quantity:"
+
+msgid "الإجمالي الكلي"
+msgstr "Grand Total"
+
+msgid "المجموع"
+msgstr "Total"
+

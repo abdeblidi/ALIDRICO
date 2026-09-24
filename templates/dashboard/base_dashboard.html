@@ -1,0 +1,457 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}لوحة التحكم{% endblock %} | ElecCatalog Dashboard</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #3949ab;
+            --accent-color: #00bcd4;
+            --dark-bg: #0b1623;
+            --sidebar-bg: #0d1b2a;
+            --card-bg: #1b2838;
+            --text-light: #e0e1dd;
+            --text-muted: #778da9;
+            --border-color: #2a3f54;
+            --hover-bg: #243447;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--sidebar-bg);
+            border-left: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar-brand {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .sidebar-brand i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+
+        .sidebar-brand h4 {
+            color: #fff;
+            font-weight: 800;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-brand p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            color: #fff;
+            background: var(--hover-bg);
+            border-right-color: var(--accent-color);
+        }
+
+        .sidebar-menu a i {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .user-details h6 {
+            color: #fff;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .user-details p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.75rem;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            margin-right: 260px;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .topbar {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar h5 {
+            color: #fff;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .topbar-actions a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .topbar-actions a:hover {
+            color: var(--accent-color);
+        }
+
+        .content-area {
+            padding: 2rem;
+        }
+
+        /* ===== MOBILE ===== */
+        .sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 991px) {
+            .sidebar {
+                right: -260px;
+            }
+            .sidebar.show {
+                right: 0;
+            }
+            .main-content {
+                margin-right: 0;
+            }
+            .sidebar-toggle {
+                display: block;
+            }
+            .overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            .overlay.show {
+                display: block;
+            }
+        }
+
+        /* ===== COMMON COMPONENTS ===== */
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .kpi-icon {
+            width: 55px; height: 55px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: #fff; flex-shrink: 0;
+        }
+        .kpi-icon.blue { background: linear-gradient(135deg, #1a237e, #3949ab); }
+        .kpi-icon.cyan { background: linear-gradient(135deg, #00bcd4, #008ba3); }
+        .kpi-icon.green { background: linear-gradient(135deg, #27ae60, #219a52); }
+        .kpi-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .kpi-info h4 { font-size: 1.6rem; font-weight: 800; color: #fff; margin: 0; }
+        .kpi-info p { color: var(--text-muted); margin: 0; font-size: 0.85rem; }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .section-card .card-header-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff; padding: 1rem 1.5rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .section-card .card-body-custom { padding: 1.5rem; }
+
+        .table-custom {
+            width: 100%; color: var(--text-light); margin: 0;
+        }
+        .table-custom th {
+            background: var(--hover-bg); color: var(--accent-color);
+            font-weight: 600; border-color: var(--border-color);
+            padding: 0.75rem 1rem; white-space: nowrap;
+        }
+        .table-custom td {
+            border-color: var(--border-color);
+            padding: 0.75rem 1rem; vertical-align: middle;
+        }
+        .table-custom tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .badge-custom {
+            display: inline-block; padding: 0.25rem 0.6rem;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+        }
+        .badge-success-custom { background: rgba(39,174,96,0.15); color: #2ecc71; }
+        .badge-warning-custom { background: rgba(243,156,18,0.15); color: #f39c12; }
+        .badge-danger-custom { background: rgba(231,76,60,0.15); color: #e74c3c; }
+        .badge-info-custom { background: rgba(0,188,212,0.15); color: var(--accent-color); }
+
+        .chart-container { position: relative; height: 300px; }
+
+        .empty-state { text-align: center; padding: 2rem; color: var(--text-muted); }
+        .empty-state i { font-size: 2.5rem; opacity: 0.3; margin-bottom: 0.5rem; }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--accent-color), #008ba3);
+            border: none; color: #fff; padding: 0.6rem 1.5rem;
+            border-radius: 8px; font-weight: 600; transition: all 0.3s;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,188,212,0.3); color: #fff;
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--accent-color); color: var(--accent-color);
+            padding: 0.6rem 1.5rem; border-radius: 8px;
+            font-weight: 600; transition: all 0.3s; background: transparent;
+        }
+        .btn-outline-custom:hover { background: var(--accent-color); color: #fff; }
+
+        .form-control-custom {
+            background: var(--dark-bg); border: 1px solid var(--border-color);
+            color: var(--text-light); border-radius: 10px;
+            padding: 0.75rem 1rem; width: 100%; transition: all 0.3s;
+        }
+        .form-control-custom:focus {
+            background: var(--dark-bg); border-color: var(--accent-color);
+            outline: none; box-shadow: 0 0 0 3px rgba(0,188,212,0.1);
+            color: var(--text-light);
+        }
+        .form-control-custom::placeholder { color: var(--text-muted); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.6s ease forwards; }
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+
+<body>
+
+<!-- Overlay Mobile -->
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <a href="{% url 'dashboard:home' %}" class="sidebar-brand">
+        <i class="bi bi-speedometer2"></i>
+        <div>
+            <h4>ALI DRICO</h4>
+            <p>لوحة التحكم</p>
+        </div>
+    </a>
+
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{% url 'dashboard:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <i class="bi bi-house-door"></i>
+                <span>الرئيسية</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'catalog:products' %}" target="_blank">
+                <i class="bi bi-box-seam"></i>
+                <span>المنتجات</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'catalog:categories' %}" target="_blank">
+                <i class="bi bi-grid-3x3-gap"></i>
+                <span>التصنيفات</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'dashboard:order_statistics' %}" class="{% if request.resolver_match.url_name == 'order_statistics' %}active{% endif %}">
+                <i class="bi bi-bar-chart-line"></i>
+                <span>إحصائيات الطلبات</span>
+            </a>
+        </li>
+        <li>
+            <a href="/admin/" target="_blank">
+                <i class="bi bi-shield-lock"></i>
+                <span>Django Admin</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-footer">
+        <div class="user-info">
+            <div class="user-avatar">
+                {{ user.username|first|upper }}
+            </div>
+            <div class="user-details">
+                <h6>{{ user.username }}</h6>
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+        <a href="{% url 'dashboard:logout' %}" class="btn btn-outline-custom w-100 mt-3" style="padding: 0.4rem;">
+            <i class="bi bi-box-arrow-left ms-1"></i> تسجيل الخروج
+        </a>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="topbar">
+        <div class="d-flex align-items-center gap-3">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            <h5>{% block page_title %}لوحة التحكم{% endblock %}</h5>
+        </div>
+        <div class="topbar-actions">
+            <a href="{% url 'catalog:home' %}" target="_blank" title="الموقع">
+                <i class="bi bi-globe"></i>
+            </a>
+            <a href="{% url 'dashboard:logout' %}" title="خروج">
+                <i class="bi bi-box-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="content-area">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="background: {% if message.tags == 'success' %}rgba(39,174,96,0.15){% else %}rgba(231,76,60,0.15){% endif %}; color: {% if message.tags == 'success' %}#2ecc71{% else %}#e74c3c{% endif %}; border-color: {% if message.tags == 'success' %}rgba(39,174,96,0.3){% else %}rgba(231,76,60,0.3){% endif %};">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('show');
+        document.getElementById('overlay').classList.toggle('show');
+    }
+</script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

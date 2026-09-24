@@ -1,0 +1,73 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}التصنيفات الفرعية{% endblock %}
+{% block page_title %}التصنيفات الفرعية{% endblock %}
+
+{% block content %}
+
+<div class="section-card animate-fade-in">
+
+    <div class="card-header-custom">
+        <span>
+            <i class="bi bi-diagram-3 me-2"></i>
+            التصنيفات الفرعية
+        </span>
+    </div>
+
+    <div class="card-body-custom p-0">
+
+        <div class="table-responsive">
+
+            <table class="table-custom">
+
+                <thead>
+                    <tr>
+                        <th>التصنيف الرئيسي</th>
+                        <th>التصنيف الفرعي</th>
+                        <th>المنتجات النشطة</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for subcategory in subcategories %}
+
+                    <tr>
+
+                        <td style="color: #fff !important;">
+                            {{ subcategory.category.name }}
+                        </td>
+
+                        <td style="color: #fff !important;">
+                            {{ subcategory.name }}
+                        </td>
+
+                        <td>
+                            <span class="badge-custom badge-info-custom">
+                                {{ subcategory.product_count }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="3" style="color: #fff !important;">
+                            لا توجد تصنيفات فرعية.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

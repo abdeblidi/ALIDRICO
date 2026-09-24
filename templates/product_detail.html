@@ -1,0 +1,1609 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% if product.name %}{{ product.name }}{% else %}{% translate "تفاصيل المنتج" %}{% endif %} |
+ALIDRICO{% endblock %}
+
+{% block extra_css %}
+
+<style>
+    .product-detail-section {
+        padding: 2rem 0 4rem;
+    }
+
+
+
+    .product-image-wrapper {
+
+        background:
+            var(--card-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            20px;
+
+        padding:
+            2rem;
+
+        text-align:
+            center;
+
+        position:
+            relative;
+
+        overflow:
+            hidden;
+
+    }
+
+
+    .product-image-wrapper::before {
+
+        content:
+            '';
+
+        position:
+            absolute;
+
+        top:
+            -50%;
+
+        left:
+            -50%;
+
+        width:
+            200%;
+
+        height:
+            200%;
+
+        background:
+            radial-gradient(circle,
+                rgba(0, 188, 212, 0.05) 0%,
+                transparent 70%);
+
+        pointer-events:
+            none;
+
+    }
+
+
+    .product-image-wrapper img {
+
+        max-width:
+            100%;
+
+        max-height:
+            400px;
+
+        object-fit:
+            contain;
+
+        position:
+            relative;
+
+        z-index:
+            1;
+
+    }
+
+
+    /* =====================================================
+       Image Zoom
+    ====================================================== */
+
+    .product-image-wrapper img.zoomable {
+        cursor: zoom-in;
+        transition: transform 0.3s ease;
+    }
+
+    .product-image-wrapper img.zoomable:hover {
+        transform: scale(1.08);
+    }
+
+    .image-lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.9);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: zoom-out;
+    }
+
+    .image-lightbox.show {
+        display: flex;
+    }
+
+    .image-lightbox img {
+        max-width: 95vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 12px;
+        cursor: default;
+    }
+
+    .image-lightbox .close-lightbox {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        border: none;
+        background: transparent;
+        color: #fff;
+        font-size: 2.5rem;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+
+    /* =====================================================
+       Additional Product Images
+    ====================================================== */
+
+    .product-thumbnails {
+
+        display:
+            flex;
+
+        gap:
+            0.75rem;
+
+        flex-wrap:
+            wrap;
+
+        margin-top:
+            1rem;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .product-thumbnail {
+
+        width:
+            78px;
+
+        height:
+            78px;
+
+        padding:
+            0.25rem;
+
+        background:
+            var(--dark-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            10px;
+
+        cursor:
+            pointer;
+
+        object-fit:
+            contain;
+
+        transition:
+            all 0.2s ease;
+
+    }
+
+
+    .product-thumbnail:hover,
+    .product-thumbnail.active {
+
+        border-color:
+            var(--accent-color);
+
+        box-shadow:
+            0 0 0 2px rgba(0, 188, 212, 0.15);
+
+    }
+
+
+    .product-image-wrapper .placeholder-icon {
+
+        font-size:
+            10rem;
+
+        color:
+            var(--text-muted);
+
+        opacity:
+            0.3;
+
+    }
+
+
+    /* =====================================================
+       Product Info
+    ====================================================== */
+
+    .product-info {
+
+        padding:
+            1rem 0;
+
+    }
+
+
+    .product-info .category-badge {
+
+        display:
+            inline-block;
+
+        background:
+            rgba(0, 188, 212, 0.15);
+
+        color:
+            var(--accent-color);
+
+        padding:
+            0.3rem 1rem;
+
+        border-radius:
+            20px;
+
+        font-size:
+            0.85rem;
+
+        font-weight:
+            600;
+
+        margin-bottom:
+            1rem;
+
+    }
+
+
+    .product-info h1 {
+
+        font-weight:
+            800;
+
+        color:
+            #fff;
+
+        margin-bottom:
+            0.5rem;
+
+        font-size:
+            2rem;
+
+    }
+
+
+    .product-info .part-number-large {
+
+        font-family:
+            'Courier New',
+            monospace;
+
+        background:
+            rgba(0, 188, 212, 0.1);
+
+        color:
+            var(--accent-color);
+
+        padding:
+            0.4rem 1rem;
+
+        border-radius:
+            8px;
+
+        font-size:
+            1.1rem;
+
+        font-weight:
+            700;
+
+        display:
+            inline-block;
+
+        margin-bottom:
+            1.5rem;
+
+        border:
+            1px solid rgba(0, 188, 212, 0.2);
+
+    }
+
+
+    .product-info .description {
+
+        color:
+            var(--text-muted);
+
+        line-height:
+            1.8;
+
+        margin-bottom:
+            2rem;
+
+    }
+
+
+    /* =====================================================
+       Action Buttons
+    ====================================================== */
+
+    .action-buttons {
+
+        display:
+            flex;
+
+        gap:
+            1rem;
+
+        flex-wrap:
+            wrap;
+
+        margin-bottom:
+            2rem;
+
+    }
+
+
+    .btn-datasheet {
+
+        background:
+            linear-gradient(135deg,
+                #e74c3c 0%,
+                #c0392b 100%);
+
+        border:
+            none;
+
+        color:
+            #fff;
+
+        padding:
+            0.8rem 1.5rem;
+
+        border-radius:
+            10px;
+
+        font-weight:
+            600;
+
+        transition:
+            all 0.3s ease;
+
+        text-decoration:
+            none;
+
+        display:
+            inline-flex;
+
+        align-items:
+            center;
+
+        gap:
+            0.5rem;
+
+    }
+
+
+    .btn-datasheet:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 8px 25px rgba(231, 76, 60, 0.3);
+
+        color:
+            #fff;
+
+    }
+
+
+    .btn-contact-product {
+
+        background:
+            linear-gradient(135deg,
+                #27ae60 0%,
+                #219a52 100%);
+
+        border:
+            none;
+
+        color:
+            #fff;
+
+        padding:
+            0.8rem 1.5rem;
+
+        border-radius:
+            10px;
+
+        font-weight:
+            600;
+
+        transition:
+            all 0.3s ease;
+
+        text-decoration:
+            none;
+
+        display:
+            inline-flex;
+
+        align-items:
+            center;
+
+        gap:
+            0.5rem;
+
+    }
+
+
+    .btn-contact-product:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 8px 25px rgba(39, 174, 96, 0.3);
+
+        color:
+            #fff;
+
+    }
+
+
+    /* =====================================================
+       Specifications Table
+    ====================================================== */
+
+    .specs-card {
+
+        background:
+            var(--card-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            16px;
+
+        overflow:
+            hidden;
+
+        margin-top:
+            2rem;
+
+    }
+
+
+    .specs-card .card-header {
+
+        background:
+            linear-gradient(135deg,
+                var(--primary-color) 0%,
+                var(--secondary-color) 100%);
+
+        color:
+            #fff;
+
+        padding:
+            1rem 1.5rem;
+
+        font-weight:
+            700;
+
+        border:
+            none;
+
+    }
+
+
+    .specs-card .table {
+
+        margin:
+            0;
+
+        color:
+            var(--text-light);
+
+    }
+
+
+    .specs-card .table th {
+
+        background:
+            var(--hover-bg);
+
+        color:
+            var(--accent-color);
+
+        font-weight:
+            600;
+
+        border-color:
+            var(--border-color);
+
+        width:
+            35%;
+
+    }
+
+
+    .specs-card .table td {
+
+        border-color:
+            var(--border-color);
+
+    }
+
+
+    .specs-card .table tr:hover td {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+    }
+
+
+    /* =====================================================
+       Technical Info
+    ====================================================== */
+
+    .tech-info-card {
+
+        background:
+            var(--card-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            16px;
+
+        padding:
+            1.5rem;
+
+        margin-top:
+            2rem;
+
+    }
+
+
+    .tech-info-card h5 {
+
+        font-weight:
+            700;
+
+        color:
+            #fff;
+
+        margin-bottom:
+            1rem;
+
+        padding-bottom:
+            0.75rem;
+
+        border-bottom:
+            1px solid var(--border-color);
+
+    }
+
+
+    .tech-info-card pre {
+
+        background:
+            var(--dark-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            8px;
+
+        padding:
+            1rem;
+
+        color:
+            var(--text-muted);
+
+        font-size:
+            0.9rem;
+
+        overflow-x:
+            auto;
+
+    }
+
+
+    /* =====================================================
+       Related Products
+    ====================================================== */
+
+    .related-section {
+
+        padding:
+            3rem 0;
+
+    }
+
+
+    /* =====================================================
+       Pinout Diagram
+    ====================================================== */
+
+    .pinout-diagram {
+
+        background:
+            var(--dark-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            12px;
+
+        padding:
+            2rem;
+
+        text-align:
+            center;
+
+        margin-top:
+            1rem;
+
+    }
+
+
+    .pinout-diagram i {
+
+        font-size:
+            4rem;
+
+        color:
+            var(--text-muted);
+
+        opacity:
+            0.5;
+
+    }
+
+
+    .pinout-diagram p {
+
+        color:
+            var(--text-muted);
+
+        margin-top:
+            1rem;
+
+    }
+
+
+    /* =====================================================
+       Pinout Image
+    ====================================================== */
+
+    .pinout-image {
+
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        max-height:
+            400px;
+
+        object-fit:
+            contain;
+
+        display:
+            block;
+
+        margin:
+            0 auto;
+
+        border-radius:
+            8px;
+
+    }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     Breadcrumb
+====================================================== -->
+
+<div class="breadcrumb-wrapper">
+
+    <div class="container">
+
+        <h1>
+            {% translate "تفاصيل المنتج" %}
+        </h1>
+
+
+        <nav aria-label="{% translate 'مسار التنقل' %}">
+
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+
+                    <a href="{% url 'catalog:home' %}">
+                        {% translate "الرئيسية" %}
+                    </a>
+
+                </li>
+
+
+                <li class="breadcrumb-item">
+
+                    <a href="{% url 'catalog:categories' %}">
+                        {% translate "التصنيفات" %}
+                    </a>
+
+                </li>
+
+
+                {% if product.category %}
+
+                <li class="breadcrumb-item">
+
+                    <a href="{% url 'catalog:category_products' product.category.slug %}">
+                        {% translate product.category.name %}
+                    </a>
+
+                </li>
+
+                {% endif %}
+
+
+                <li class="breadcrumb-item active">
+
+                    {{ product.name|default:"1N4007 Diode" }}
+
+                </li>
+
+            </ol>
+
+        </nav>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     Product Detail
+====================================================== -->
+
+<section class="product-detail-section">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <!-- =================================================
+                 Product Image + Pinout
+            ================================================== -->
+
+            <div class="col-lg-5">
+
+
+                <!-- Product Image -->
+
+                <div class="product-image-wrapper">
+
+                    {% if product.image %}
+
+                    <img id="main-product-image" class="zoomable" src="{{ product.image.url }}" alt="{{ product.name }}" onclick="openImageLightbox(this.src)">
+
+                    {% else %}
+
+                    <i class="bi bi-diagram-2 placeholder-icon"></i>
+
+                    {% endif %}
+
+                </div>
+
+                {% if product.additional_images.all %}
+
+                <div class="product-thumbnails">
+
+                    {% if product.image %}
+
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-thumbnail active"
+                        onclick="changeProductImage(this)">
+
+                    {% endif %}
+
+                    {% for extra_image in product.additional_images.all %}
+
+                    <img src="{{ extra_image.image.url }}" alt="{{ product.name }}" class="product-thumbnail"
+                        onclick="changeProductImage(this)">
+
+                    {% endfor %}
+
+                </div>
+
+                {% endif %}
+
+
+
+                <!-- =================================================
+                     Pinout Diagram
+                ================================================== -->
+
+                <div class="pinout-diagram">
+
+                    {% if product.pinout_image %}
+
+                    <img src="{{ product.pinout_image.url }}" alt="{% translate 'مخطط الأرجل' %} - {{ product.name }}"
+                        class="pinout-image" onclick="openImageLightbox(this.src)" style="cursor: zoom-in;">
+
+                    {% else %}
+
+                    <i class="bi bi-diagram-3"></i>
+
+                    <p>
+                        {% translate "مخطط الأرجل" %}
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 Product Info
+            ================================================== -->
+
+            <div class="col-lg-7">
+
+                <div class="product-info">
+
+
+                    {% if product.category %}
+
+                    <span class="category-badge">
+
+                        {% translate product.category.name %}
+
+                    </span>
+
+                    {% else %}
+
+                    <span class="category-badge">
+
+                        {% translate "ديودات" %}
+
+                    </span>
+
+                    {% endif %}
+
+
+
+                    <h1>
+
+                        {{ product.name|default:"1N4007 Diode" }}
+
+                    </h1>
+
+
+
+                    <span class="part-number-large">
+
+                        <i class="bi bi-upc-scan me-2"></i>
+
+                        {{ product.part_number|default:"1N4007" }}
+
+                    </span>
+
+
+
+                    
+
+                    <div class="mt-2 mb-3">
+
+                        <span style="
+                                font-size: 2rem;
+                                font-weight: 800;
+                                color: #27ae60;
+                            ">
+
+                            {{ product.price }} DZD
+
+                        </span>
+
+
+                        <span class="text-muted ms-2">
+
+                            / {% translate "وحدة" %}
+
+                        </span>
+
+                    </div>
+
+        
+
+
+                    <p class="description">
+                        {% if product.description %}
+                            {{ product.description }}
+                        {% else %}
+                            {% translate "لا يوجد وصف" %}
+                        {% endif %}
+                    </p>
+
+
+                    <!-- =================================================
+                         Action Buttons
+                    ================================================== -->
+
+                    <div class="action-buttons">
+
+
+                        {% if product.datasheet %}
+
+                        <a href="{{ product.datasheet.url }}" class="btn-datasheet" download>
+
+                            <i class="bi bi-file-earmark-pdf"></i>
+
+                            {% translate "تحميل ورقة البيانات" %}
+
+                        </a>
+
+                        {% else %}
+
+                        <a href="#" class="btn-datasheet">
+
+                            <i class="bi bi-file-earmark-pdf"></i>
+
+                            {% translate "تحميل ورقة البيانات" %}
+
+                        </a>
+
+                        {% endif %}
+
+
+
+                        {% if product.quantity > 0 %}
+
+                        <form method="post" action="{% url 'catalog:cart_add' product.slug %}" style="display: inline;">
+
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn-contact-product">
+
+                                <i class="bi bi-cart-plus"></i>
+
+                                {% translate "إضافة إلى السلة" %}
+
+                            </button>
+
+                        </form>
+
+                        {% else %}
+
+                        <button type="button" class="btn-contact-product" disabled style="
+                                opacity: 0.6;
+                                cursor: not-allowed;
+                            ">
+
+                            <i class="bi bi-x-circle"></i>
+
+                            {% translate "غير متوفر" %}
+
+                        </button>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     Specifications
+                ================================================== -->
+
+                <div class="specs-card">
+
+
+                    <div class="card-header">
+
+                        <i class="bi bi-list-check me-2"></i>
+
+                        {% translate "المواصفات التقنية" %}
+
+                    </div>
+
+
+
+                    <div class="table-responsive">
+
+                        <table class="table">
+
+                            <tbody>
+
+
+                                {% if product.specifications %}
+
+                                {% for spec in product.specifications.all %}
+
+                                <tr>
+
+                                    <th>
+                                        {{ spec.name }}
+                                    </th>
+
+                                    <td>
+                                        {{ spec.value }}
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+
+                                {% else %}
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "نوع المكون" %}
+                                    </th>
+
+                                    <td>
+                                        {% translate "ديود مقوم" %}
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "الجهد العكسي القصوي (VRRM)" %}
+                                    </th>
+
+                                    <td>
+                                        1000V
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "التيار الأمامي المتوسط (IF)" %}
+                                    </th>
+
+                                    <td>
+                                        1.0A
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "سقوط الجهد الأمامي (VF)" %}
+                                    </th>
+
+                                    <td>
+                                        1.1V @ 1A
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "التيار العكسي (IR)" %}
+                                    </th>
+
+                                    <td>
+                                        5µA @ 1000V
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "التردد" %}
+                                    </th>
+
+                                    <td>
+                                        50/60 Hz
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "نوع التغليف" %}
+                                    </th>
+
+                                    <td>
+                                        DO-41
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "درجة حرارة التشغيل" %}
+                                    </th>
+
+                                    <td>
+                                        -55°C to +175°C
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "الشركة المصنعة" %}
+                                    </th>
+
+                                    <td>
+                                        {% translate "عدة مصنعين" %}
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <th>
+                                        {% translate "الحالة" %}
+                                    </th>
+
+                                    <td>
+
+                                        <span class="badge bg-success">
+
+                                            {% if product.quantity > 0 %}
+                                            {% translate "متوفر" %}
+                                            {% else %}
+                                            {% translate "غير متوفر" %}
+                                            {% endif %}
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                                {% endif %}
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     Technical Information
+                ================================================== -->
+
+                <div class="tech-info-card">
+
+
+                    <h5>
+
+                        <i class="bi bi-info-circle me-2"></i>
+
+                        {% translate "معلومات تقنية إضافية" %}
+
+                    </h5>
+
+
+
+
+                    <pre>{{ product.technical_info }}</pre>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     Related Products
+====================================================== -->
+
+<section class="related-section">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <h2>
+                {% translate "منتجات ذات صلة" %}
+            </h2>
+
+            <p>
+                {% translate "قد يهمك أيضاً" %}
+            </p>
+
+            <div class="line"></div>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            {% for related in related_products %}
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+
+                <div class="card-custom">
+
+
+                    <div class="card-img-wrapper">
+
+
+                        {% if related.image %}
+
+                        <img src="{{ related.image.url }}" alt="{{ related.name }}">
+
+                        {% else %}
+
+                        <i class="bi bi-cpu" style="
+                                font-size: 3rem;
+                                color: var(--text-muted);
+                            "></i>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+
+                    <div class="card-body">
+
+
+                        <span class="part-number">
+
+                            {{ related.part_number }}
+
+                        </span>
+                               <div class="mt-2">
+
+                                    <span class="text-success fw-bold">
+
+                                        {{ product.price }} DZD
+
+                                    </span>
+
+                                </div>
+
+                        <h5 class="card-title mt-2">
+
+                            {{ related.name }}
+
+                        </h5>
+
+
+                        <a href="{% url 'catalog:product_detail' related.slug %}"
+                            class="btn btn-primary-custom w-100 mt-2">
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            {% translate "عرض التفاصيل" %}
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+            <!-- =================================================
+                 Demo Related Products
+            ================================================== -->
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card-custom">
+
+                    <div class="card-img-wrapper">
+
+                        <i class="bi bi-diagram-2" style="
+                                font-size: 3rem;
+                                color: var(--text-muted);
+                            "></i>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <span class="part-number">
+                            1N4001
+                        </span>
+
+
+                        <h5 class="card-title mt-2">
+                            1N4001 {% translate "ديود" %}
+                        </h5>
+
+
+                        <a href="#" class="btn btn-primary-custom w-100 mt-2">
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            {% translate "عرض التفاصيل" %}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card-custom">
+
+                    <div class="card-img-wrapper">
+
+                        <i class="bi bi-diagram-2" style="
+                                font-size: 3rem;
+                                color: var(--text-muted);
+                            "></i>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <span class="part-number">
+                            1N5408
+                        </span>
+
+                        <h5 class="card-title mt-2">
+                            1N5408 {% translate "ديود" %}
+                        </h5>
+
+
+                        <a href="#" class="btn btn-primary-custom w-100 mt-2">
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            {% translate "عرض التفاصيل" %}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card-custom">
+
+                    <div class="card-img-wrapper">
+
+                        <i class="bi bi-diagram-2" style="
+                                font-size: 3rem;
+                                color: var(--text-muted);
+                            "></i>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <span class="part-number">
+                            1N5819
+                        </span>
+
+
+                        <h5 class="card-title mt-2">
+                            1N5819 {% translate "شوتكي" %}
+                        </h5>
+
+
+                        <a href="#" class="btn btn-primary-custom w-100 mt-2">
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            {% translate "عرض التفاصيل" %}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card-custom">
+
+                    <div class="card-img-wrapper">
+
+                        <i class="bi bi-diagram-2" style="
+                                font-size: 3rem;
+                                color: var(--text-muted);
+                            "></i>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <span class="part-number">
+                            1N4148
+                        </span>
+
+
+                        <h5 class="card-title mt-2">
+                            1N4148 {% translate "ديود إشارة" %}
+                        </h5>
+
+
+                        <a href="#" class="btn btn-primary-custom w-100 mt-2">
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            {% translate "عرض التفاصيل" %}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- Image Lightbox -->
+<div id="image-lightbox" class="image-lightbox" onclick="closeImageLightbox(event)">
+    <button type="button" class="close-lightbox" aria-label="Close"
+        onclick="closeImageLightbox(event)">&times;</button>
+    <img id="lightbox-image" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+
+<script>
+
+    function openImageLightbox(imageSrc) {
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+
+        if (!lightbox || !lightboxImage) return;
+
+        lightboxImage.src = imageSrc;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+
+    function closeImageLightbox(event) {
+        if (event) event.stopPropagation();
+
+        const lightbox = document.getElementById('image-lightbox');
+
+        if (!lightbox) return;
+
+        lightbox.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeImageLightbox();
+        }
+    });
+
+
+    function changeProductImage(thumbnail) {
+
+        const mainImage = document.getElementById(
+            'main-product-image'
+        );
+
+        if (!mainImage) {
+            return;
+        }
+
+        mainImage.src = thumbnail.src;
+
+        document
+            .querySelectorAll('.product-thumbnail')
+            .forEach(function (image) {
+                image.classList.remove('active');
+            });
+
+        thumbnail.classList.add('active');
+    }
+
+</script>
+
+{% endblock %}

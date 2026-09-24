@@ -1,0 +1,1348 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate "الرئيسية" %} | ALIDRICO{% endblock %}
+
+
+{% block extra_css %}
+
+<style>
+    /* =========================================================
+   HERO SECTION
+========================================================= */
+
+    .hero-section {
+
+        background:
+            linear-gradient(135deg,
+                #0d1b2a 0%,
+                #1a237e 50%,
+                #0d1b2a 100%);
+
+        padding:
+            5rem 0;
+
+        position:
+            relative;
+
+        overflow:
+            hidden;
+    }
+
+
+    .hero-section::before {
+
+        content: '';
+
+        position:
+            absolute;
+
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background:
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300bcd4' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+        opacity:
+            0.5;
+
+        pointer-events:
+            none;
+    }
+
+
+    .hero-content {
+
+        position:
+            relative;
+
+        z-index:
+            1;
+    }
+
+
+    .hero-title {
+
+        font-size:
+            3rem;
+
+        font-weight:
+            800;
+
+        color:
+            #fff;
+
+        margin-bottom:
+            1rem;
+
+        line-height:
+            1.3;
+    }
+
+
+    .hero-title span {
+
+        color:
+            var(--accent-color);
+    }
+
+
+    .hero-subtitle {
+
+        font-size:
+            1.2rem;
+
+        color:
+            var(--text-muted);
+
+        margin-bottom:
+            2rem;
+
+        max-width:
+            600px;
+    }
+
+
+    .hero-stats {
+
+        display:
+            flex;
+
+        gap:
+            2rem;
+
+        margin-top:
+            3rem;
+    }
+
+
+    .hero-stat {
+
+        text-align:
+            center;
+    }
+
+
+    .hero-stat .number {
+
+        font-size:
+            2rem;
+
+        font-weight:
+            800;
+
+        color:
+            var(--accent-color);
+    }
+
+
+    .hero-stat .label {
+
+        color:
+            var(--text-muted);
+
+        font-size:
+            0.9rem;
+    }
+
+
+    .hero-image {
+
+        position:
+            relative;
+    }
+
+
+    .hero-image .floating-card {
+
+        background:
+            var(--card-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            16px;
+
+        padding:
+            1rem;
+
+        position:
+            absolute;
+
+        animation:
+            float 3s ease-in-out infinite;
+    }
+
+
+    .hero-image .floating-card.card-1 {
+
+        top:
+            10%;
+
+        right:
+            0;
+
+        animation-delay:
+            0s;
+    }
+
+
+    .hero-image .floating-card.card-2 {
+
+        bottom:
+            20%;
+
+        left:
+            0;
+
+        animation-delay:
+            1.5s;
+    }
+
+
+    @keyframes float {
+
+        0%,
+        100% {
+
+            transform:
+                translateY(0);
+
+        }
+
+        50% {
+
+            transform:
+                translateY(-15px);
+
+        }
+
+    }
+
+
+    /* =========================================================
+   HOME CATEGORY CARDS
+========================================================= */
+
+
+    /* منطقة البطاقة كاملة */
+
+    .categories-section .category-column {
+
+        position:
+            relative;
+
+    }
+
+
+    /* البطاقة */
+
+    .category-card {
+
+        position:
+            relative !important;
+
+        display:
+            flex !important;
+
+        flex-direction:
+            column !important;
+
+        align-items:
+            center !important;
+
+        justify-content:
+            center !important;
+
+        width:
+            100% !important;
+
+        min-height:
+            210px !important;
+
+        height:
+            100% !important;
+
+        box-sizing:
+            border-box !important;
+
+        padding:
+            2rem !important;
+
+        background:
+            var(--card-bg) !important;
+
+        border:
+            1px solid var(--border-color) !important;
+
+        border-radius:
+            16px !important;
+
+        text-align:
+            center !important;
+
+        text-decoration:
+            none !important;
+
+        color:
+            inherit !important;
+
+        cursor:
+            pointer !important;
+
+        pointer-events:
+            auto !important;
+
+        transform:
+            translateY(0) !important;
+
+        transition:
+            transform 0.35s ease,
+            box-shadow 0.35s ease,
+            border-color 0.35s ease,
+            background-color 0.35s ease !important;
+
+        z-index:
+            5 !important;
+
+        overflow:
+            hidden !important;
+
+        will-change:
+            transform;
+
+    }
+
+
+    /* Hover على كامل البطاقة */
+
+    .category-card:hover {
+
+        transform:
+            translateY(-8px) !important;
+
+        border-color:
+            var(--accent-color) !important;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.45) !important;
+
+        background:
+            var(--card-bg) !important;
+
+        color:
+            inherit !important;
+
+        text-decoration:
+            none !important;
+
+        z-index:
+            50 !important;
+
+    }
+
+
+    /* الخط العلوي */
+
+    .category-card::before {
+
+        content:
+            '';
+
+        position:
+            absolute;
+
+        top:
+            0;
+
+        left:
+            0;
+
+        right:
+            0;
+
+        height:
+            3px;
+
+        background:
+            linear-gradient(90deg,
+                var(--accent-color),
+                var(--secondary-color));
+
+        transform:
+            scaleX(0);
+
+        transform-origin:
+            center;
+
+        transition:
+            transform 0.35s ease;
+
+        pointer-events:
+            none;
+
+        z-index:
+            10;
+
+    }
+
+
+    .category-card:hover::before {
+
+        transform:
+            scaleX(1);
+
+    }
+
+
+    /* =========================================================
+   CATEGORY ICON / IMAGE
+========================================================= */
+
+    .category-card .icon-wrapper {
+
+        position:
+            relative;
+
+        width:
+            70px;
+
+        height:
+            70px;
+
+        flex-shrink:
+            0;
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        margin:
+            0 auto 1rem;
+
+        border-radius:
+            50%;
+
+        background:
+            linear-gradient(135deg,
+                var(--primary-color),
+                var(--secondary-color));
+
+        color:
+            #fff;
+
+        font-size:
+            1.8rem;
+
+        transition:
+            transform 0.35s ease,
+            box-shadow 0.35s ease;
+
+        z-index:
+            2;
+
+        pointer-events:
+            none;
+
+        overflow:
+            hidden;
+
+    }
+
+
+    /* صورة التصنيف التي يرفعها العميل */
+
+    .category-card .category-icon-image {
+
+        width:
+            100% !important;
+
+        height:
+            100% !important;
+
+        max-width:
+            100% !important;
+
+        max-height:
+            100% !important;
+
+        object-fit:
+            contain !important;
+
+        display:
+            block !important;
+
+        border-radius:
+            50%;
+
+        pointer-events:
+            none;
+
+        transition:
+            transform 0.35s ease,
+            filter 0.35s ease;
+
+    }
+
+
+    /* حركة الأيقونة عند hover */
+
+    .category-card:hover .icon-wrapper {
+
+        transform:
+            rotate(5deg) scale(1.1);
+
+        box-shadow:
+            0 10px 30px rgba(0, 188, 212, 0.35);
+
+    }
+
+
+    .category-card:hover .category-icon-image {
+
+        transform:
+            scale(1.08);
+
+        filter:
+            brightness(1.1);
+
+    }
+
+
+    /* =========================================================
+   CATEGORY NAME
+========================================================= */
+
+    .category-card h5 {
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        margin:
+            0 0 0.5rem;
+
+        color:
+            #fff;
+
+        font-weight:
+            700;
+
+        transition:
+            color 0.3s ease;
+
+        pointer-events:
+            none;
+
+    }
+
+
+    .category-card:hover h5 {
+
+        color:
+            var(--accent-color);
+
+    }
+
+
+    /* =========================================================
+   PRODUCT COUNT
+========================================================= */
+
+    .category-card p {
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        margin:
+            0;
+
+        color:
+            var(--text-muted);
+
+        font-size:
+            0.9rem;
+
+        transition:
+            color 0.3s ease;
+
+        pointer-events:
+            none;
+
+    }
+
+
+    .category-card:hover p {
+
+        color:
+            var(--accent-color);
+
+    }
+
+
+    /* =========================================================
+   KEYBOARD FOCUS
+========================================================= */
+
+    .category-card:focus-visible {
+
+        outline:
+            2px solid var(--accent-color) !important;
+
+        outline-offset:
+            4px;
+
+        transform:
+            translateY(-8px) !important;
+
+        border-color:
+            var(--accent-color) !important;
+
+    }
+
+
+    /* =========================================================
+   SERVICES
+========================================================= */
+
+    .service-card {
+
+        background:
+            var(--card-bg);
+
+        border:
+            1px solid var(--border-color);
+
+        border-radius:
+            16px;
+
+        padding:
+            2rem;
+
+        text-align:
+            center;
+
+        transition:
+            all 0.3s ease;
+
+        height:
+            100%;
+
+    }
+
+
+    .service-card:hover {
+
+        transform:
+            translateY(-5px);
+
+        border-color:
+            var(--accent-color);
+
+    }
+
+
+    .service-card .icon {
+
+        width:
+            60px;
+
+        height:
+            60px;
+
+        background:
+            linear-gradient(135deg,
+                var(--primary-color) 0%,
+                var(--secondary-color) 100%);
+
+        border-radius:
+            12px;
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        margin:
+            0 auto 1rem;
+
+        font-size:
+            1.5rem;
+
+        color:
+            #fff;
+
+    }
+
+
+    /* =========================================================
+   FEATURED PRODUCTS
+========================================================= */
+
+    .featured-section {
+
+        padding:
+            4rem 0;
+
+    }
+
+
+    /* =========================================================
+   CTA
+========================================================= */
+
+    .cta-section {
+
+        background:
+            linear-gradient(135deg,
+                var(--primary-color) 0%,
+                var(--secondary-color) 100%);
+
+        padding:
+            4rem 0;
+
+        text-align:
+            center;
+
+        border-radius:
+            24px;
+
+        margin:
+            3rem auto;
+
+        max-width:
+            90%;
+
+    }
+
+
+    .cta-section h2 {
+
+        font-weight:
+            800;
+
+        color:
+            #fff;
+
+        margin-bottom:
+            1rem;
+
+    }
+
+
+    .cta-section p {
+
+        color:
+            rgba(255, 255, 255, 0.8);
+
+        margin-bottom:
+            2rem;
+
+    }
+
+
+    /* =========================================================
+   RESPONSIVE
+========================================================= */
+
+    @media (max-width: 768px) {
+
+        .hero-title {
+
+            font-size:
+                2rem;
+
+        }
+
+
+        .hero-stats {
+
+            gap:
+                1rem;
+
+        }
+
+
+        .category-card {
+
+            min-height:
+                190px !important;
+
+            padding:
+                1.5rem !important;
+
+        }
+
+
+        .category-card .icon-wrapper {
+
+            width:
+                65px;
+
+            height:
+                65px;
+
+            font-size:
+                1.6rem;
+
+        }
+
+    }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+
+            <div class="col-lg-6 hero-content">
+
+                <h1 class="hero-title">
+
+                    {% translate "اكتشف عالم" %}<br>
+
+                    <span>
+                        {% translate "المكونات الإلكترونية" %}
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-subtitle">
+
+                    {% translate "ALIDRICO Electronics متخصصة في المكونات الإلكترونية، وإصلاح البطاقات الإلكترونية، وتصنيع لوحات الدوائر المطبوعة (PCB) حسب الطلب. نقوم بإصلاح البطاقات الصناعية، ومغيرات السرعة، وبطاقات مكيفات الهواء، ومصادر الطاقة، ومصادر طاقة أفران الميكروويف، والمثبتات، وبطاقات التحكم، وغيرها من الأنظمة الإلكترونية. نقدم خدمات التشخيص والإصلاح على مستوى المكونات، واستبدال المكونات التالفة. كما نقوم بتصميم وتصنيع لوحات PCB حسب الطلب. ونقوم أيضًا بتحويل لوحات المفاتيح ذات الأغشية أو البلاستيكية إلى أنظمة تحكم بأزرار ضغط حقيقية، بهدف تحسين موثوقية الأجهزة وزيادة متانتها." %}
+                </p>
+
+
+                <div class="d-flex gap-3 flex-wrap">
+
+                    <a href="{% url 'catalog:products' %}" class="btn btn-primary-custom">
+
+                        <i class="bi bi-box-seam me-2"></i>
+
+                        {% translate "تصفح المنتجات" %}
+
+                    </a>
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-6 d-none d-lg-block hero-image">
+
+                <div class="text-center">
+
+                    <i class="bi bi-cpu" style="
+                            font-size: 15rem;
+                            color: rgba(0,188,212,0.2);
+                        "></i>
+
+
+                    <div class="floating-card card-1">
+
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                        <span>
+                            {% translate "جودة مضمونة" %}
+                        </span>
+
+                    </div>
+
+
+                    <div class="floating-card card-2">
+
+                        <i class="bi bi-lightning-charge-fill text-warning me-2"></i>
+
+                        <span>
+                            {% translate "توصيل سريع" %}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CATEGORIES
+========================================================= -->
+
+<section class="py-5 categories-section">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <h2>
+                {% translate "أهم تصنيفات المكونات" %}
+            </h2>
+
+            <p>
+                {% translate "تصفح المكونات حسب الفئة" %}
+            </p>
+
+            <div class="line"></div>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            {% for category in featured_categories %}
+
+
+            <div class="col-6 col-md-4 col-lg-3 category-column">
+
+
+                <a href="{% url 'catalog:category_products' category.slug %}" class="category-card">
+
+
+                    <div class="icon-wrapper">
+
+
+
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-icon-image">
+
+   
+
+
+                    </div>
+
+
+                    <h5>
+
+                        {{ category.name }}
+
+                    </h5>
+
+
+                    <p>
+
+                        {{ category.product_count|default:0 }}{% translate " منتج" %}
+
+                    </p>
+
+
+                </a>
+
+
+            </div>
+
+
+            {% empty %}
+
+
+
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FEATURED PRODUCTS
+========================================================= -->
+
+<section class="featured-section">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <h2>
+                {% translate "منتجات مميزة" %}
+            </h2>
+
+            <p>
+                {% translate "أهم المكونات الإلكترونية المتوفرة لدينا" %}
+            </p>
+
+            <div class="line"></div>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            {% for product in featured_products %}
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card-custom">
+
+
+                    <div class="card-img-wrapper">
+
+
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+
+
+                    </div>
+
+
+
+                    <div class="card-body">
+
+                        <span class="part-number mb-2">
+
+                            {{ product.part_number }}
+
+                        </span>
+                        <div class="mt-2">
+
+                                    <span class="text-success fw-bold">
+
+                                        {{ product.price }} DZD
+
+                                    </span>
+
+                        </div>
+
+                        <h5 class="card-title mt-2">
+
+                            {{ product.name }}
+
+                        </h5>
+
+
+                        <p class="card-text">
+
+                            {{ product.short_description|truncatechars:80 }}
+
+                        </p>
+
+
+                        <a href="{% url 'catalog:product_detail' product.slug %}"
+                            class="btn btn-primary-custom w-100 mt-2">
+
+                            <i class="bi bi-eye me-1"></i>
+
+                            {% translate "عرض التفاصيل" %}
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+        <div class="text-center mt-4">
+
+            <a href="{% url 'catalog:products' %}" class="btn btn-outline-custom">
+
+                {% translate "عرض جميع المنتجات" %}
+
+                <i class="bi bi-arrow-left me-1"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section class="py-5">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <h2>
+                {% translate "خدماتنا" %}
+            </h2>
+
+            <p>
+                {% translate "ما نوفره لعملائنا" %}
+            </p>
+
+            <div class="line"></div>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+
+                    <h5>
+                        {% translate "بحث متقدم" %}
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        {% translate "ابحث عن المكونات بالاسم أو الرقم المرجعي أو المواصفات التقنية بسهولة وسرعة." %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="icon">
+
+                        <i class="bi bi-file-earmark-pdf"></i>
+
+                    </div>
+
+
+                    <h5>
+                        {% translate "Datasheets" %}
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        {% translate "اطلع على Datasheets كاملة لجميع المكونات مع إمكانية التحميل المباشر." %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="icon">
+
+                        <i class="bi bi-headset"></i>
+
+                    </div>
+
+
+                    <h5>
+                        {% translate "دعم فني" %}
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        {% translate "فريق متخصص جاهز لمساعدتك في اختيار المكونات المناسبة لمشروعك." %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="icon">
+
+                        <i class="bi bi-truck"></i>
+
+                    </div>
+
+
+                    <h5>
+                        {% translate "توصيل سريع" %}
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        {% translate "نوفر خدمة توصيل سريعة لجميع الطلبات إلى مختلف المناطق." %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+
+                    <h5>
+                        {% translate "جودة مضمونة" %}
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        {% translate "جميع المكونات أصلية 100% مع ضمان الجودة والأداء." %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <div class="icon">
+
+                        <i class="bi bi-tags"></i>
+
+                    </div>
+
+
+                    <h5>
+                        {% translate "أسعار تنافسية" %}
+                    </h5>
+
+
+                    <p class="text-muted">
+
+                        {% translate "أفضل الأسعار في السوق مع عروض خاصة للكميات الكبيرة." %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="container">
+
+    <div class="cta-section">
+
+        <h2>
+            {% translate "هل تبحث عن مكون إلكتروني محدد؟" %}
+        </h2>
+
+
+        <p>
+            {% translate "فريقنا جاهز لمساعدتك في العثور على ما تحتاجه" %}
+        </p>
+
+
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

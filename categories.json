@@ -1,0 +1,671 @@
+{
+    "schema_version": "1.0",
+    "source_url": "https://powerlab.dz/",
+    "categories": [
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "DIODES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/diodes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "REGULATEURS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/regulateurs-composants-actifs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "THYRISTORS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/thyristors/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "TRIACS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/triacs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "TRANSISTORS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/transistors/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "C.INTEGRES LOGIQUES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/c-integres-logiques/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "ANALOGIQUES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/analogiques/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "DIVERS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-actifs/divers/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "RESISTANCES FIXES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-fixes/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "RESISTANCES VARIABLES",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/resistances-variables/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "CONDENSATEURS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/condensateurs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "SELFS",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/selfs/"
+        },
+        {
+            "category_group": "Composants éléctroniques",
+            "name": "HAUTE FREQUENCE",
+            "url": "https://powerlab.dz/product-category/composants-eletroniques/composants-passifs/haute-frequence/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "ALIMENTATIONS",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/alimentations-appareils-de-mesure/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "MULTIMETRES ET TESTEURS",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/multimetres-et-testeurs/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "OSCILLOSCOPES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/oscilloscopes/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "CAPACIMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/capacimetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "GENERATEURS DE FOCTION",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/generateurs-de-foction/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "HYGROMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/hygrometres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "LUXMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/luxmetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "SONOMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/sonometres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "THERMOMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/thermometres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "MEGOHMMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/megohmmetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "ANEMOMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/anemometres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "PH-METRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/ph-metres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "ANALYSEUR DE SPECTRE",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/analyseur-de-spectre/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "WATTMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/wattmetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "TACHYMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/tachymetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "VOLTMETRES ET AMPEREMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/voltmetres-et-ameremetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "BOITES A DECADES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/boites-a-decades/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "TELEMETRES",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/appareils-de-mesure/telemetres/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "ACCESSOIRES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/accessoires-cartes-raspberry-pi/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "BUS CAN",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/circuits-imprimes/bus-can/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "USB-RS232",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/circuits-imprimes/usb-rs232/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "MODULES USB",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/circuits-imprimes/modules-usb/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "GPIB",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/circuits-imprimes/gpib/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "RS485",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/circuits-imprimes/rs485/"
+        },
+        {
+            "category_group": "Mesure et interfaces",
+            "name": "RS422",
+            "url": "https://powerlab.dz/product-category/outillage-et-mesure/circuits-imprimes/rs422/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "CAPTEURS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/capteurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "CARTES ARDUINO ORIGINALES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-originales/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "CARTES ARDUINO COMPATIBLES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-arduino-compatibles/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "KITS ARDUINO COMPATIBLES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/kits-arduino-compatibles/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "KITS ARDUINO ORIGINALES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/kits-arduino-originales/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "SHIELDS ARDUINO",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-phidgets/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "RASPBERRY PI",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-raspberry-pi/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "MODULES GROVES",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/modules-groves/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "CARTES STM-32",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-stm-32/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "CARTES DIGILENT FPGA – SOC",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-digilent-fpga-soc/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "CARTES MIKROELECTRONIKA",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/cartes-mikroelectronika/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "AUTRES CARTES BASE LINUX",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/autres-cartes-base-linux/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "PROGRAMMATEURS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/programmateurs/"
+        },
+        {
+            "category_group": "Cartes programmables et capteurs",
+            "name": "COMPILATEURS",
+            "url": "https://powerlab.dz/product-category/cartes-programmables/prototypage-grove-gravity/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "CONNECTEURS COAXIAUX",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-coaxiaux/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "CONNECTEURS BANANES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-bananes/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "CONNECTEURS INFORMATIQUES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-informatiques/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "CONNECTEURS DIVERS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/connecteurs-divers/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "CORDONS DE MESURE",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cordons-de-mesure/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "CABLES ET ACCESSOIRES",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/cables-et-accessoires/"
+        },
+        {
+            "category_group": "Connectique, cables et boitiers",
+            "name": "RELAIS",
+            "url": "https://powerlab.dz/product-category/connecteurs-commutateurs-cables-et-relais/relais/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "ROBOTS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/robots-et-chassis/robots/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "CHASSIS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/robots-et-chassis/chassis/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "SERVOMOTEURS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/moteurs-et-actionneurs/servomoteurs/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "MOTEURS CC",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/moteurs-et-actionneurs/moteurs-cc/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "MOTOREDUCTEURS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/moteurs-et-actionneurs/motoreducteurs/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "MOTEURS PAS A PAS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/moteurs-et-actionneurs/moteurs-pas-a-pas/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "MOTEURS CC",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/commandes-de-moteurs/moteurs-cc-commandes-de-moteurs/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "MOTEURS PAS A PAS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/commandes-de-moteurs/moteurs-pas-a-pas-commandes-de-moteurs/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "SERVOMOTEURS",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/commandes-de-moteurs/servomoteurs-commandes-de-moteurs/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "IMPRIMANTES 3D",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/imprimantes-et-scanners-3d/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "MACHINES CNC",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/imprimantes-et-scanners-3d/machines-cnc/"
+        },
+        {
+            "category_group": "Robotique et imprimantes 3D",
+            "name": "BOBINES FILS D’IMPRESSION",
+            "url": "https://powerlab.dz/product-category/bobotique-et-imprimante-3d/imprimantes-et-scanners-3d/bobines-fils-dimpression/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "PRODUITS CHIMIQUES +GANTS",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/produits-chimiques/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "PLAQUES CIRCUITS IMPRIMES CUIVRES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/plaques-circuits-imprimes-cuivres/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "PLAQUES C. IMPRIMES PRESENSIBLES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/plaques-circuits-imprimes-presensibles/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "PLAQUES A POINTS",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/plaques-a-points/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "INSOLEUSES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/insoleuses/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "GRAVEUSES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/graveuses/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "CISAILLES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/cisailles/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "LOGICIELS",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/circuits-imprimes-et-soudage/logiciels/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "SOUDURE – ETAIN",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/consommables-soudage-dessoudage/soudure-etain/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "TRESSES A DESSOUDER",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/consommables-soudage-dessoudage/tresses-a-dessouder/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "FERS A SOUDER",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/fers-a-souder/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "STATIONS A SOUDER",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/stations-a-souder/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "STATIONS A AIR CHAUD",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/stations-a-air-chaud/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "STATIONS SOUDAGE ET DESSOUDAGE",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/stations-soudage-et-dessoudage/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "ACCESSOIRES DE SOUDAGE",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/accessoires-de-soudage/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "ASPIRATION DES FUMEES ET VENTILLATEURS",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/aspiration-des-fumees/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "PISTOLETS A COLLE",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/fers-a-souder-et-stations/pistolets-a-colle/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "TOURNEVIS",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/tournevis/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "PINCES ET BRUCELLES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/pinces-et-brucelles/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "LAMPES LOUPES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/lampes-loupes/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "MICROSCOPES ELECTRONIQUES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/microscopes-electroniques/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "DIVERS OUTILLAGES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/divers-outillages/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "RANGEMENT",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/rangement/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "CAISSES A OUTILS – VALISES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/caisses-a-outils-valises/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "ANTISTATIQUES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/antistatiques/"
+        },
+        {
+            "category_group": "Soudage et outillages",
+            "name": "VISSEUSES – PERCEUSES",
+            "url": "https://powerlab.dz/product-category/soudage-et-outillage/outillage/visseuses-perceuses/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "ALCALINES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/alcalines/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "LITHIUM",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/lithium/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "ACCUS NiMH",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/accus-nimh/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "COUPLEURS DE PILES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/coupleurs-de-piles/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "CHARGEURS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/chargeurs/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "TRNASFORMATEURS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/trnasformateurs/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "BATTERIES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/piles-et-accumulateurs-piles-et-accumulateurs/batteries/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "FUSIBLES 5 X 20 mm",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/fusibles-5-x-20-mm/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "FUSIBLES 6 X 32mm",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/fusibles-5-x-32mm/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "FUSIBLES DIVERS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/fusibles-divers/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "FUSIBLES MICROFUSES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/fusibles-microfuses/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "FUSIBLES THERMIQUES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/fusibles-thermiques/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "THERMOSTATS CLIXONS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/thermostats-clixons/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "SUPPORTS FUSIBLES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/fusibles/supports-fusibles/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "CELLULES SOLAIRES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/cellules-solaires-et-regulateurs/cellules-solaires/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "REGULATEURS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/cellules-solaires-et-regulateurs/regulateurs/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "CHARGEURS SOLAIRE",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/cellules-solaires-et-regulateurs/chargeurs-solaire/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "CONVERTISSEURS DC-DC et AC-DC",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/convertisseurs-de-tension/convertisseurs-ac-dc/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "ALIMENTATIONS INDUSTRIELLES",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/convertisseurs-de-tension/alimentations-industrielles/"
+        },
+        {
+            "category_group": "Piles et accumulateurs",
+            "name": "DIVERS ADAPTATEURS",
+            "url": "https://powerlab.dz/product-category/piles-et-accumulateurs/convertisseurs-de-tension/divers-adaptateurs/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "DIODES LEDS ( 3mm 5mm 10mm )",
+            "url": "https://powerlab.dz/product-category/optoelectronique/diodes-leds-3mm-5mm-10mm/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "DIODES LEDS HL ( 3mm 5mm 10mm )",
+            "url": "https://powerlab.dz/product-category/optoelectronique/diodes-leds-hl-3mm-5mm-10mm/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "DIODES LEDS CMS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/diodes-leds-cms/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "DIODES LEDS DE PUISSANCE",
+            "url": "https://powerlab.dz/product-category/optoelectronique/diodes-leds-de-puissance/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "DIODES LEDS RVB",
+            "url": "https://powerlab.dz/product-category/optoelectronique/diodes-leds-rvb/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "ACCESSOIRES DIODES LEDS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/accessoires-diodes-leds/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "MATRICES A LEDS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/matrices-a-leds/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "BARGRAPHES A LEDS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/bargraphes-a-leds/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "PHOTO INTERRUPTEURS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/photo-interrupteurs/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "PHOTO-DIODE IR",
+            "url": "https://powerlab.dz/product-category/optoelectronique/photo-diodes-ir/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "PHOTO -TRANSISTOR",
+            "url": "https://powerlab.dz/product-category/optoelectronique/photo-transistors/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "MODULES IR",
+            "url": "https://powerlab.dz/product-category/optoelectronique/modules-ir/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "OPTOCOUPLEURS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/optocoupleurs/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "PHOTORESISTANCES",
+            "url": "https://powerlab.dz/product-category/optoelectronique/photoresistances/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "BUZZERS ET MICROS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/buzzers-et-micros/"
+        },
+        {
+            "category_group": "OPTOELECTRONIQUE",
+            "name": "AFFICHEURS",
+            "url": "https://powerlab.dz/product-category/optoelectronique/afficheurs/"
+        }
+    ]
+}

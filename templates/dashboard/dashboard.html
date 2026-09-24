@@ -1,0 +1,553 @@
+{% extends 'dashboard/base_dashboard.html' %}
+
+{% block title %}الرئيسية{% endblock %}
+{% block page_title %}نظرة عامة{% endblock %}
+
+{% block content %}
+
+<!-- KPI Cards -->
+<div class="row g-4 mb-4">
+
+    <div class="col-lg-3 col-md-6">
+        <div class="kpi-card animate-fade-in">
+
+            <div class="kpi-icon blue">
+                <i class="bi bi-box-seam"></i>
+            </div>
+
+            <div class="kpi-info">
+
+                <h4>{{ total_products }}</h4>
+
+                <p style="color: #fff !important;">
+                    إجمالي المنتجات
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="kpi-card animate-fade-in animate-delay-1">
+
+            <div class="kpi-icon cyan">
+                <i class="bi bi-grid-3x3-gap"></i>
+            </div>
+
+            <div class="kpi-info">
+
+                <h4>{{ total_categories }}</h4>
+
+                <p style="color: #fff !important;">
+                    التصنيفات
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="kpi-card animate-fade-in animate-delay-2">
+
+            <div class="kpi-icon blue">
+                <i class="bi bi-diagram-3"></i>
+            </div>
+
+            <div class="kpi-info">
+
+                <h4>{{ total_subcategories }}</h4>
+
+                <p style="color: #fff !important;">
+                    التصنيفات الفرعية
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="kpi-card animate-fade-in animate-delay-3">
+
+            <div class="kpi-icon green">
+                <i class="bi bi-star-fill"></i>
+            </div>
+
+            <div class="kpi-info">
+
+                <h4>{{ featured_products_count }}</h4>
+
+                <p style="color: #fff !important;">
+                    منتجات مميزة
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row g-4">
+
+    <!-- Chart -->
+
+    <div class="col-lg-8">
+
+        <div class="section-card animate-fade-in">
+
+            <div class="card-header-custom">
+
+                <span>
+                    <i class="bi bi-bar-chart-line me-2"></i>
+                    المنتجات حسب التصنيف
+                </span>
+
+            </div>
+
+            <div class="card-body-custom">
+
+                <div class="chart-container">
+
+                    <canvas id="categoryChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Stats -->
+
+    <div class="col-lg-4">
+
+        <div class="section-card animate-fade-in animate-delay-1">
+
+            <div class="card-header-custom">
+
+                <span>
+                    <i class="bi bi-lightning me-2"></i>
+                    ملخص سريع
+                </span>
+
+            </div>
+
+            <div class="card-body-custom">
+
+                <div class="d-flex flex-column gap-3">
+
+
+                    <div
+                        class="d-flex justify-content-between align-items-center p-3"
+                        style="
+                            background: var(--dark-bg);
+                            border-radius: 12px;
+                        "
+                    >
+
+                        <span style="color: #fff !important;">
+                            منتجات نشطة
+                        </span>
+
+                        <span class="fw-bold text-success">
+                            {{ total_products }}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="d-flex justify-content-between align-items-center p-3"
+                        style="
+                            background: var(--dark-bg);
+                            border-radius: 12px;
+                        "
+                    >
+
+                        <span style="color: #fff !important;">
+                            تصنيفات نشطة
+                        </span>
+
+                        <span class="fw-bold text-info">
+                            {{ total_categories }}
+                        </span>
+
+                    </div>
+
+
+
+
+
+                    <a
+                        href="{% url 'catalog:products' %}"
+                        target="_blank"
+                        class="btn btn-primary-custom w-100"
+                    >
+
+                        <i class="bi bi-box-seam ms-2"></i>
+
+                        إدارة المنتجات
+
+                    </a>
+
+
+                    <a
+                        href="{% url 'dashboard:subcategories' %}"
+                        class="btn btn-primary-custom w-100"
+                    >
+
+                        <i class="bi bi-diagram-3 ms-2"></i>
+
+                        إدارة التصنيفات الفرعية
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% if inactive_products %}
+
+<div class="row mt-4">
+
+    <div class="col-12">
+
+        <div class="section-card animate-fade-in">
+
+            <div
+                class="card-header-custom"
+                style="
+                    background:
+                    linear-gradient(
+                        135deg,
+                        #c0392b,
+                        #e74c3c
+                    );
+                "
+            >
+
+                <span>
+
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+
+                    منتجات غير نشطة
+
+                </span>
+
+            </div>
+
+
+            <div class="card-body-custom p-0">
+
+                <div class="table-responsive">
+
+                    <table class="table-custom">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>الرقم المرجعي</th>
+
+                                <th>الاسم</th>
+
+                                <th>التصنيف</th>
+
+                                <th>التاريخ</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for product in inactive_products %}
+
+                            <tr>
+
+                                <td>
+
+                                    <span class="badge-custom badge-info-custom">
+
+                                        {{ product.part_number }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <td style="color: #fff !important;">
+
+                                    {{ product.name }}
+
+                                </td>
+
+
+                                <td style="color: #fff !important;">
+
+                                    {{ product.category.name }}
+
+                                </td>
+
+
+                                <td
+                                    style="
+                                        color: #fff !important;
+                                        font-size: 0.85rem;
+                                    "
+                                >
+
+                                    {{ product.created_at|date:"Y-m-d" }}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+></script>
+
+
+<script>
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function() {
+
+            const ctx =
+                document
+                .getElementById('categoryChart')
+                .getContext('2d');
+
+
+            const labels =
+                {{ chart_labels|safe }};
+
+
+            const data =
+                {{ chart_data|safe }};
+
+
+            new Chart(
+                ctx,
+                {
+
+                    type: 'bar',
+
+                    data: {
+
+                        labels: labels,
+
+                        datasets: [
+
+                            {
+
+                                label:
+                                    'عدد المنتجات',
+
+                                data:
+                                    data,
+
+                                backgroundColor:
+                                    'rgba(0, 188, 212, 0.6)',
+
+                                borderColor:
+                                    'rgba(0, 188, 212, 1)',
+
+                                borderWidth:
+                                    1,
+
+                                borderRadius:
+                                    8,
+
+                            }
+
+                        ]
+
+                    },
+
+
+                    options: {
+
+                        responsive:
+                            true,
+
+                        maintainAspectRatio:
+                            false,
+
+
+                        plugins: {
+
+                            legend: {
+
+                                display:
+                                    false
+
+                            },
+
+
+                            tooltip: {
+
+                                backgroundColor:
+                                    'rgba(27, 40, 56, 0.95)',
+
+                                titleColor:
+                                    '#fff',
+
+                                bodyColor:
+                                    '#e0e1dd',
+
+                                borderColor:
+                                    'rgba(0, 188, 212, 0.3)',
+
+                                borderWidth:
+                                    1,
+
+                                padding:
+                                    12,
+
+
+                                titleFont: {
+
+                                    family:
+                                        'Cairo',
+
+                                    size:
+                                        14
+
+                                },
+
+
+                                bodyFont: {
+
+                                    family:
+                                        'Cairo',
+
+                                    size:
+                                        13
+
+                                },
+
+                            }
+
+                        },
+
+
+                        scales: {
+
+                            y: {
+
+                                beginAtZero:
+                                    true,
+
+
+                                grid: {
+
+                                    color:
+                                        'rgba(255, 255, 255, 0.05)'
+
+                                },
+
+
+                                ticks: {
+
+                                    color:
+                                        '#fff',
+
+                                    font: {
+
+                                        family:
+                                            'Cairo'
+
+                                    }
+
+                                }
+
+                            },
+
+
+                            x: {
+
+                                grid: {
+
+                                    display:
+                                        false
+
+                                },
+
+
+                                ticks: {
+
+                                    color:
+                                        '#fff',
+
+                                    font: {
+
+                                        family:
+                                            'Cairo'
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+    );
+
+</script>
+
+{% endblock %}
