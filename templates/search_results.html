@@ -2,8 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}نتائج البحث | ALIDRICO{% endblock %}
-
+{% block title %}{% translate "نتائج البحث" %} | ALIDRICO{% endblock %}
 {% block extra_css %}
 <style>
     .search-section {
@@ -136,6 +135,54 @@
         color: #fff;
     }
 
+    /* Pagination */
+    .pagination-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 2rem auto 0;
+        width: 100%;
+        direction: ltr;
+    }
+
+    .pagination-custom .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        margin: 0;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: var(--card-bg);
+        color: var(--text-light);
+        text-decoration: none;
+        line-height: 1;
+        flex: 0 0 42px;
+        transition: all 0.2s ease;
+    }
+
+    .pagination-custom .page-link:hover {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        color: #fff;
+    }
+
+    .pagination-custom .page-link.active {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .pagination-custom .page-link.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     /* Product Card Compact */
     .product-card-compact {
         background: var(--card-bg);
@@ -236,7 +283,7 @@
 <!-- Breadcrumb -->
 <div class="breadcrumb-wrapper">
     <div class="container">
-        <h1>نتائج البحث</h1>
+        <h1>{% translate "نتائج البحث" %}</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
 
@@ -267,7 +314,7 @@
 
                 {% translate "نتائج البحث عن:" %}
                 <span class="search-term">
-                    "{{ query|default:"1N4007" }}"
+                    "{{ query }}"
                 </span>
             </h4>
 
@@ -284,7 +331,7 @@
                 <input
                     type="search"
                     name="q"
-                    value="{{ query|default:"1N4007" }}"
+                    value="{{ query }}"
                     placeholder='{% translate "ابحث عن مكون إلكتروني..." %}'
                 >
 
@@ -307,34 +354,7 @@
 
         <!-- Quick Filters -->
 
-        <div class="quick-filters">
-
-            <span class="filter-chip active">
-                {% translate "الكل" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Diodes" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Resistors" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Capacitors" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Transistors" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "ICs" %}
-            </span>
-
-        </div>
-
+        
 
         <!-- Results List -->
 
@@ -356,10 +376,7 @@
                         alt="{{ product.name }}"
                     >
 
-                    {% else %}
-
-                    <i class="bi bi-cpu"></i>
-
+                    
                     {% endif %}
 
                 </div>
@@ -375,7 +392,6 @@
                         {{ product.part_number }}
                     </span>
 
-                    {% if product.price %}
 
                     <div class="mt-1">
 
@@ -385,7 +401,6 @@
 
                     </div>
 
-                    {% endif %}
 
                     <span class="category-tag">
                         {{ product.category.name }}
@@ -469,345 +484,32 @@
 
         {% else %}
 
-        <!-- Demo Results -->
-
-        <div class="quick-filters">
-
-            <span class="filter-chip active">
-                {% translate "الكل" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Diodes" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Resistors" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Capacitors" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "Transistors" %}
-            </span>
-
-            <span class="filter-chip">
-                {% translate "ICs" %}
-            </span>
-
-        </div>
-
-
-        <div class="results-list">
-
-            <a href="#" class="product-card-compact">
-
-                <div class="product-icon">
-                    <i class="bi bi-diagram-2"></i>
-                </div>
-
-                <div class="product-details">
-
-                    <h5>
-                        {% translate "1N4007 Diode" %}
-                    </h5>
-
-                    <span class="part-number">
-                        1N4007
-                    </span>
-
-                    <div class="mt-1">
-                        <span class="text-success fw-bold">
-                            15.00 DZD
-                        </span>
-                    </div>
-
-                    <span class="category-tag">
-                        {% translate "Diodes" %}
-                    </span>
-
-                    <p>
-                        {% translate "ديود عام الاستخدام 1000V 1A،" %}
-                        {% translate "مثالي لتطبيقات التحويل والحماية من التيار العكسي." %}
-                    </p>
-
-                </div>
-
-                <i class="bi bi-chevron-left arrow-icon"></i>
-
-            </a>
-
-
-            <a href="#" class="product-card-compact">
-
-                <div class="product-icon">
-                    <i class="bi bi-diagram-2"></i>
-                </div>
-
-                <div class="product-details">
-
-                    <h5>
-                        {% translate "1N4001 Diode" %}
-                    </h5>
-
-                    <span class="part-number">
-                        1N4001
-                    </span>
-
-                    <div class="mt-1">
-                        <span class="text-success fw-bold">
-                            12.00 DZD
-                        </span>
-                    </div>
-
-                    <span class="category-tag">
-                        {% translate "Diodes" %}
-                    </span>
-
-                    <p>
-                        {% translate "ديود عام الاستخدام 50V 1A،" %}
-                        {% translate "مناسب للدوائر ذات الجهد المنخفض." %}
-                    </p>
-
-                </div>
-
-                <i class="bi bi-chevron-left arrow-icon"></i>
-
-            </a>
-
-
-            <a href="#" class="product-card-compact">
-
-                <div class="product-icon">
-                    <i class="bi bi-diagram-2"></i>
-                </div>
-
-                <div class="product-details">
-
-                    <h5>
-                        {% translate "1N5408 Diode" %}
-                    </h5>
-
-                    <span class="part-number">
-                        1N5408
-                    </span>
-
-                    <div class="mt-1">
-                        <span class="text-success fw-bold">
-                            30.00 DZD
-                        </span>
-                    </div>
-
-                    <span class="category-tag">
-                        {% translate "Diodes" %}
-                    </span>
-
-                    <p>
-                        {% translate "ديود قدرة عالية 1000V 3A،" %}
-                        {% translate "مناسب لتطبيقات الطاقة والتحويل العالية." %}
-                    </p>
-
-                </div>
-
-                <i class="bi bi-chevron-left arrow-icon"></i>
-
-            </a>
-
-
-            <a href="#" class="product-card-compact">
-
-                <div class="product-icon">
-                    <i class="bi bi-diagram-2"></i>
-                </div>
-
-                <div class="product-details">
-
-                    <h5>
-                        {% translate "1N5819 Schottky Diode" %}
-                    </h5>
-
-                    <span class="part-number">
-                        1N5819
-                    </span>
-
-                    <div class="mt-1">
-                        <span class="text-success fw-bold">
-                            25.00 DZD
-                        </span>
-                    </div>
-
-                    <span class="category-tag">
-                        {% translate "Diodes" %}
-                    </span>
-
-                    <p>
-                        {% translate "ديود شوتكي 40V 1A،" %}
-                        {% translate "سقوط جهد منخفض مثالي لتطبيقات التبديل السريع." %}
-                    </p>
-
-                </div>
-
-                <i class="bi bi-chevron-left arrow-icon"></i>
-
-            </a>
-
-
-            <a href="#" class="product-card-compact">
-
-                <div class="product-icon">
-                    <i class="bi bi-diagram-2"></i>
-                </div>
-
-                <div class="product-details">
-
-                    <h5>
-                        {% translate "FR107 Fast Recovery Diode" %}
-                    </h5>
-
-                    <span class="part-number">
-                        FR107
-                    </span>
-
-                    <div class="mt-1">
-                        <span class="text-success fw-bold">
-                            18.00 DZD
-                        </span>
-                    </div>
-
-                    <span class="category-tag">
-                        {% translate "Diodes" %}
-                    </span>
-
-                    <p>
-                        {% translate "ديود استرداد سريع 1000V 1A،" %}
-                        {% translate "مثالي للتطبيقات عالية التردد." %}
-                    </p>
-
-                </div>
-
-                <i class="bi bi-chevron-left arrow-icon"></i>
-
-            </a>
-
-
-            <a href="#" class="product-card-compact">
-
-                <div class="product-icon">
-                    <i class="bi bi-diagram-2"></i>
-                </div>
-
-                <div class="product-details">
-
-                    <h5>
-                        {% translate "1N4148 Signal Diode" %}
-                    </h5>
-
-                    <span class="part-number">
-                        1N4148
-                    </span>
-
-                    <div class="mt-1">
-                        <span class="text-success fw-bold">
-                            12.00 DZD
-                        </span>
-                    </div>
-
-                    <span class="category-tag">
-                        {% translate "Diodes" %}
-                    </span>
-
-                    <p>
-                        {% translate "ديود إشارة سريع 100V 200mA،" %}
-                        {% translate "الأكثر استخداماً في الدوائر الرقمية والتبديل." %}
-                    </p>
-
-                </div>
-
-                <i class="bi bi-chevron-left arrow-icon"></i>
-
-            </a>
-
-        </div>
-
-
-        <!-- Pagination -->
-
-        <nav class="pagination-custom">
-
-            <span class="page-link disabled">
-                <i class="bi bi-chevron-right"></i>
-            </span>
-
-            <span class="page-link active">
-                1
-            </span>
-
-            <a href="#" class="page-link">
-                2
-            </a>
-
-            <a href="#" class="page-link">
-                <i class="bi bi-chevron-left"></i>
-            </a>
-
-        </nav>
-
-        {% endif %}
-
-
-        <!-- No Results (hidden by default, shown when no results) -->
-
-        <!--
+        <!-- No Results -->
         <div class="no-results">
 
             <i class="bi bi-search"></i>
 
-            <h4>
-                {% translate "لم يتم العثور على نتائج" %}
-            </h4>
+                {% if query %}
+                    <h4>
+                        {% translate "لم يتم العثور على نتائج" %}
+                    </h4>
 
-            <p>
-                {% translate "جرب البحث باستخدام كلمات مختلفة أو تحقق من الإملاء" %}
-            </p>
+                    <p>
+                        {% translate "لا توجد منتجات مطابقة لبحثك." %}
+                    </p>
+                {% else %}
+                    <h4>
+                        {% translate "ابدأ البحث عن منتج" %}
+                    </h4>
 
-            <div class="suggestions">
-
-                <h6>
-                    {% translate "اقتراحات:" %}
-                </h6>
-
-                <a href="#" class="suggestion-tag">
-                    1N4007
-                </a>
-
-                <a href="#" class="suggestion-tag">
-                    BC547
-                </a>
-
-                <a href="#" class="suggestion-tag">
-                    10kΩ
-                </a>
-
-                <a href="#" class="suggestion-tag">
-                    ESP32
-                </a>
-
-                <a href="#" class="suggestion-tag">
-                    Arduino
-                </a>
-
-                <a href="#" class="suggestion-tag">
-                    ATmega328P
-                </a>
-
-            </div>
-
-        </div>
-        -->
+                    <p>
+                        {% translate "اكتب اسم المنتج في مربع البحث." %}
+                    </p>
+                {% endif %}
 
     </div>
 </section>
+
+{% endif %}
 
 {% endblock %}

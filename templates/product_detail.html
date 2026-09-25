@@ -595,6 +595,20 @@ ALIDRICO{% endblock %}
     }
 
 
+    .schematic-title {
+        color: var(--accent-color) !important;
+        font-size: 1.45rem !important;
+        font-weight: 800 !important;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .schematic-title i {
+        color: var(--accent-color) !important;
+        font-size: 1.25rem;
+    }
+
     .tech-info-card pre {
 
         background:
@@ -840,9 +854,17 @@ ALIDRICO{% endblock %}
                 </div>
 
                 {% endif %}
+                    <div class="tech-info-">
 
 
+                    <h5 class="schematic-title">
 
+                        <i class="bi bi-diagram-3 me-2"></i>
+
+                        {% translate "المخطط الفني للمنتج" %}
+
+                    </h5>
+                </div>
                 <!-- =================================================
                      Pinout Diagram
                 ================================================== -->

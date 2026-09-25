@@ -941,3 +941,17 @@ msgstr "Frais de livraison"
 #~ msgid "جميع المكونات أصلية 100%"
 #~ msgstr "Tous les composants sont 100 % authentiques"
 
+msgid "المخطط الفني للمنتج"
+msgstr "Schéma technique du produit"
+
+msgid "لا توجد منتجات مطابقة لبحثك."
+msgstr "Aucun produit ne correspond à votre recherche."
+
+msgid "ابدأ البحث عن منتج"
+msgstr "Commencez votre recherche de produits"
+
+msgid "اكتب اسم المنتج في مربع البحث."
+msgstr "Saisissez le nom du produit dans la barre de recherche."
+#: .\templates\search_results.html
+msgid "نتائج البحث"
+msgstr "Résultats de recherche"

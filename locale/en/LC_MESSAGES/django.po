@@ -937,3 +937,16 @@ msgstr "Delivery Fee"
 
 #~ msgid "جميع المكونات أصلية 100%"
 #~ msgstr "All components are 100% genuine"
+msgid "المخطط الفني للمنتج"
+msgstr "Product Technical Diagram"
+msgid "لا توجد منتجات مطابقة لبحثك."
+msgstr "No products match your search."
+
+msgid "ابدأ البحث عن منتج"
+msgstr "Start searching for a product"
+
+msgid "اكتب اسم المنتج في مربع البحث."
+msgstr "Enter the product name in the search box."
+#: .\templates\search_results.html
+msgid "نتائج البحث"
+msgstr "Search Results"

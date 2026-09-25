@@ -970,13 +970,7 @@ def search(request):
 
         results_list = Product.objects.filter(
 
-            Q(name__icontains=query) |
-
-            Q(part_number__icontains=query) |
-
-            Q(description__icontains=query) |
-
-            Q(short_description__icontains=query),
+            Q(name__icontains=query) ,
 
             is_active=True
 
