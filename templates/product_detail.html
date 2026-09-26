@@ -227,6 +227,33 @@ ALIDRICO{% endblock %}
        Product Info
     ====================================================== */
 
+
+    /* =====================================================
+       LTR content only where requested
+    ====================================================== */
+
+    .product-info .description {
+        direction: ltr;
+        text-align: left;
+        unicode-bidi: plaintext;
+    }
+
+    .tech-info-card pre {
+        direction: ltr;
+        text-align: left;
+        unicode-bidi: plaintext;
+    }
+
+    .related-section .card-body {
+        direction: ltr;
+        text-align: left;
+    }
+
+    .related-section .card-body .btn-primary-custom {
+        direction: rtl;
+        text-align: center;
+    }
+
     .product-info {
 
         padding:
@@ -1261,7 +1288,7 @@ ALIDRICO{% endblock %}
 
 
 
-                    <pre>{{ product.technical_info }}</pre>
+                    <pre class="ltr-product-content">{{ product.technical_info }}</pre>
 
                 </div>
 

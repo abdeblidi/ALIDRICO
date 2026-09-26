@@ -472,8 +472,11 @@
             <span class="required">*</span>
           </label>
 
-          <input type="tel" id="phone" name="phone" class="form-control-custom" value="{{ phone|default:'' }}"
-            placeholder="{% translate "مثال: 05 XX XX XX XX" %}" maxlength="20" required>
+          <input type="tel" id="phone" name="phone" class="form-control-custom"
+            value="{{ phone|default:'' }}"
+            placeholder="{% translate "+مثال: 0774269258 أو 213774269258" %}"
+            maxlength="17"
+            required>
         </div>
 
         <div class="form-group">
@@ -498,8 +501,35 @@
             </option>
 
             {% for wilaya in wilayas %}
-            <option value="{{ wilaya.id }}" data-delivery-price="{{ wilaya.delivery_price|unlocalize }}">
+            <option
+              value="{{ wilaya.id }}"
+              {% if selected_wilaya_id|stringformat:"s" == wilaya.id|stringformat:"s" %}selected{% endif %}
+            >
               {{ wilaya.code }} - {{ wilaya.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="commune">
+            {% translate "البلدية" %}
+            <span class="required">*</span>
+          </label>
+
+          <select id="commune" name="commune" class="form-control-custom" required disabled>
+            <option value="">
+              {% translate "اختر البلدية" %}
+            </option>
+
+            {% for commune in communes %}
+            <option
+              value="{{ commune.id }}"
+              data-wilaya="{{ commune.wilaya_id }}"
+              data-delivery-price="{{ commune.delivery_price|unlocalize }}"
+              {% if selected_commune_id|stringformat:"s" == commune.id|stringformat:"s" %}selected{% endif %}
+            >
+              {{ commune.name }}
             </option>
             {% endfor %}
           </select>
@@ -558,15 +588,60 @@
   const PRODUCTS_TOTAL = Number("{{ products_total|default:0|unlocalize }}");
 
   const wilayaSelect = document.getElementById("wilaya");
+  const communeSelect = document.getElementById("commune");
   const deliveryTotal = document.getElementById("delivery-total");
   const grandTotal = document.getElementById("grand-total");
+
+  // Keep a copy of all commune options so we can show only
+  // the communes belonging to the selected wilaya.
+  const communeOptions = Array.from(
+    communeSelect.querySelectorAll("option[data-wilaya]")
+  );
+
+  function updateCommunes() {
+    const wilayaId = wilayaSelect.value;
+    const selectedCommuneId = "{{ selected_commune_id|default:'' }}";
+
+    // Reset the current commune before filtering.
+    communeSelect.value = "";
+
+    communeOptions.forEach((option) => {
+      const belongsToWilaya =
+        option.dataset.wilaya === wilayaId;
+
+      option.hidden = !belongsToWilaya;
+      option.disabled = !belongsToWilaya;
+    });
+
+    communeSelect.disabled = !wilayaId;
+
+    if (!wilayaId) {
+      communeSelect.value = "";
+      updateTotal();
+      return;
+    }
+
+    // Restore the submitted commune after a validation error,
+    // but only if it really belongs to the selected wilaya.
+    const matchingOption = communeOptions.find(
+      (option) =>
+        option.dataset.wilaya === wilayaId &&
+        option.value === selectedCommuneId
+    );
+
+    if (matchingOption) {
+      matchingOption.selected = true;
+    }
+
+    updateTotal();
+  }
 
   function updateTotal() {
     let deliveryPrice = 0;
 
-    if (wilayaSelect.value) {
+    if (communeSelect.value) {
       const selectedOption =
-        wilayaSelect.options[wilayaSelect.selectedIndex];
+        communeSelect.options[communeSelect.selectedIndex];
 
       deliveryPrice =
         Number(selectedOption.dataset.deliveryPrice) || 0;
@@ -582,9 +657,73 @@
       grandTotalValue.toFixed(2) + " DZD";
   }
 
-  wilayaSelect.addEventListener("change", updateTotal);
+  wilayaSelect.addEventListener("change", function () {
+    // A new wilaya means the previously selected commune is no longer valid.
+    communeOptions.forEach((option) => {
+      option.selected = false;
+    });
 
-  updateTotal();
+    updateCommunes();
+  });
+
+  communeSelect.addEventListener("change", updateTotal);
+
+  // Format the phone number visually with spaces.
+  // The phone value itself is always handled left-to-right (LTR),
+  // while the surrounding page keeps its normal language direction.
+  // Examples: 07 74 26 92 58 or +213 774 269 258
+  const phoneInput = document.getElementById("phone");
+  const orderForm = document.getElementById("order-form");
+
+  if (phoneInput) {
+    function formatPhone(value) {
+      // Keep only digits and "+".
+      value = value.replace(/[^\d+]/g, "");
+
+      // "+" is allowed only at the beginning.
+      if (value.startsWith("+")) {
+        const digits = value.slice(1).replace(/\D/g, "").slice(0, 12);
+
+        if (digits.length <= 3) {
+          return "+" + digits;
+        }
+
+        return "+" + digits.slice(0, 3) + " " +
+          digits.slice(3, 6) +
+          (digits.length > 6 ? " " + digits.slice(6, 9) : "") +
+          (digits.length > 9 ? " " + digits.slice(9, 12) : "");
+      }
+
+      // Local format: 07 74 26 92 58
+      const digits = value.replace(/\D/g, "").slice(0, 10);
+
+      return digits.replace(/(\d{2})(?=\d)/g, "$1 ");
+    }
+
+    function setPhoneDirection() {
+      phoneInput.style.direction = "ltr";
+      phoneInput.style.textAlign = "left";
+      phoneInput.style.unicodeBidi = "plaintext";
+    }
+
+    setPhoneDirection();
+
+    phoneInput.value = formatPhone(phoneInput.value);
+
+    phoneInput.addEventListener("input", function () {
+      setPhoneDirection();
+      this.value = formatPhone(this.value);
+    });
+
+    if (orderForm) {
+      orderForm.addEventListener("submit", function () {
+        // Remove visual spaces before sending the value to Django.
+        phoneInput.value = phoneInput.value.replace(/\s/g, "");
+      });
+    }
+  }
+
+  updateCommunes();
 </script>
 {% endif %}
 

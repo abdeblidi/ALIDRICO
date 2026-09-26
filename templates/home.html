@@ -262,7 +262,7 @@
             100% !important;
 
         min-height:
-            210px !important;
+            225px !important;
 
         height:
             100% !important;
@@ -271,7 +271,7 @@
             border-box !important;
 
         padding:
-            2rem !important;
+            2.2rem !important;
 
         background:
             var(--card-bg) !important;
@@ -409,10 +409,10 @@
             relative;
 
         width:
-            70px;
+            105px;
 
         height:
-            70px;
+            105px;
 
         flex-shrink:
             0;
@@ -433,9 +433,7 @@
             50%;
 
         background:
-            linear-gradient(135deg,
-                var(--primary-color),
-                var(--secondary-color));
+            transparent;
 
         color:
             #fff;
@@ -476,7 +474,7 @@
             100% !important;
 
         object-fit:
-            contain !important;
+            cover !important;
 
         display:
             block !important;
@@ -795,16 +793,27 @@
         .category-card .icon-wrapper {
 
             width:
-                65px;
+                90px;
 
             height:
-                65px;
+                90px;
 
             font-size:
                 1.6rem;
 
         }
 
+    }
+
+    /* Featured product cards: LTR content only */
+    .featured-section .card-custom .card-body {
+        direction: ltr;
+        text-align: left;
+    }
+
+    .featured-section .card-custom .card-body .btn-primary-custom {
+        direction: rtl;
+        text-align: center;
     }
 </style>
 

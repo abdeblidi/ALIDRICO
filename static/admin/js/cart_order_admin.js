@@ -6,20 +6,16 @@
         return Number.isFinite(number) ? number : 0;
     }
 
-    /*
-     * Product search
-     * ----------------
-     * We keep the original <select> untouched.
-     * This is important because your existing data-price attributes
-     * are still used by updateItem().
-     *
-     * A small search box is added above each product select.
-     * Typing filters the existing products, and clicking a result
-     * selects the original option. Therefore prices/totals keep
-     * working exactly as before.
-     */
+    // =========================================================
+    // PRODUCT SEARCH
+    // =========================================================
+
     function setupProductSearch(select) {
-        if (!select || select.dataset.productSearchReady === '1') {
+
+        if (
+            !select ||
+            select.dataset.productSearchReady === '1'
+        ) {
             return;
         }
 
@@ -31,6 +27,7 @@
         wrapper.style.width = '100%';
 
         const search = document.createElement('input');
+
         search.type = 'search';
         search.className = 'product-search-input';
         search.placeholder = 'Search product...';
@@ -41,6 +38,7 @@
         search.style.marginBottom = '5px';
 
         const results = document.createElement('div');
+
         results.className = 'product-search-results';
         results.style.display = 'none';
         results.style.position = 'absolute';
@@ -62,19 +60,24 @@
         wrapper.appendChild(select);
         wrapper.appendChild(results);
 
-        // Keep the real select for form submission,
-        // but show the search box instead of the long dropdown.
         select.style.display = 'none';
 
         const currentOption =
             select.options[select.selectedIndex];
 
-        if (currentOption && currentOption.value) {
-            search.value = currentOption.textContent.trim();
+        if (
+            currentOption &&
+            currentOption.value
+        ) {
+            search.value =
+                currentOption.textContent.trim();
         }
 
         function getOptions() {
-            return Array.from(select.options).filter(function (option) {
+
+            return Array.from(
+                select.options
+            ).filter(function (option) {
                 return option.value !== '';
             });
         }
@@ -84,14 +87,12 @@
         }
 
         function chooseOption(option) {
+
             select.value = option.value;
 
-            search.value = option.textContent.trim();
+            search.value =
+                option.textContent.trim();
 
-            /*
-             * Trigger the same change event as the original select.
-             * Existing price/total calculation remains active.
-             */
             select.dispatchEvent(
                 new Event('change', {
                     bubbles: true
@@ -102,6 +103,7 @@
         }
 
         function renderResults(query) {
+
             results.innerHTML = '';
 
             const normalizedQuery =
@@ -115,25 +117,26 @@
             const matches =
                 getOptions()
                     .filter(function (option) {
+
                         return option.textContent
                             .trim()
                             .toLowerCase()
-                            .includes(normalizedQuery);
+                            .includes(
+                                normalizedQuery
+                            );
                     })
                     .slice(0, 30);
 
             if (!matches.length) {
+
                 const empty =
                     document.createElement('div');
 
                 empty.textContent =
                     'No product found';
 
-                empty.style.padding =
-                    '8px';
-
-                empty.style.color =
-                    '#777';
+                empty.style.padding = '8px';
+                empty.style.color = '#777';
 
                 results.appendChild(empty);
 
@@ -144,6 +147,7 @@
             }
 
             matches.forEach(function (option) {
+
                 const item =
                     document.createElement('button');
 
@@ -152,35 +156,17 @@
                 item.textContent =
                     option.textContent.trim();
 
-                item.style.display =
-                    'block';
-
-                item.style.width =
-                    '100%';
-
-                item.style.padding =
-                    '8px 10px';
-
-                item.style.border =
-                    '0';
-
+                item.style.display = 'block';
+                item.style.width = '100%';
+                item.style.padding = '8px 10px';
+                item.style.border = '0';
                 item.style.borderBottom =
                     '1px solid #eee';
-
-                item.style.background =
-                    '#fff';
-
-                item.style.color =
-                    '#333';
-
-                item.style.textAlign =
-                    'left';
-
-                item.style.cursor =
-                    'pointer';
-
-                item.style.font =
-                    'inherit';
+                item.style.background = '#fff';
+                item.style.color = '#333';
+                item.style.textAlign = 'left';
+                item.style.cursor = 'pointer';
+                item.style.font = 'inherit';
 
                 item.addEventListener(
                     'mouseenter',
@@ -201,6 +187,7 @@
                 item.addEventListener(
                     'mousedown',
                     function (event) {
+
                         event.preventDefault();
 
                         chooseOption(option);
@@ -210,8 +197,7 @@
                 results.appendChild(item);
             });
 
-            results.style.display =
-                'block';
+            results.style.display = 'block';
         }
 
         search.addEventListener(
@@ -224,6 +210,7 @@
         search.addEventListener(
             'focus',
             function () {
+
                 if (search.value.trim()) {
                     renderResults(search.value);
                 }
@@ -233,7 +220,9 @@
         search.addEventListener(
             'keydown',
             function (event) {
+
                 if (event.key === 'Escape') {
+
                     hideResults();
                     search.blur();
                 }
@@ -243,34 +232,35 @@
         document.addEventListener(
             'click',
             function (event) {
+
                 if (!wrapper.contains(event.target)) {
                     hideResults();
                 }
             }
         );
 
-        /*
-         * If the user changes the original select manually,
-         * keep the search box synchronized.
-         */
         select.addEventListener(
             'change',
             function () {
+
                 const option =
                     select.options[
                         select.selectedIndex
                     ];
 
-                if (option && option.value) {
+                if (
+                    option &&
+                    option.value
+                ) {
                     search.value =
                         option.textContent.trim();
+
                 } else {
                     search.value = '';
                 }
             }
         );
     }
-
 
     function getProductRows() {
 
@@ -281,22 +271,26 @@
 
         const rows = [];
 
-        productSelects.forEach(function (select) {
+        productSelects.forEach(
+            function (select) {
 
-            setupProductSearch(select);
+                setupProductSearch(select);
 
-            const row =
-                select.closest('tr');
+                const row =
+                    select.closest('tr');
 
-            if (row) {
-                rows.push(row);
+                if (row) {
+                    rows.push(row);
+                }
             }
-
-        });
+        );
 
         return rows;
     }
 
+    // =========================================================
+    // PRODUCT PRICE / ITEM TOTAL
+    // =========================================================
 
     function updateItem(row) {
 
@@ -325,7 +319,6 @@
                 'input[name$="-DELETE"]'
             );
 
-
         if (
             !productSelect ||
             !quantityInput ||
@@ -334,7 +327,6 @@
         ) {
             return 0;
         }
-
 
         if (
             deleteInput &&
@@ -350,15 +342,12 @@
             return 0;
         }
 
-
         const selectedOption =
             productSelect.options[
                 productSelect.selectedIndex
             ];
 
-
         let productPrice = 0;
-
 
         if (selectedOption) {
 
@@ -368,9 +357,7 @@
                         'data-price'
                     )
                 );
-
         }
-
 
         const quantity =
             Math.max(
@@ -381,32 +368,182 @@
                 )
             );
 
-
         const itemTotal =
             productPrice * quantity;
-
 
         productPriceInput.value =
             productSelect.value
                 ? productPrice.toFixed(2)
                 : '0.00';
 
-
         itemTotalInput.value =
             productSelect.value
                 ? itemTotal.toFixed(2)
                 : '0.00';
 
-
         return itemTotal;
     }
 
+    // =========================================================
+    // WILAYA → COMMUNE
+    // =========================================================
+
+function updateCommunes() {
+
+    const wilayaSelect =
+        document.getElementById('id_wilaya');
+
+    const communeSelect =
+        document.getElementById('id_commune');
+
+    if (!wilayaSelect || !communeSelect) {
+        return;
+    }
+
+    const wilayaId =
+        String(wilayaSelect.value || '');
+
+    /*
+     * نحفظ بيانات جميع البلديات الأصلية مرة واحدة.
+     */
+    if (!communeSelect._communeData) {
+
+        communeSelect._communeData =
+            Array.from(
+                communeSelect.options
+            )
+            .filter(function (option) {
+                return option.value !== '';
+            })
+            .map(function (option) {
+
+                return {
+                    value: option.value,
+
+                    text:
+                        option.textContent.trim(),
+
+                    wilayaId:
+                        String(
+                            option.getAttribute(
+                                'data-wilaya'
+                            ) || ''
+                        ),
+
+                    deliveryPrice:
+                        option.getAttribute(
+                            'data-delivery-price'
+                        ) || '0'
+                };
+            });
+    }
+
+    const communeData =
+        communeSelect._communeData;
+
+    /*
+     * نمسح جميع البلديات الموجودة.
+     */
+    communeSelect.innerHTML = '';
+
+    /*
+     * الخيار الافتراضي.
+     */
+    const placeholder =
+        document.createElement('option');
+
+    placeholder.value = '';
+
+    placeholder.textContent =
+        '- Select an option -';
+
+    communeSelect.appendChild(
+        placeholder
+    );
+
+    /*
+     * إذا لم يتم اختيار Wilaya.
+     */
+    if (!wilayaId) {
+
+        communeSelect.value = '';
+
+        communeSelect.disabled = true;
+
+        updateDeliveryPrice();
+
+        return;
+    }
+
+    /*
+     * نضيف فقط البلديات التابعة
+     * للولاية المختارة.
+     */
+    let matchingCommunes = 0;
+
+    communeData.forEach(function (commune) {
+
+        if (
+            String(commune.wilayaId) !==
+            wilayaId
+        ) {
+            return;
+        }
+
+        const option =
+            document.createElement('option');
+
+        option.value =
+            commune.value;
+
+        option.textContent =
+            commune.text;
+
+        option.setAttribute(
+            'data-wilaya',
+            commune.wilayaId
+        );
+
+        option.setAttribute(
+            'data-delivery-price',
+            commune.deliveryPrice
+        );
+
+        communeSelect.appendChild(
+            option
+        );
+
+        matchingCommunes++;
+    });
+
+    /*
+     * لا نحتفظ بأي Commune قديمة.
+     */
+    communeSelect.value = '';
+
+    /*
+     * إذا كانت هناك بلديات تابعة للولاية
+     * نفعّل القائمة.
+     */
+    communeSelect.disabled =
+        matchingCommunes === 0;
+
+    /*
+     * لا يوجد سعر حتى يتم اختيار Commune.
+     */
+    updateDeliveryPrice();
+}
+    // =========================================================
+    // DELIVERY PRICE
+    // =========================================================
+    // السعر من Commune وليس Wilaya
+    // =========================================================
 
     function updateDeliveryPrice() {
 
-        const wilayaSelect =
+        const communeSelect =
             document.getElementById(
-                'id_wilaya'
+                'id_commune'
             );
 
         const deliveryPriceInput =
@@ -414,25 +551,24 @@
                 'id_delivery_price'
             );
 
-
         if (
-            !wilayaSelect ||
+            !communeSelect ||
             !deliveryPriceInput
         ) {
             return 0;
         }
 
-
         const selectedOption =
-            wilayaSelect.options[
-                wilayaSelect.selectedIndex
+            communeSelect.options[
+                communeSelect.selectedIndex
             ];
-
 
         let deliveryPrice = 0;
 
-
-        if (selectedOption) {
+        if (
+            selectedOption &&
+            selectedOption.value
+        ) {
 
             deliveryPrice =
                 toNumber(
@@ -440,45 +576,41 @@
                         'data-delivery-price'
                     )
                 );
-
         }
 
-
         deliveryPriceInput.value =
-            wilayaSelect.value
+            communeSelect.value
                 ? deliveryPrice.toFixed(2)
                 : '0.00';
-
 
         return deliveryPrice;
     }
 
+    // =========================================================
+    // TOTALS
+    // =========================================================
 
     function updateTotals() {
 
         let productsTotal = 0;
 
-
         const rows =
             getProductRows();
 
+        rows.forEach(
+            function (row) {
 
-        rows.forEach(function (row) {
-
-            productsTotal +=
-                updateItem(row);
-
-        });
-
+                productsTotal +=
+                    updateItem(row);
+            }
+        );
 
         const deliveryPrice =
             updateDeliveryPrice();
 
-
         const total =
             productsTotal +
             deliveryPrice;
-
 
         const productsTotalInput =
             document.getElementById(
@@ -490,29 +622,28 @@
                 'id_total_price'
             );
 
-
         if (productsTotalInput) {
 
             productsTotalInput.value =
                 productsTotal.toFixed(2);
-
         }
-
 
         if (totalPriceInput) {
 
             totalPriceInput.value =
                 total.toFixed(2);
-
         }
-
     }
 
+    // =========================================================
+    // INITIALIZATION
+    // =========================================================
 
     function initialize() {
 
-        updateTotals();
+        updateCommunes();
 
+        updateTotals();
 
         document.addEventListener(
             'change',
@@ -532,16 +663,28 @@
                     ) ||
 
                     event.target.id ===
-                        'id_wilaya'
+                        'id_wilaya' ||
+
+                    event.target.id ===
+                        'id_commune'
                 ) {
 
+                    /*
+                     * عند تغيير الولاية:
+                     * أعد بناء قائمة البلديات.
+                     */
+                    if (
+                        event.target.id ===
+                        'id_wilaya'
+                    ) {
+
+                        updateCommunes();
+                    }
+
                     updateTotals();
-
                 }
-
             }
         );
-
 
         document.addEventListener(
             'input',
@@ -554,24 +697,18 @@
                 ) {
 
                     updateTotals();
-
                 }
-
             }
         );
-
 
         document.addEventListener(
             'formset:added',
             function () {
 
                 updateTotals();
-
             }
         );
-
     }
-
 
     if (
         document.readyState ===
@@ -586,7 +723,6 @@
     } else {
 
         initialize();
-
     }
 
 })();

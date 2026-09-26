@@ -1961,6 +1961,16 @@
             word-break: break-word;
         }
 
+        .search-autocomplete-price {
+            display: block;
+            margin-top: 0.15rem;
+            color: #198754;
+            font-size: 0.82rem;
+            font-weight: 700;
+            direction: ltr;
+            text-align: start;
+        }
+
         .search-autocomplete-item:hover,
         .search-autocomplete-item:focus {
             background: var(--hover-bg);
@@ -2045,7 +2055,7 @@
                     </a>
                 </div>
                 <a class="topbar-item" href="https://maps.app.goo.gl/vztrKBpAw3PFKvbYA" target="_blank" rel="noopener"><i class="bi bi-geo-alt"></i><span>{% translate "العنوان هنا" %}</span></a>
-                <span class="topbar-item"><i class="bi bi-clock"></i><span>{% translate "الأحد - الخميس: 8:30 - 16:30" %}</span></span>
+                <span class="topbar-item"><i class="bi bi-clock"></i><span>{% translate "السبت - الخميس: 10:00 - 17:30" %}</span></span>
                 <a class="topbar-item" href="tel:0771592502"><i class="bi bi-telephone"></i><span>0771592502</span></a>
                 <a class="topbar-item" href="tel:0540519330"><i class="bi bi-telephone"></i><span>0540519330</span></a>
             </div>
@@ -2617,6 +2627,13 @@ document.addEventListener('DOMContentLoaded', function () {
             part.className = 'search-autocomplete-part';
             part.textContent = product.part_number;
             info.appendChild(part);
+        }
+
+        if (product.price !== null && product.price !== undefined && product.price !== '') {
+            const price = document.createElement('span');
+            price.className = 'search-autocomplete-price';
+            price.textContent = `${product.price} DZD`;
+            info.appendChild(price);
         }
 
         link.appendChild(info);

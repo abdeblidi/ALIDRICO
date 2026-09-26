@@ -12,6 +12,7 @@ from .models import (
     SpecificationType,
     Specification,
     Wilaya,
+    Commune,
     CartOrder,
     CartOrderItem,
 )
@@ -72,7 +73,16 @@ class ProductPriceSelect(forms.Select):
         return option
 
 
-class WilayaDeliverySelect(forms.Select):
+class WilayaSelect(forms.Select):
+    """Wilaya selector.
+
+    Delivery price belongs to Commune, not Wilaya.
+    """
+
+    pass
+
+
+class CommuneDeliverySelect(forms.Select):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -99,26 +109,39 @@ class WilayaDeliverySelect(forms.Select):
         )
 
         if value not in (None, '', '__empty__'):
-
             try:
+                commune_id = int(str(value))
 
-                wilaya_id = int(str(value))
+                if commune_id not in self.delivery_map:
+                    commune = Commune.objects.filter(
+                        pk=commune_id
+                    ).only('delivery_price', 'wilaya_id').first()
 
-                if wilaya_id not in self.delivery_map:
+                    if commune:
+                        self.delivery_map[commune_id] = {
+                            'delivery_price': commune.delivery_price or Decimal('0'),
+                            'wilaya_id': commune.wilaya_id,
+                        }
 
-                    wilaya = Wilaya.objects.filter(
-                        pk=wilaya_id
-                    ).only('delivery_price').first()
+                if commune_id in self.delivery_map:
+                    data = self.delivery_map[commune_id]
 
-                    if wilaya:
-                        self.delivery_map[wilaya_id] = (
-                            wilaya.delivery_price or Decimal('0')
-                        )
+                    # Show only the Commune name in the dropdown.
+                    commune = Commune.objects.filter(
+                        pk=commune_id
+                    ).only('name').first()
 
-                if wilaya_id in self.delivery_map:
+                    if commune:
+                        option['label'] = commune.name
 
+                    # Used by JavaScript to filter by Wilaya.
+                    option['attrs']['data-wilaya'] = str(
+                        data['wilaya_id']
+                    )
+
+                    # Used by JavaScript to calculate delivery price.
                     option['attrs']['data-delivery-price'] = str(
-                        self.delivery_map[wilaya_id]
+                        data['delivery_price']
                     )
 
             except (TypeError, ValueError):
@@ -137,7 +160,8 @@ class CartOrderForm(forms.ModelForm):
 
         widgets = {
 
-            'wilaya': WilayaDeliverySelect(),
+            'wilaya': WilayaSelect(),
+            'commune': CommuneDeliverySelect(),
 
             'products_total': forms.NumberInput(
                 attrs={
@@ -157,6 +181,25 @@ class CartOrderForm(forms.ModelForm):
                 }
             ),
         }
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        wilaya = cleaned_data.get('wilaya')
+        commune = cleaned_data.get('commune')
+
+        if wilaya and commune and commune.wilaya_id != wilaya.id:
+            raise forms.ValidationError(
+                'The selected commune does not belong to the selected wilaya.'
+            )
+
+        if commune:
+            cleaned_data['delivery_price'] = (
+                commune.delivery_price or Decimal('0')
+            )
+
+        return cleaned_data
 
 
 class CartOrderItemForm(forms.ModelForm):
@@ -292,6 +335,8 @@ class SpecificationInline(admin.TabularInline):
 @admin.register(SpecificationType)
 class SpecificationTypeAdmin(admin.ModelAdmin):
 
+    list_per_page = 20
+
     list_display = [
         'name'
     ]
@@ -307,6 +352,8 @@ class SpecificationTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(admin.ModelAdmin):
+
+    list_per_page = 20
 
     list_display = [
         'name',
@@ -340,6 +387,8 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+
+    list_per_page = 20
 
     list_display = [
         'name',
@@ -380,7 +429,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-
+    list_per_page = 20
     list_display = [
         'name',
         'part_number',
@@ -505,6 +554,8 @@ def get_view_on_site_url(self, obj):
 @admin.register(Specification)
 class SpecificationAdmin(admin.ModelAdmin):
 
+    list_per_page = 20
+
     list_display = [
         'name',
         'value',
@@ -530,10 +581,11 @@ class SpecificationAdmin(admin.ModelAdmin):
 @admin.register(Wilaya)
 class WilayaAdmin(admin.ModelAdmin):
 
+    list_per_page = 20
+
     list_display = [
         'code',
         'name',
-        'delivery_price',
         'is_active'
     ]
 
@@ -546,12 +598,44 @@ class WilayaAdmin(admin.ModelAdmin):
     ]
 
     list_editable = [
-        'delivery_price',
         'is_active'
     ]
 
     ordering = [
         'code'
+    ]
+
+
+@admin.register(Commune)
+class CommuneAdmin(admin.ModelAdmin):
+
+    list_per_page = 20
+
+    list_display = [
+        'name',
+        'wilaya',
+        'delivery_price',
+        'is_active',
+    ]
+
+    list_filter = [
+        'wilaya',
+        'is_active',
+    ]
+
+    search_fields = [
+        'name',
+        'wilaya__name',
+    ]
+
+    list_editable = [
+        'delivery_price',
+        'is_active',
+    ]
+
+    ordering = [
+        'wilaya__code',
+        'name',
     ]
 
 
@@ -585,6 +669,8 @@ class CartOrderItemInline(admin.TabularInline):
 @admin.register(CartOrder)
 class CartOrderAdmin(admin.ModelAdmin):
 
+    list_per_page = 20
+
     form = CartOrderForm
 
     class Media:
@@ -598,6 +684,7 @@ class CartOrderAdmin(admin.ModelAdmin):
         'customer_name_link',
         'phone',
         'wilaya',
+        'commune',
         'products_total',
         'delivery_price',
         'total_price',
@@ -611,6 +698,7 @@ class CartOrderAdmin(admin.ModelAdmin):
         'status',
         'is_read',
         'wilaya',
+        'commune',
         'created_at',
     ]
 
@@ -664,6 +752,7 @@ class CartOrderAdmin(admin.ModelAdmin):
             {
                 'fields': (
                     'wilaya',
+                    'commune',
                     'delivery_price',
                 )
             }
@@ -800,8 +889,8 @@ class CartOrderAdmin(admin.ModelAdmin):
         )
 
         delivery_price = (
-            order.wilaya.delivery_price
-            if order.wilaya_id
+            order.commune.delivery_price
+            if order.commune_id
             else Decimal('0')
         )
 

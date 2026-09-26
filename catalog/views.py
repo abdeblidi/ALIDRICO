@@ -16,6 +16,7 @@ from .models import (
     Product,
     ContactMessage,
     Wilaya,
+    Commune,
     CartOrder,
     CartOrderItem,
 )
@@ -726,6 +727,7 @@ def cart_checkout(request):
     request.session.modified = True
 
     wilayas = Wilaya.objects.filter(is_active=True)
+    communes = Commune.objects.filter(is_active=True).select_related('wilaya')
 
     if request.method == 'POST':
 
@@ -750,6 +752,7 @@ def cart_checkout(request):
         ).strip()
 
         wilaya_id = request.POST.get('wilaya')
+        commune_id = request.POST.get('commune')
 
         if not full_name or not phone:
             messages.error(
@@ -763,6 +766,9 @@ def cart_checkout(request):
                     'items': items,
                     'products_total': products_total,
                     'wilayas': wilayas,
+                    'communes': communes,
+                    'selected_wilaya_id': wilaya_id,
+                    'selected_commune_id': commune_id,
                     'full_name': full_name,
                     'phone': phone,
                     'email': email,
@@ -782,6 +788,31 @@ def cart_checkout(request):
                     'items': items,
                     'products_total': products_total,
                     'wilayas': wilayas,
+                    'communes': communes,
+                    'selected_wilaya_id': wilaya_id,
+                    'selected_commune_id': commune_id,
+                    'full_name': full_name,
+                    'phone': phone,
+                    'email': email,
+                    'note': note,
+                }
+            )
+
+        if not commune_id:
+            messages.error(
+                request,
+                'يرجى اختيار البلدية.'
+            )
+            return render(
+                request,
+                'cart_checkout.html',
+                {
+                    'items': items,
+                    'products_total': products_total,
+                    'wilayas': wilayas,
+                    'communes': communes,
+                    'selected_wilaya_id': wilaya_id,
+                    'selected_commune_id': commune_id,
                     'full_name': full_name,
                     'phone': phone,
                     'email': email,
@@ -795,8 +826,16 @@ def cart_checkout(request):
             is_active=True
         )
 
-        # One delivery fee for the whole cart.
-        delivery_price = wilaya.delivery_price or Decimal('0')
+        # The commune must belong to the selected wilaya.
+        commune = get_object_or_404(
+            Commune,
+            id=commune_id,
+            wilaya=wilaya,
+            is_active=True
+        )
+
+        # One delivery fee for the whole cart, based on the selected commune.
+        delivery_price = commune.delivery_price or Decimal('0')
         grand_total = products_total + delivery_price
 
         created_order = None
@@ -811,6 +850,7 @@ def cart_checkout(request):
                     phone=phone,
                     email=email,
                     wilaya=wilaya,
+                    commune=commune,
                     products_total=products_total,
                     delivery_price=delivery_price,
                     total_price=grand_total,
@@ -875,6 +915,7 @@ def cart_checkout(request):
             'items': items,
             'products_total': products_total,
             'wilayas': wilayas,
+            'communes': communes,
         }
     )
 
@@ -945,15 +986,16 @@ def search(request):
 
         if query.strip():
             suggestion_products = Product.objects.filter(
-                Q(name__icontains=query),
+                name__icontains=query,
                 is_active=True
-            ).order_by('name')[:15]
+            ).order_by('name')
 
             for product in suggestion_products:
                 suggestions.append({
                 'name': product.name,
                 'part_number': product.part_number or '',
                 'image': product.image.url if product.image else '',
+                'price': product.price,
                 'url': reverse(
                     'catalog:product_detail',
                     kwargs={'slug': product.slug}

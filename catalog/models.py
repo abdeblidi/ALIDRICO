@@ -134,7 +134,8 @@ class Product(models.Model):
 
     slug = models.SlugField(
         unique=True,
-        verbose_name="Slug"
+        verbose_name="Slug",
+        max_length=255
     )
 
     part_number = models.CharField(
@@ -366,12 +367,6 @@ class Wilaya(models.Model):
         verbose_name="Wilaya Code"
     )
 
-    delivery_price = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=0,
-        verbose_name="Delivery Price (DZD)"
-    )
 
     is_active = models.BooleanField(
         default=True,
@@ -385,6 +380,42 @@ class Wilaya(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Commune(models.Model):
+    """Algerian commune belonging to a wilaya."""
+
+    wilaya = models.ForeignKey(
+        Wilaya,
+        on_delete=models.CASCADE,
+        related_name='communes',
+        verbose_name="Wilaya"
+    )
+
+    name = models.CharField(
+        max_length=100,
+        verbose_name="Commune"
+    )
+
+    delivery_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name="Delivery Price (DZD)"
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Active"
+    )
+
+    class Meta:
+        verbose_name = "Commune"
+        verbose_name_plural = "Communes"
+        ordering = ['name']
+
+    def __str__(self):
+        return f"{self.wilaya.name} - {self.name}"
 
 
 class CartOrder(models.Model):
@@ -407,7 +438,7 @@ class CartOrder(models.Model):
     )
 
     phone = models.CharField(
-        max_length=20,
+        max_length=13,
         verbose_name="Phone"
     )
 
@@ -425,6 +456,14 @@ class CartOrder(models.Model):
         on_delete=models.PROTECT,
         related_name='cart_orders',
         verbose_name="Wilaya"
+    )
+    commune = models.ForeignKey(
+        Commune,
+        on_delete=models.PROTECT,
+        related_name='cart_orders',
+        verbose_name="Commune",
+        null=True,
+        blank=True
     )
 
     # =====================================================

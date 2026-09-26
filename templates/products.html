@@ -254,6 +254,36 @@
         pointer-events: none;
     }
 
+    .pagination-pages {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+
+    .pagination-custom .pagination-ellipsis {
+        color: var(--text-muted);
+        padding: 0.5rem 0.25rem;
+        user-select: none;
+    }
+
+    @media (max-width: 575.98px) {
+        .pagination-custom {
+            gap: 0.25rem;
+        }
+
+        .pagination-pages {
+            gap: 0.25rem;
+        }
+
+        .pagination-custom .page-link {
+            min-width: 34px;
+            padding: 0.45rem 0.55rem;
+            text-align: center;
+        }
+    }
+
     /* Mobile Filter Toggle */
     .filter-toggle-btn {
         display: none;
@@ -362,6 +392,17 @@
             width: 100% !important;
             max-width: 100% !important;
         }
+    }
+
+    /* Product card content: LTR only, details button stays Arabic RTL */
+    .products-section .card-custom .card-body {
+        direction: ltr;
+        text-align: left;
+    }
+
+    .products-section .card-custom .card-body .btn-primary-custom {
+        direction: rtl;
+        text-align: center;
     }
 </style>
 {% endblock %}
@@ -901,85 +942,56 @@
 
                 {% if products.has_other_pages %}
 
-                <nav class="pagination-custom">
-
+                <nav class="pagination-custom" aria-label="Pagination">
 
                     <!-- Previous -->
-
                     {% if products.has_previous %}
-
                     <a href="?{{ query_string }}{% if query_string %}&{% endif %}page={{ products.previous_page_number }}"
-                        class="page-link">
-
+                        class="page-link pagination-prev"
+                        aria-label="Previous page">
                         <i class="bi bi-chevron-right"></i>
-
                     </a>
-
                     {% else %}
-
-                    <span class="page-link disabled">
-
+                    <span class="page-link disabled pagination-prev" aria-hidden="true">
                         <i class="bi bi-chevron-right"></i>
-
                     </span>
-
                     {% endif %}
-
 
                     <!-- Pages -->
+                    <div class="pagination-pages" data-current-page="{{ products.number }}"
+                        data-total-pages="{{ products.paginator.num_pages }}">
 
-                    {% for num in products.paginator.page_range %}
+                        {% for num in products.paginator.page_range %}
+                        {% if products.number == num %}
+                        <span class="page-link active page-number" data-page="{{ num }}" aria-current="page">
+                            {{ num }}
+                        </span>
+                        {% else %}
+                        <a href="?{{ query_string }}{% if query_string %}&{% endif %}page={{ num }}"
+                            class="page-link page-number" data-page="{{ num }}">
+                            {{ num }}
+                        </a>
+                        {% endif %}
+                        {% endfor %}
 
-
-                    {% if products.number == num %}
-
-                    <span class="page-link active">
-
-                        {{ num }}
-
-                    </span>
-
-                    {% else %}
-
-                    <a href="?{{ query_string }}{% if query_string %}&{% endif %}page={{ num }}" class="page-link">
-
-                        {{ num }}
-
-                    </a>
-
-                    {% endif %}
-
-
-                    {% endfor %}
-
+                    </div>
 
                     <!-- Next -->
-
                     {% if products.has_next %}
-
                     <a href="?{{ query_string }}{% if query_string %}&{% endif %}page={{ products.next_page_number }}"
-                        class="page-link">
-
+                        class="page-link pagination-next"
+                        aria-label="Next page">
                         <i class="bi bi-chevron-left"></i>
-
                     </a>
-
                     {% else %}
-
-                    <span class="page-link disabled">
-
+                    <span class="page-link disabled pagination-next" aria-hidden="true">
                         <i class="bi bi-chevron-left"></i>
-
                     </span>
-
                     {% endif %}
-
 
                 </nav>
 
                 {% endif %}
-
-
             </div>
 
         </div>
@@ -1450,6 +1462,60 @@
 
         renderSubcategories();
 
+    })();
+</script>
+
+<script>
+    // Keep pagination compact when there are many pages.
+    (function () {
+        'use strict';
+
+        const pagesContainer = document.querySelector('.pagination-pages');
+        if (!pagesContainer) return;
+
+        const current = Number(pagesContainer.dataset.currentPage);
+        const total = Number(pagesContainer.dataset.totalPages);
+        const pageItems = Array.from(
+            pagesContainer.querySelectorAll('.page-number')
+        );
+
+        if (!current || !total || pageItems.length <= 7) return;
+
+        const visible = new Set();
+
+        // Always keep the first two and last two pages.
+        visible.add(1);
+        visible.add(2);
+        visible.add(total - 1);
+        visible.add(total);
+
+        // Keep two pages around the current page.
+        for (let page = current - 2; page <= current + 2; page++) {
+            if (page >= 1 && page <= total) {
+                visible.add(page);
+            }
+        }
+
+        let previousPage = null;
+
+        pageItems.forEach(function (item) {
+            const page = Number(item.dataset.page);
+
+            if (!visible.has(page)) {
+                item.remove();
+                return;
+            }
+
+            if (previousPage !== null && page - previousPage > 1) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'pagination-ellipsis';
+                ellipsis.textContent = '…';
+                ellipsis.setAttribute('aria-hidden', 'true');
+                pagesContainer.insertBefore(ellipsis, item);
+            }
+
+            previousPage = page;
+        });
     })();
 </script>
 {% endblock %}

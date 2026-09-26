@@ -955,3 +955,15 @@ msgstr "Saisissez le nom du produit dans la barre de recherche."
 #: .\templates\search_results.html
 msgid "نتائج البحث"
 msgstr "Résultats de recherche"
+msgid "البلدية"
+msgstr "Commune"
+
+msgid "اختر البلدية"
+msgstr "Sélectionnez la commune"
+
+msgid "مثال:"
+msgstr "Exemple :"
+msgid "+مثال: 0774269258 أو 213774269258"
+msgstr "Exemple : 0774269258 ou +213774269258"
+msgid "السبت - الخميس: 10:00 - 17:30"
+msgstr "Samedi - Jeudi : 10:00 - 17:30"

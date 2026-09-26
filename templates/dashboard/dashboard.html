@@ -191,7 +191,7 @@
 
 
                     <a
-                        href="{% url 'catalog:products' %}"
+                        href="{% url 'admin:catalog_product_changelist' %}"
                         target="_blank"
                         class="btn btn-primary-custom w-100"
                     >
@@ -201,10 +201,20 @@
                         إدارة المنتجات
 
                     </a>
+                    <a
+                        href="{% url 'admin:catalog_category_changelist' %}"
+                        target="_blank"
+                        class="btn btn-primary-custom w-100"
+                    >
 
+                        <i class="bi bi-box-seam ms-2"></i>
+
+                        إدارة التصنيفات
+
+                    </a>
 
                     <a
-                        href="{% url 'dashboard:subcategories' %}"
+                        href="{% url 'admin:catalog_subcategory_changelist' %}"
                         class="btn btn-primary-custom w-100"
                     >
 

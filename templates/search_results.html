@@ -38,6 +38,111 @@
         display: flex;
         gap: 0.5rem;
         margin-top: 1rem;
+        position: relative;
+    }
+
+    .search-header .search-results-box {
+        position: relative;
+    }
+
+    .search-header .search-results-autocomplete {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: 0;
+        left: 0;
+        width: 100%;
+        z-index: 99999;
+        display: none;
+        max-height: 360px;
+        overflow-y: auto;
+        padding: 0.35rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        box-shadow: 0 12px 30px var(--shadow-color);
+    }
+
+    .search-header .search-results-autocomplete.show {
+        display: block;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        width: 100%;
+        padding: 0.65rem 0.8rem;
+        color: var(--text-light);
+        text-decoration: none;
+        border-radius: 10px;
+        transition: background 0.15s ease;
+        box-sizing: border-box;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-item:hover,
+    .search-header .search-results-autocomplete .search-autocomplete-item:focus {
+        background: var(--hover-bg);
+        color: var(--heading-color);
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-image {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        flex: 0 0 60px;
+        border-radius: 8px;
+        background: var(--surface-bg);
+        order: 2;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-info {
+        min-width: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        order: 1;
+        overflow: hidden;
+        direction: ltr;
+        text-align: left;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-name {
+        display: block;
+        font-weight: 700;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-part {
+        display: block;
+        margin-top: 0.1rem;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        direction: ltr;
+        text-align: left;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-price {
+        display: block;
+        margin-top: 0.15rem;
+        color: #198754;
+        font-size: 0.82rem;
+        font-weight: 700;
+        direction: ltr;
+        text-align: left;
+    }
+
+    .search-header .search-results-autocomplete .search-autocomplete-empty {
+        padding: 0.75rem 0.8rem;
+        color: var(--text-muted);
+        text-align: center;
     }
 
     .search-header .search-form input {
@@ -185,6 +290,7 @@
 
     /* Product Card Compact */
     .product-card-compact {
+        direction: ltr;
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: 16px;
@@ -263,7 +369,7 @@
 
     .product-card-compact:hover .arrow-icon {
         color: var(--accent-color);
-        transform: translateX(-5px);
+        transform: translateX(5px);
     }
 
     @media (max-width: 768px) {
@@ -276,6 +382,14 @@
             display: none;
         }
     }
+
+    /* Product-card foreign text: keep it LTR and left aligned */
+    .product-card-ltr {
+        direction: ltr;
+        text-align: left;
+        unicode-bidi: plaintext;
+    }
+
 </style>
 {% endblock %}
 
@@ -319,31 +433,46 @@
             </h4>
 
             <p class="results-info">
-                {% translate "تم العثور على" %} {{ results_count|default:12 }} {% translate "نتيجة" %}
+                {% translate "تم العثور على" %} {{ results_count }} {% translate "نتيجة" %}
             </p>
 
             <form
-                class="search-form"
+                class="search-form search-results-box"
                 action="{% url 'catalog:search' %}"
                 method="GET"
+                autocomplete="off"
+                novalidate
             >
 
                 <input
-                    type="search"
-                    name="q"
+                    type="text"
+                    name="search_input"
                     value="{{ query }}"
                     placeholder='{% translate "ابحث عن مكون إلكتروني..." %}'
+                    autocomplete="new-password"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    data-lpignore="true"
+                    data-form-type="other"
                 >
+
+                <input type="hidden" name="q" value="{{ query }}">
 
                 <button
                     type="submit"
                     class="btn btn-primary-custom"
                 >
-
                     <i class="bi bi-search"></i>
                     {% translate "بحث" %}
-
                 </button>
+
+                <div
+                    class="search-autocomplete search-results-autocomplete"
+                    id="searchResultsAutocomplete"
+                    role="listbox"
+                    aria-label="{% translate 'اقتراحات المنتجات' %}"
+                ></div>
 
             </form>
 
@@ -384,36 +513,36 @@
 
                 <div class="product-details">
 
-                    <h5>
+                    <h5 class="product-card-ltr">
                         {{ product.name }}
                     </h5>
 
-                    <span class="part-number">
+                    <span class="part-number product-card-ltr">
                         {{ product.part_number }}
                     </span>
 
 
                     <div class="mt-1">
 
-                        <span class="text-success fw-bold">
+                        <span class="text-success fw-bold product-card-ltr">
                             {{ product.price }} DZD
                         </span>
 
                     </div>
 
 
-                    <span class="category-tag">
+                    <span class="category-tag product-card-ltr">
                         {{ product.category.name }}
                     </span>
 
-                    <p>
+                    <p class="product-card-ltr">
                         {{ product.short_description|truncatechars:120 }}
                     </p>
 
                 </div>
 
 
-                <i class="bi bi-chevron-left arrow-icon"></i>
+                <i class="bi bi-chevron-right arrow-icon"></i>
 
             </a>
 
@@ -506,10 +635,136 @@
                         {% translate "اكتب اسم المنتج في مربع البحث." %}
                     </p>
                 {% endif %}
-
+        </div>
     </div>
+
+    {% endif %}
 </section>
 
-{% endif %}
+<script>
+/* SEARCH RESULTS BOX — same product suggestions, only for this box */
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.querySelector('.search-header .search-results-box');
+    if (!searchForm) return;
+
+    const searchInput = searchForm.querySelector('input[name="search_input"]');
+    const hiddenQuery = searchForm.querySelector('input[name="q"]');
+    const suggestionsBox = document.getElementById('searchResultsAutocomplete');
+
+    if (!searchInput || !hiddenQuery || !suggestionsBox) return;
+
+    let timer = null;
+    let controller = null;
+
+    function clearSuggestions() {
+        suggestionsBox.innerHTML = '';
+        suggestionsBox.classList.remove('show');
+    }
+
+    function addSuggestion(product) {
+        const link = document.createElement('a');
+        link.className = 'search-autocomplete-item';
+        link.href = product.url;
+        link.setAttribute('role', 'option');
+
+        if (product.image) {
+            const image = document.createElement('img');
+            image.className = 'search-autocomplete-image';
+            image.src = product.image;
+            image.alt = product.name || '';
+            image.loading = 'lazy';
+            link.appendChild(image);
+        }
+
+        const info = document.createElement('div');
+        info.className = 'search-autocomplete-info';
+
+        const name = document.createElement('span');
+        name.className = 'search-autocomplete-name';
+        name.textContent = product.name || '';
+        info.appendChild(name);
+
+        if (product.part_number) {
+            const part = document.createElement('span');
+            part.className = 'search-autocomplete-part';
+            part.textContent = product.part_number;
+            info.appendChild(part);
+        }
+
+        if (product.price !== null && product.price !== undefined && product.price !== '') {
+            const price = document.createElement('span');
+            price.className = 'search-autocomplete-price';
+            price.textContent = `${product.price} DZD`;
+            info.appendChild(price);
+        }
+
+        link.appendChild(info);
+        suggestionsBox.appendChild(link);
+    }
+
+    async function loadSuggestions() {
+        const query = searchInput.value.trim();
+
+        if (!query) {
+            clearSuggestions();
+            return;
+        }
+
+        if (controller) controller.abort();
+        controller = new AbortController();
+
+        try {
+            const url = new URL(searchForm.action, window.location.origin);
+            url.searchParams.set('q', query);
+            url.searchParams.set('suggestions', '1');
+
+            const response = await fetch(url.toString(), {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                cache: 'no-store',
+                signal: controller.signal
+            });
+
+            if (!response.ok) {
+                clearSuggestions();
+                return;
+            }
+
+            const data = await response.json();
+            suggestionsBox.innerHTML = '';
+
+            if (Array.isArray(data.results) && data.results.length > 0) {
+                data.results.forEach(addSuggestion);
+                suggestionsBox.classList.add('show');
+            } else {
+                clearSuggestions();
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') clearSuggestions();
+        }
+    }
+
+    searchInput.addEventListener('input', function () {
+        hiddenQuery.value = searchInput.value;
+        clearTimeout(timer);
+        timer = setTimeout(loadSuggestions, 250);
+    });
+
+    searchInput.addEventListener('focus', function () {
+        if (searchInput.value.trim()) loadSuggestions();
+    });
+
+    searchForm.addEventListener('submit', function () {
+        hiddenQuery.value = searchInput.value;
+        clearSuggestions();
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!searchForm.contains(event.target)) clearSuggestions();
+    });
+});
+</script>
 
 {% endblock %}
