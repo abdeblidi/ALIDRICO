@@ -1,11 +1,11 @@
 /* CHANGELISTS */
 
-#changelist .changelist-form-container {
+/*#changelist .changelist-form-container {
     display: flex;
     align-items: flex-start;
     width: 100%;
 }
-
+*/
 #changelist .changelist-form-container > div {
     flex: 1 1 auto;
 }
