@@ -1911,7 +1911,9 @@
         .search-autocomplete-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
+            flex-direction: row;
+            direction: rtl;
             gap: 16px;
             width: 100%;
             padding: 0.65rem 0.8rem;
@@ -1928,7 +1930,7 @@
             flex: 0 0 60px;
             border-radius: 8px;
             background: var(--surface-bg);
-            order: 2;
+            order: 1;
         }
 
         .search-autocomplete-info {
@@ -1937,13 +1939,18 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            order: 1;
+            align-items: flex-start;
+            order: 2;
             overflow: hidden;
+            direction: ltr;
+            text-align: left;
         }
 
         .search-autocomplete-name {
             display: block;
             font-weight: 700;
+            direction: ltr;
+            text-align: left;
             white-space: normal;
             overflow-wrap: anywhere;
             word-break: break-word;
@@ -1955,7 +1962,7 @@
             color: var(--text-muted);
             font-size: 0.78rem;
             direction: ltr;
-            text-align: start;
+            text-align: left;
             white-space: normal;
             overflow-wrap: anywhere;
             word-break: break-word;
@@ -1968,7 +1975,7 @@
             font-size: 0.82rem;
             font-weight: 700;
             direction: ltr;
-            text-align: start;
+            text-align: left;
         }
 
         .search-autocomplete-item:hover,
@@ -2010,7 +2017,7 @@
                 z-index: 2000;
             }
         }
-
+        
 
 </style>
  

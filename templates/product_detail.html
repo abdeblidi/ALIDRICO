@@ -8,6 +8,22 @@ ALIDRICO{% endblock %}
 {% block extra_css %}
 
 <style>
+    /* =====================================================
+       Force this page to LTR in all languages
+       ====================================================== */
+    html,
+    body {
+        direction: ltr !important;
+        text-align: left;
+    }
+
+    .product-detail-section,
+    .product-detail-section *,
+    .related-section,
+    .related-section * {
+        direction: ltr;
+    }
+
     .product-detail-section {
         padding: 2rem 0 4rem;
     }
@@ -250,7 +266,7 @@ ALIDRICO{% endblock %}
     }
 
     .related-section .card-body .btn-primary-custom {
-        direction: rtl;
+        direction: ltr;
         text-align: center;
     }
 
