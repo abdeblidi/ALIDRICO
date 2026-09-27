@@ -1,8 +1,6 @@
 /* CHANGELISTS */
 
 #changelist .changelist-form-container {
-    display: flex;
-    align-items: flex-start;
     width: 100%;
 }
 
@@ -14,10 +12,6 @@
     width: 100%;
 }
 
-#changelist .changelist-form-container:has(#changelist-filter) > div {
-    min-width: 0;
-    max-width: calc(100% - 270px);
-}
 
 #changelist table {
     width: 100%;
