@@ -8,22 +8,6 @@ ALIDRICO{% endblock %}
 {% block extra_css %}
 
 <style>
-    /* =====================================================
-       Force this page to LTR in all languages
-       ====================================================== */
-    html,
-    body {
-        direction: ltr !important;
-        text-align: left;
-    }
-
-    .product-detail-section,
-    .product-detail-section *,
-    .related-section,
-    .related-section * {
-        direction: ltr;
-    }
-
     .product-detail-section {
         padding: 2rem 0 4rem;
     }
@@ -244,37 +228,25 @@ ALIDRICO{% endblock %}
     ====================================================== */
 
 
-    /* =====================================================
-       LTR content only where requested
-    ====================================================== */
-
-    .product-info .description {
-        direction: ltr;
-        text-align: left;
-        unicode-bidi: plaintext;
-    }
-
-    .tech-info-card pre {
-        direction: ltr;
-        text-align: left;
-        unicode-bidi: plaintext;
-    }
-
-    .related-section .card-body {
-        direction: ltr;
-        text-align: left;
-    }
-
-    .related-section .card-body .btn-primary-custom {
-        direction: ltr;
-        text-align: center;
-    }
-
     .product-info {
-
+        direction: ltr;
+        text-align: left;
+        unicode-bidi: plaintext;
         padding:
             1rem 0;
+    }
 
+    /* فقط السعر والأزرار في الجهة اليمنى */
+    .product-info .mt-2.mb-3 {
+        direction: ltr;
+        text-align: right;
+        width: 100%;
+    }
+
+    .product-info .action-buttons {
+        direction: ltr;
+        width: 100%;
+        justify-content: flex-end;
     }
 
 
