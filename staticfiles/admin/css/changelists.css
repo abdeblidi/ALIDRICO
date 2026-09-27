@@ -1,15 +1,17 @@
 /* CHANGELISTS */
-
 #changelist .changelist-form-container {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 240px;
-    column-gap: 30px;
-    align-items: start;
+    display: flex;
+    align-items: flex-start;
     width: 100%;
 }
 
 #changelist .changelist-form-container > div {
+    flex: 1 1 auto;
     min-width: 0;
+}
+
+#changelist .changelist-form-container:not(:has(#changelist-filter)) > div {
+    width: 100%;
 }
 
 /* الجدول والمحتوى الرئيسي يبقى في الجهة اليسرى */
