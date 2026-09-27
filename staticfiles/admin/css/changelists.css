@@ -1,24 +1,17 @@
 /* CHANGELISTS */
 
 #changelist .changelist-form-container {
-    display: flex;
-    align-items: flex-start;
     width: 100%;
-    direction: ltr;
 }
 
 #changelist .changelist-form-container > div {
     flex: 1 1 auto;
-    min-width: 0;
 }
 
 #changelist .changelist-form-container:not(:has(#changelist-filter)) > div {
     width: 100%;
 }
 
-#changelist .changelist-form-container:has(#changelist-filter) > div {
-    max-width: none;
-}
 
 #changelist table {
     width: 100%;
@@ -301,7 +294,6 @@
 
 /* Once the :has() pseudo-class is supported by all browsers, the tr.selected
    selector and the JS adding the class can be removed. */
-
 #changelist tbody tr.selected {
     background-color: var(--selected-row);
 }
@@ -314,7 +306,6 @@
     #changelist tbody tr.selected {
         background-color: SelectedItem;
     }
-
     #changelist tbody tr:has(.action-select:checked) {
         background-color: SelectedItem;
     }
