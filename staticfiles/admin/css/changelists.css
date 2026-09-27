@@ -1,38 +1,17 @@
 /* CHANGELISTS */
+
 #changelist .changelist-form-container {
-    display: flex;
-    align-items: flex-start;
     width: 100%;
 }
 
 #changelist .changelist-form-container > div {
     flex: 1 1 auto;
-    min-width: 0;
 }
 
 #changelist .changelist-form-container:not(:has(#changelist-filter)) > div {
     width: 100%;
 }
 
-/* الجدول والمحتوى الرئيسي يبقى في الجهة اليسرى */
-#changelist .changelist-form-container > div:first-child {
-    grid-column: 1;
-}
-
-/* الـ FILTER وحده في الجهة اليمنى */
-#changelist-filter {
-    grid-column: 2;
-    grid-row: 1;
-    width: 240px;
-    background: var(--darkened-bg);
-    border-left: none;
-    margin: 0;
-}
-
-#changelist .changelist-form-container:not(:has(#changelist-filter)) > div {
-    width: 100%;
-    grid-column: 1 / -1;
-}
 
 #changelist table {
     width: 100%;
@@ -177,6 +156,14 @@
 
 /* FILTER COLUMN */
 
+#changelist-filter {
+    flex: 0 0 240px;
+    order: 1;
+    background: var(--darkened-bg);
+    border-left: none;
+    margin: 0 0 0 30px;
+}
+
 @media (forced-colors: active) {
     #changelist-filter {
         border: 1px solid;
@@ -307,7 +294,6 @@
 
 /* Once the :has() pseudo-class is supported by all browsers, the tr.selected
    selector and the JS adding the class can be removed. */
-
 #changelist tbody tr.selected {
     background-color: var(--selected-row);
 }
@@ -320,7 +306,6 @@
     #changelist tbody tr.selected {
         background-color: SelectedItem;
     }
-
     #changelist tbody tr:has(.action-select:checked) {
         background-color: SelectedItem;
     }
