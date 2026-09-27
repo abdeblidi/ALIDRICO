@@ -1,17 +1,24 @@
 /* CHANGELISTS */
 
 #changelist .changelist-form-container {
+    display: flex;
+    align-items: flex-start;
     width: 100%;
+    direction: ltr;
 }
 
 #changelist .changelist-form-container > div {
     flex: 1 1 auto;
+    min-width: 0;
 }
 
 #changelist .changelist-form-container:not(:has(#changelist-filter)) > div {
     width: 100%;
 }
 
+#changelist .changelist-form-container:has(#changelist-filter) > div {
+    max-width: none;
+}
 
 #changelist table {
     width: 100%;
@@ -294,6 +301,7 @@
 
 /* Once the :has() pseudo-class is supported by all browsers, the tr.selected
    selector and the JS adding the class can be removed. */
+
 #changelist tbody tr.selected {
     background-color: var(--selected-row);
 }
@@ -306,34 +314,8 @@
     #changelist tbody tr.selected {
         background-color: SelectedItem;
     }
+
     #changelist tbody tr:has(.action-select:checked) {
         background-color: SelectedItem;
     }
-}
-/* Admin changelist layout fix */
-
-/* إبقاء جدول المنتجات والـ Filter في نفس الصف */
-#changelist .changelist-form-container {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-    width: 100%;
-}
-
-/* المحتوى الرئيسي يأخذ المساحة المتبقية */
-#changelist .changelist-form-container > div {
-    flex: 1 1 auto;
-    min-width: 0;
-}
-
-/* إلغاء الفراغ الكبير */
-#changelist .changelist-form-container:has(#changelist-filter) > div {
-    max-width: none;
-}
-
-/* وضع FILTER في الجهة اليمنى */
-#changelist-filter {
-    flex: 0 0 240px;
-    order: 0;
-    margin: 0 0 0 30px;
 }
