@@ -1933,8 +1933,8 @@ industrial electronics repair
         .search-autocomplete {
             position: absolute;
             top: calc(100% + 0.5rem);
-            right: 0;
-            left: auto;
+            right: auto;
+            left: 0;
             width: 500px;
             max-width: 80vw;
             z-index: 2000;
@@ -2053,15 +2053,134 @@ industrial electronics repair
             .search-autocomplete {
                 position: absolute;
                 top: calc(100% + 0.5rem);
-                right: 0;
-                left: auto;
-                width: 90vw;
-                max-width: 360px;
+                right: auto;
+                left: 0;
+                width: 93vw;
+                max-width: 600px;
                 margin-top: 0;
                 z-index: 2000;
             }
         }
         
+        @media (min-width: 992px) and (max-width: 1280px) {
+
+    /* ================================
+       MAIN NAVBAR
+       ================================ */
+
+    .navbar > .container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "brand tools"
+            "nav   nav";
+
+        align-items: center;
+        row-gap: 12px;
+    }
+
+
+    /* ================================
+       LOGO
+       ================================ */
+
+    .navbar-brand {
+        grid-area: brand;
+        margin-right: 0;
+    }
+
+    .navbar-brand img {
+        max-width: 260px;
+        height: auto;
+    }
+
+
+    /* ================================
+       SEARCH + THEME
+       ================================ */
+
+    .navbar-tools {
+        margin-right: 15vw;
+        grid-area: tools;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 10px;
+
+        min-width: 0;
+    }
+
+
+    /* ================================
+       SECOND ROW
+       ================================ */
+
+    .navbar-collapse {
+        grid-area: nav;
+
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        min-width: 0;
+
+        margin-top: 2px;
+    }
+
+
+    /* ================================
+       NAVIGATION LINKS
+       ================================ */
+
+    .navbar-collapse .navbar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 0 !important;
+
+        gap: 4px;
+    }
+
+
+    .navbar-collapse .nav-item {
+        margin: 0;
+    }
+
+
+    .navbar-collapse .nav-link {
+        white-space: nowrap;
+    }
+
+
+    /* ================================
+       LANGUAGE SWITCHER
+       ================================ */
+
+    .language-switcher {
+        display: flex;
+        align-items: center;
+
+        margin: 0 0 0 20px;
+
+        flex-shrink: 0;
+    }
+
+
+    /* ================================
+       LANGUAGE MENU
+       ================================ */
+
+    .language-menu {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
 
 </style>
  
@@ -2141,7 +2260,7 @@ industrial electronics repair
  
  
             <!-- SEARCH + THEME: always visible in the navbar -->
-            <div class="navbar-tools">
+            <div class="navbar-tools" dir="rtl">
                 <button type="button"
                         class="theme-toggle"
                         id="themeToggle"
@@ -2157,6 +2276,7 @@ industrial electronics repair
                     <i class="bi bi-search"></i>
 
                     <input type="search"
+                           id="searchInput"
                            name="q"
                            placeholder="{% translate 'ابحث عن مكون...' %}"
                            aria-label="{% translate 'Search' %}"
@@ -2749,6 +2869,24 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!searchForm.contains(event.target)) clearSuggestions();
     });
 });
+</script>
+<script>
+    const searchInput = document.getElementById('searchInput');
+
+function setSearchDirection() {
+    const isArabic = document.documentElement.lang.toLowerCase().startsWith('ar');
+        searchInput.dir = isArabic ? 'rtl' : 'ltr';
+    }
+
+    setSearchDirection();
+
+    searchInput.addEventListener('input', function () {
+        const isArabic = document.documentElement.lang.toLowerCase().startsWith('ar');
+
+        this.dir = this.value.trim()
+            ? 'ltr'
+            : (isArabic ? 'rtl' : 'ltr');
+    });
 </script>
 
     {% block extra_js %}{% endblock %}
