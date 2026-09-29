@@ -379,7 +379,7 @@
   }
 </style>
 
-<div class="order-page" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+<div class="order-page" dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
   <div class="order-card">
 
     <h2 class="order-title">
@@ -398,22 +398,21 @@
       <div class="cart-item-row" style="
           display:flex;
           align-items:center;
+          justify-content: center;
           gap:16px;
           padding:14px 0;
           border-bottom:1px solid #f3f4f6;
-        ">
+        "
+        dir="ltr">
         <div style="
             width:80px;
             height:80px;
             border-radius:10px;
             background:#f9fafb;
             border:1px solid #e5e7eb;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            flex-shrink:0;
             overflow:hidden;
-          ">
+          "
+          >
           {% if item.product.image %}
           <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
             style="width:100%;height:100%;object-fit:contain;">
@@ -422,17 +421,17 @@
           {% endif %}
         </div>
 
-        <div class="cart-item-info" style="flex:1;min-width:0;">
-          <div class="product-name" style="font-size:17px;margin-bottom:6px;">
+        <div class="cart-item-info" style="flex:1;min-width:300px;">
+          <div class="product-name"  style="font-size:17px;margin-bottom:24px;">
             {{ item.product.name }}
           </div>
 
-          <div class="meta-line" style="margin-bottom:4px;">
+          <div class="meta-line" style="margin-bottom:4px;" dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
             <strong>{% translate "الكمية:" %}</strong>
             <span class="value">{{ item.quantity }}</span>
           </div>
 
-          <div class="meta-line" style="margin-bottom:0;">
+          <div class="meta-line" style="margin-bottom:0;" dir="{% if request.LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
             <strong>{% translate "سعر الوحدة:" %}</strong>
             <span class="value">{{ item.unit_price|floatformat:2 }} DZD</span>
           </div>
@@ -495,8 +494,8 @@
             <span class="required">*</span>
           </label>
 
-          <select id="wilaya" name="wilaya" class="form-control-custom" required>
-            <option value="">
+          <select id="wilaya" name="wilaya" class="form-control-custom" required dir="ltr">
+            <option value="" dir="rtl">
               {% translate "اختر الولاية" %}
             </option>
 
@@ -517,8 +516,8 @@
             <span class="required">*</span>
           </label>
 
-          <select id="commune" name="commune" class="form-control-custom" required disabled>
-            <option value="">
+          <select id="commune" name="commune" class="form-control-custom" required disabled dir="ltr">
+            <option value="" dir="rtl">
               {% translate "اختر البلدية" %}
             </option>
 
@@ -724,6 +723,34 @@
   }
 
   updateCommunes();
+
+  const note = document.getElementById('note');
+  const pageLang = document.documentElement.lang.toLowerCase();
+
+  const defaultDirection = pageLang.startsWith('ar') ? 'rtl' : 'ltr';
+
+  note.dir = defaultDirection;
+
+  note.addEventListener('input', function () {
+      const value = this.value.trim();
+
+      // Empty → use the page language direction
+      if (!value) {
+          this.dir = defaultDirection;
+          return;
+      }
+
+      // Find the first strong Arabic or Latin character
+      const firstLetter = value.match(
+          /[\u0600-\u06FF\u0041-\u005A\u0061-\u007A]/
+      );
+
+      if (firstLetter) {
+          this.dir = /[\u0600-\u06FF]/.test(firstLetter[0])
+              ? 'rtl'
+              : 'ltr';
+      }
+  });
 </script>
 {% endif %}
 

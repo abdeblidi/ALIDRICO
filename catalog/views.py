@@ -734,7 +734,17 @@ def cart_checkout(request):
     request.session['cart'] = cleaned_cart
     request.session.modified = True
 
-    wilayas = Wilaya.objects.filter(is_active=True)
+    def wilaya_sort_key(wilaya):
+        try:
+            return (0, int(str(wilaya.code).strip()))
+        except (ValueError, TypeError):
+            return (1, 0)
+
+    wilayas = sorted(
+        Wilaya.objects.filter(is_active=True),
+        key=wilaya_sort_key
+    )
+
     communes = Commune.objects.filter(is_active=True).select_related('wilaya')
 
     if request.method == 'POST':

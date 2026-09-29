@@ -10,6 +10,8 @@
 
     /* Cart item cards: LTR content */
     .cart-item {
+        flex-wrap: wrap;
+        justify-content: flex-end;
         direction: ltr;
         text-align: left;
     }
@@ -40,13 +42,9 @@
         width: 90px;
         height: 90px;
         flex: 0 0 90px;
-        background: var(--dark-bg);
         border: 1px solid var(--border-color);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        margin-left: auto; 
+        margin-right: auto;
     }
 
     .cart-item-image img {
@@ -258,7 +256,7 @@
                             {% endif %}
                         </div>
 
-                        <div class="cart-item-info">
+                        <div class="cart-item-info" style="min-width: 300px;">
 
                             <h5>
                                 {{ item.product.name }}

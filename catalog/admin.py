@@ -662,6 +662,23 @@ class WilayaAdmin(admin.ModelAdmin):
         'code'
     ]
 
+class WilayaNameFilter(admin.SimpleListFilter):
+    title = 'Wilaya'
+    parameter_name = 'wilaya'
+
+    def lookups(self, request, model_admin):
+        return Wilaya.objects.order_by('name').values_list(
+            'id',
+            'name'
+        )
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(
+                wilaya_id=self.value()
+            )
+
+        return queryset
 
 @admin.register(Commune)
 class CommuneAdmin(admin.ModelAdmin):
@@ -676,7 +693,7 @@ class CommuneAdmin(admin.ModelAdmin):
     ]
 
     list_filter = [
-        'wilaya',
+        WilayaNameFilter,
         'is_active',
     ]
 
