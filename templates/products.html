@@ -124,6 +124,7 @@
         right: 0;
         left: 0;
         max-height: 280px;
+        overflow-x: hidden;
         overflow-y: auto;
         z-index: 1100;
         background: var(--card-bg);
@@ -532,7 +533,7 @@
 
                                 </button>
 
-                                <div class="checkbox-dropdown-menu">
+                                <div class="checkbox-dropdown-menu" dir="ltr">
 
                                     {% for cat in all_categories %}
 
@@ -592,7 +593,7 @@
                                 </button>
 
                                 <div class="checkbox-dropdown-menu"
-                                    id="subcategoryMenu">
+                                    id="subcategoryMenu" dir="ltr">
 
                                     <p class="checkbox-dropdown-empty">
                                         {% translate "كل التصنيفات الفرعية" %}

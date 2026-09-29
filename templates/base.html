@@ -2242,7 +2242,8 @@ industrial electronics repair
  
  
             <a class="navbar-brand" href="{% url 'catalog:home' %}">
-                <img src="{% static 'img/logo2.png' %}"
+                <img id="siteLogo"
+                     src="{% static 'img/logo4.png' %}"
                      alt="ALI DRICO ELECTRONICS STORE">
             </a>
  
@@ -2603,6 +2604,15 @@ industrial electronics repair
 <script>
 (function () {
     function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+
+        const logo = document.getElementById('siteLogo');
+        if (logo) {
+            logo.src = theme === 'dark'
+                ? "{% static 'img/logo2.png' %}"
+                : "{% static 'img/logo4.png' %}";
+        }
+
         const root = document.documentElement;
         root.setAttribute('data-theme', theme);
         localStorage.setItem('site-theme', theme);
@@ -2629,15 +2639,23 @@ industrial electronics repair
         );
     }
 
+
+
     document.addEventListener('DOMContentLoaded', function () {
         const current = document.documentElement.getAttribute('data-theme') || 'dark';
+
         applyTheme(current);
 
         const button = document.getElementById('themeToggle');
+
         if (button) {
             button.addEventListener('click', function () {
-                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-                applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                const currentTheme =
+                    document.documentElement.getAttribute('data-theme') || 'dark';
+
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                applyTheme(newTheme);
             });
         }
     });

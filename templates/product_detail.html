@@ -980,13 +980,15 @@ ALIDRICO{% endblock %}
         
 
 
-                    <p class="description">
-                        {% if product.description %}
+                    {% if product.description %}
+                        <p class="description">
                             {{ product.description }}
-                        {% else %}
+                        </p>
+                    {% else %}
+                        <p class="description" style="text-align: end;">
                             {% translate "لا يوجد وصف" %}
-                        {% endif %}
-                    </p>
+                        </p>
+                    {% endif %}
 
 
                     <!-- =================================================

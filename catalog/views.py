@@ -259,7 +259,11 @@ def products(request):
     # =========================
 
     products_list = Product.objects.filter(
-        is_active=True
+        is_active=True,
+        category__is_active=True,
+    ).filter(
+        Q(subcategory__isnull=True) |
+        Q(subcategory__is_active=True)
     )
 
     # =========================
