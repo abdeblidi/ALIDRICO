@@ -149,6 +149,48 @@ class CommuneDeliverySelect(forms.Select):
 
         return option
 
+class SubcategorySelect(forms.Select):
+
+    def create_option(
+        self,
+        name,
+        value,
+        label,
+        selected,
+        index,
+        subindex=None,
+        attrs=None
+    ):
+        option = super().create_option(
+            name,
+            value,
+            label,
+            selected,
+            index,
+            subindex=subindex,
+            attrs=attrs,
+        )
+
+        if value not in (None, '', '__empty__'):
+            try:
+                subcategory_id = int(str(value))
+
+                subcategory = (
+                    Subcategory.objects
+                    .filter(pk=subcategory_id)
+                    .only('category_id')
+                    .first()
+                )
+
+                if subcategory:
+                    option['attrs']['data-category'] = str(
+                        subcategory.category_id
+                    )
+
+            except (TypeError, ValueError):
+                pass
+
+        return option
 
 class CartOrderForm(forms.ModelForm):
 
@@ -426,9 +468,24 @@ class CategoryAdmin(admin.ModelAdmin):
 
     product_count.short_description = 'Product Count'
 
+class ProductAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+        widgets = {
+            'subcategory': SubcategorySelect(),
+        }
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    form = ProductAdminForm
+
+    class Media:
+        js = (
+            'admin/js/product_admin.js',
+        )
+    
     list_per_page = 20
     list_display = [
         'name',
