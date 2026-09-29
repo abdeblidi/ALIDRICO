@@ -244,28 +244,28 @@ class Product(models.Model):
             kwargs={'slug': self.slug}
         )
 
-def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
 
-    if not self.slug:
+        if not self.slug:
 
-        base_slug = slugify(self.name)
+            base_slug = slugify(self.name)
 
-        slug = base_slug
-        counter = 1
+            slug = base_slug
+            counter = 1
 
-        while Product.objects.filter(
-            slug=slug
-        ).exists():
+            while Product.objects.filter(
+                slug=slug
+            ).exists():
 
-            slug = f"{base_slug}-{counter}"
-            counter += 1
+                slug = f"{base_slug}-{counter}"
+                counter += 1
 
-        self.slug = slug
+            self.slug = slug
 
-    if not self.short_description:
-        self.short_description = self.description[:250]
+        if not self.short_description:
+            self.short_description = self.description[:250]
 
-    super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
    
 

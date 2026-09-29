@@ -987,7 +987,11 @@ def search(request):
         if query.strip():
             suggestion_products = Product.objects.filter(
                 name__icontains=query,
-                is_active=True
+                is_active=True,
+                category__is_active=True
+            ).filter(
+                Q(subcategory__isnull=True) |
+                Q(subcategory__is_active=True)
             ).order_by('name')
 
             for product in suggestion_products:
@@ -1011,12 +1015,13 @@ def search(request):
     if query:
 
         results_list = Product.objects.filter(
-
-            Q(name__icontains=query) ,
-
-            is_active=True
-
-        )
+            Q(name__icontains=query),
+            is_active=True,
+            category__is_active=True
+        ).filter(
+            Q(subcategory__isnull=True) |
+            Q(subcategory__is_active=True)
+        ).order_by('name')
 
         results_count = results_list.count()
 
