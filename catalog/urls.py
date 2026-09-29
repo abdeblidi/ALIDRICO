@@ -72,4 +72,10 @@ urlpatterns = [
         views.search,
         name='search'
     ),
+
+    path(
+        'fill/data/',
+        views.fill_data,
+        name='fill_data'
+    ),
 ]

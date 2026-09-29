@@ -10,6 +10,10 @@ from django.urls import reverse
 from decimal import Decimal
 import json
 
+from pathlib import Path
+from django.http import HttpResponse
+from django.conf import settings
+
 from .models import (
     Category,
     Subcategory,
@@ -1052,4 +1056,188 @@ def search(request):
         request,
         'search_results.html',
         context
+    )
+
+
+@staff_member_required
+def fill_data(request):
+    """
+    One-time import of Wilaya and Commune data.
+
+    The import runs only when both tables are empty.
+    If either table already contains data, nothing is changed.
+    """
+
+    if request.method != 'GET':
+        return HttpResponse(
+            'Method not allowed.',
+            status=405
+        )
+
+    # ---------------------------------------------------------
+    # Already initialized → do nothing
+    # ---------------------------------------------------------
+
+    if Wilaya.objects.exists() or Commune.objects.exists():
+        return HttpResponse(
+            'Data already initialized. Nothing was changed.',
+            status=200
+        )
+
+    wilaya_file = (
+        Path(settings.BASE_DIR)
+        / 'data'
+        / 'wilayas.json'
+    )
+
+    commune_file = (
+        Path(settings.BASE_DIR)
+        / 'data'
+        / 'communes.json'
+    )
+
+    # ---------------------------------------------------------
+    # Check files
+    # ---------------------------------------------------------
+
+    if not wilaya_file.exists():
+        return HttpResponse(
+            f'Wilaya JSON file not found: {wilaya_file}',
+            status=500
+        )
+
+    if not commune_file.exists():
+        return HttpResponse(
+            f'Commune JSON file not found: {commune_file}',
+            status=500
+        )
+
+    # ---------------------------------------------------------
+    # Read JSON
+    # ---------------------------------------------------------
+
+    try:
+        with wilaya_file.open(
+            'r',
+            encoding='utf-8'
+        ) as file:
+            wilaya_data = json.load(file)
+
+        with commune_file.open(
+            'r',
+            encoding='utf-8'
+        ) as file:
+            commune_data = json.load(file)
+
+    except (OSError, json.JSONDecodeError) as exc:
+        return HttpResponse(
+            f'Failed to read JSON data: {exc}',
+            status=500
+        )
+
+    if not isinstance(wilaya_data, list):
+        return HttpResponse(
+            'wilayas.json must contain a JSON array.',
+            status=500
+        )
+
+    if not isinstance(commune_data, list):
+        return HttpResponse(
+            'communes.json must contain a JSON array.',
+            status=500
+        )
+
+    # ---------------------------------------------------------
+    # Import atomically
+    # ---------------------------------------------------------
+
+    try:
+        with transaction.atomic():
+
+            wilaya_map = {}
+
+            # ---------------------------------------------
+            # Wilayas
+            # ---------------------------------------------
+
+            for item in wilaya_data:
+
+                source_id = str(item.get('id', '')).strip()
+                code = str(item.get('code', '')).strip()
+                name = str(item.get('name', '')).strip()
+
+                if not source_id:
+                    raise ValueError(
+                        'A Wilaya is missing "id".'
+                    )
+
+                if not code:
+                    raise ValueError(
+                        f'Wilaya {source_id} is missing "code".'
+                    )
+
+                if not name:
+                    raise ValueError(
+                        f'Wilaya {source_id} is missing "name".'
+                    )
+
+                wilaya = Wilaya.objects.create(
+                    name=name,
+                    code=code,
+                    is_active=True,
+                )
+
+                wilaya_map[source_id] = wilaya
+
+            # ---------------------------------------------
+            # Communes
+            # ---------------------------------------------
+
+            for item in commune_data:
+
+                name = str(item.get('name', '')).strip()
+                wilaya_source_id = str(
+                    item.get('wilaya_id', '')
+                ).strip()
+
+                if not name:
+                    raise ValueError(
+                        'A Commune is missing "name".'
+                    )
+
+                if not wilaya_source_id:
+                    raise ValueError(
+                        f'Commune "{name}" is missing "wilaya_id".'
+                    )
+
+                wilaya = wilaya_map.get(
+                    wilaya_source_id
+                )
+
+                if not wilaya:
+                    raise ValueError(
+                        f'Commune "{name}" references '
+                        f'unknown Wilaya ID "{wilaya_source_id}".'
+                    )
+
+                Commune.objects.create(
+                    wilaya=wilaya,
+                    name=name,
+                    delivery_price=0,
+                    is_active=True,
+                )
+
+    except Exception as exc:
+        return HttpResponse(
+            f'Import failed. No data was imported.<br><br>{exc}',
+            status=500
+        )
+
+    return HttpResponse(
+        f'''
+        <h2>Import completed successfully.</h2>
+        <p>Wilayas imported: {Wilaya.objects.count()}</p>
+        <p>Communes imported: {Commune.objects.count()}</p>
+        <p>Future requests will do nothing.</p>
+        '''
     )
