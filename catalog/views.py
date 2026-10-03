@@ -607,7 +607,13 @@ def cart(request):
 def cart_update(request, product_id):
     """تحديث كمية منتج داخل السلة."""
     if request.method != 'POST':
-        return redirect('catalog:cart')
+        return JsonResponse(
+            {
+                'success': False,
+                'message': 'Invalid request method.'
+            },
+            status=405
+        )
 
     product = get_object_or_404(
         Product,
@@ -616,7 +622,12 @@ def cart_update(request, product_id):
     )
 
     try:
-        quantity = int(request.POST.get('quantity', 0))
+        quantity = int(
+            request.POST.get(
+                'quantity',
+                0
+            )
+        )
     except (TypeError, ValueError):
         quantity = 0
 
@@ -624,31 +635,218 @@ def cart_update(request, product_id):
     key = str(product.id)
 
     if quantity <= 0:
-        cart_data.pop(key, None)
+
+        cart_data.pop(
+            key,
+            None
+        )
+
     elif product.quantity <= 0:
-        cart_data.pop(key, None)
+
+        cart_data.pop(
+            key,
+            None
+        )
+
     else:
-        cart_data[key] = min(quantity, product.quantity)
+
+        quantity = min(
+            quantity,
+            product.quantity
+        )
+
+        cart_data[key] = quantity
+
+    cart_total = Decimal('0')
+    cart_count = 0
+
+    for cart_key, qty in list(
+        cart_data.items()
+    ):
+
+        try:
+            cart_product = Product.objects.get(
+                id=int(cart_key),
+                is_active=True
+            )
+
+        except (
+            Product.DoesNotExist,
+            ValueError,
+            TypeError
+        ):
+
+            cart_data.pop(
+                cart_key,
+                None
+            )
+
+            continue
+
+        if cart_product.quantity <= 0:
+
+            cart_data.pop(
+                cart_key,
+                None
+            )
+
+            continue
+
+        try:
+            qty = int(qty)
+
+        except (
+            TypeError,
+            ValueError
+        ):
+
+            cart_data.pop(
+                cart_key,
+                None
+            )
+
+            continue
+
+        actual_quantity = min(
+            qty,
+            cart_product.quantity
+        )
+
+        if actual_quantity <= 0:
+
+            cart_data.pop(
+                cart_key,
+                None
+            )
+
+            continue
+
+        cart_data[cart_key] = (
+            actual_quantity
+        )
+
+        cart_total += (
+            cart_product.price *
+            actual_quantity
+        )
+
+        cart_count += actual_quantity
 
     request.session['cart'] = cart_data
     request.session.modified = True
 
-    return redirect('catalog:cart')
+    if key not in cart_data:
 
+        return JsonResponse(
+            {
+                'success': True,
+                'removed': True,
+                'quantity': 0,
+                'max_quantity': product.quantity,
+                'subtotal': '0.00',
+                'cart_total':
+                    f'{cart_total:.2f}',
+                'cart_count':
+                    cart_count,
+            }
+        )
+
+    current_quantity = (
+        cart_data[key]
+    )
+
+    subtotal = (
+        product.price *
+        current_quantity
+    )
+
+    return JsonResponse(
+        {
+            'success': True,
+            'removed': False,
+            'quantity':
+                current_quantity,
+            'max_quantity':
+                product.quantity,
+            'subtotal':
+                f'{subtotal:.2f}',
+            'cart_total':
+                f'{cart_total:.2f}',
+            'cart_count':
+                cart_count,
+        }
+    )
 
 def cart_remove(request, product_id):
     """حذف منتج من السلة."""
     if request.method != 'POST':
-        return redirect('catalog:cart')
+        return JsonResponse(
+            {
+                'success': False,
+                'message': 'Invalid request method.'
+            },
+            status=405
+        )
 
     cart_data = _get_cart(request)
+
+    # Remove requested product
     cart_data.pop(str(product_id), None)
+
+    # Recalculate cart totals
+    cart_total = Decimal('0')
+    cart_count = 0
+
+    for cart_key, qty in list(cart_data.items()):
+        try:
+            product = Product.objects.get(
+                id=int(cart_key),
+                is_active=True
+            )
+        except (Product.DoesNotExist, ValueError, TypeError):
+            # Remove invalid product from session
+            cart_data.pop(cart_key, None)
+            continue
+
+        # Remove out-of-stock products
+        if product.quantity <= 0:
+            cart_data.pop(cart_key, None)
+            continue
+
+        try:
+            qty = int(qty)
+        except (TypeError, ValueError):
+            cart_data.pop(cart_key, None)
+            continue
+
+        actual_quantity = min(
+            qty,
+            product.quantity
+        )
+
+        if actual_quantity <= 0:
+            cart_data.pop(cart_key, None)
+            continue
+
+        if actual_quantity != qty:
+            cart_data[cart_key] = actual_quantity
+
+        cart_total += (
+            product.price * actual_quantity
+        )
+        cart_count += actual_quantity
 
     request.session['cart'] = cart_data
     request.session.modified = True
 
-    return redirect('catalog:cart')
-
+    return JsonResponse(
+        {
+            'success': True,
+            'removed': True,
+            'cart_total': f'{cart_total:.2f}',
+            'cart_count': cart_count,
+        }
+    )
 
 def cart_checkout(request):
     """إتمام طلب جميع المنتجات الموجودة في السلة."""

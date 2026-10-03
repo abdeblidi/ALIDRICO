@@ -235,177 +235,183 @@
 
         {% if items %}
 
-        <div class="row g-4">
+            <div class="row g-4">
 
-            <div class="col-lg-8">
-
-                <div class="cart-card">
+                <div class="col-lg-8">
 
                     {% for item in items %}
 
-                    <div class="cart-item">
+                        <div
+                            class="cart-item"
+                            data-update-url="{% url 'catalog:cart_update' item.product.id %}"
+                            data-remove-url="{% url 'catalog:cart_remove' item.product.id %}"
+                        >
+                            <div class="cart-item-image">
+                                {% if item.product.image %}
+                                    <img
+                                        src="{{ item.product.image.url }}"
+                                        alt="{{ item.product.name }}"
+                                    >
+                                {% else %}
+                                    <i class="bi bi-cpu"></i>
+                                {% endif %}
+                            </div>
 
-                        <div class="cart-item-image">
-                            {% if item.product.image %}
-                                <img
-                                    src="{{ item.product.image.url }}"
-                                    alt="{{ item.product.name }}"
+                            <div class="cart-item-info" style="min-width: 300px;">
+                                <h5>
+                                    {{ item.product.name }}
+                                </h5>
+
+                                <div class="part-number">
+                                    {{ item.product.part_number }}
+                                </div>
+
+                                <div class="cart-item-price">
+                                    {{ item.unit_price|floatformat:2 }} DZD
+                                </div>
+                            </div>
+
+                            <form class="quantity-form">
+                                {% csrf_token %}
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                    onclick="changeQuantity(this, -1)"
+                                    {% if item.quantity <= 1 %}disabled{% endif %}
+                                    title="{% translate 'إنقاص الكمية' %}"
+                                    aria-label="{% translate 'إنقاص الكمية' %}"
                                 >
-                            {% else %}
-                                <i class="bi bi-cpu"></i>
-                            {% endif %}
-                        </div>
+                                    −
+                                </button>
 
-                        <div class="cart-item-info" style="min-width: 300px;">
+                                <input
+                                    type="number"
+                                    name="quantity"
+                                    class="quantity-input"
+                                    value="{{ item.quantity }}"
+                                    min="1"
+                                    max="{{ item.product.quantity }}"
+                                    inputmode="numeric"
+                                    aria-label="{% translate 'الكمية' %}"
+                                    onchange="setQuantity(this)"
+                                    onkeydown="handleQuantityKeydown(event, this)"
+                                >
 
-                            <h5>
-                                {{ item.product.name }}
-                            </h5>
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                    onclick="changeQuantity(this, 1)"
+                                    {% if item.quantity >= item.product.quantity %}disabled{% endif %}
+                                    title="{% translate 'زيادة الكمية' %}"
+                                    aria-label="{% translate 'زيادة الكمية' %}"
+                                >
+                                    +
+                                </button>
+                            </form>
 
-                            <div class="part-number">
-                                {{ item.product.part_number }}
+                            <div class="cart-subtotal">
+                                {{ item.subtotal|floatformat:2 }} DZD
                             </div>
 
-                            <div class="cart-item-price">
-                                {{ item.unit_price|floatformat:2 }} DZD
-                            </div>
+                            <form
+                                class="remove-form"
+                                onsubmit="removeCartItem(event, this)"
+                            >
+                                {% csrf_token %}
 
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-danger"
+                                    title="{% translate 'حذف' %}"
+                                >
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
                         </div>
-
-                        <form
-                            method="post"
-                            action="{% url 'catalog:cart_update' item.product.id %}"
-                            class="quantity-form"
-                        >
-                            {% csrf_token %}
-
-                            <button
-                                type="button"
-                                class="quantity-btn"
-                                onclick="changeQuantity(this, -1)"
-                                {% if item.quantity <= 1 %}disabled{% endif %}
-                                title="{% translate 'إنقاص الكمية' %}"
-                                aria-label="{% translate 'إنقاص الكمية' %}"
-                            >
-                                −
-                            </button>
-
-                            <input
-                                type="number"
-                                name="quantity"
-                                value="{{ item.quantity }}"
-                                min="1"
-                                max="{{ item.product.quantity }}"
-                                readonly
-                                aria-label="{% translate 'الكمية' %}"
-                            >
-
-                            <button
-                                type="button"
-                                class="quantity-btn"
-                                onclick="changeQuantity(this, 1)"
-                                {% if item.quantity >= item.product.quantity %}disabled{% endif %}
-                                title="{% translate 'زيادة الكمية' %}"
-                                aria-label="{% translate 'زيادة الكمية' %}"
-                            >
-                                +
-                            </button>
-                        </form>
-
-                        <div class="cart-subtotal">
-                            {{ item.subtotal|floatformat:2 }} DZD
-                        </div>
-
-                        <form
-                            method="post"
-                            action="{% url 'catalog:cart_remove' item.product.id %}"
-                            class="remove-form"
-                        >
-                            {% csrf_token %}
-
-                            <button
-                                type="submit"
-                                class="btn btn-outline-danger"
-                                title="{% translate 'حذف' %}"
-                            >
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
-
-                    </div>
 
                     {% endfor %}
 
                 </div>
 
-            </div>
+                <div class="col-lg-4">
 
-            <div class="col-lg-4">
+                    <div class="cart-summary">
 
-                <div class="cart-summary">
+                        <h4>
+                            <i class="bi bi-receipt me-2"></i>
+                            {% translate "ملخص الطلب" %}
+                        </h4>
 
-                    <h4>
-                        <i class="bi bi-receipt me-2"></i>
-                        {% translate "ملخص الطلب" %}
-                    </h4>
+                        <div class="summary-row">
+                            <span>
+                                {% translate "عدد المنتجات" %}
+                            </span>
 
-                    <div class="summary-row">
-                        <span>{% translate "عدد المنتجات" %}</span>
-                        <span>{{ cart_count }}</span>
+                            <span class="cart-count">
+                                {{ cart_count }}
+                            </span>
+                        </div>
+
+                        <div class="summary-row summary-total">
+                            <span>
+                                {% translate "الإجمالي" %}
+                            </span>
+
+                            <span class="cart-total">
+                                {{ total|floatformat:2 }} DZD
+                            </span>
+                        </div>
+
+                        <a
+                            href="{% url 'catalog:cart_checkout' %}"
+                            class="btn btn-primary-custom w-100 mt-3"
+                        >
+                            <i class="bi bi-check2-circle me-2"></i>
+                            {% translate "إتمام الطلب" %}
+                        </a>
+
+                        <a
+                            href="{% url 'catalog:products' %}"
+                            class="btn btn-outline-custom w-100 mt-2"
+                        >
+                            <i class="bi bi-arrow-left me-2"></i>
+                            {% translate "مواصلة التسوق" %}
+                        </a>
+
                     </div>
-
-                    <div class="summary-row summary-total">
-                        <span>{% translate "الإجمالي" %}</span>
-                        <span>{{ total|floatformat:2 }} DZD</span>
-                    </div>
-
-                    <a
-                        href="{% url 'catalog:cart_checkout' %}"
-                        class="btn btn-primary-custom w-100 mt-3"
-                    >
-                        <i class="bi bi-check2-circle me-2"></i>
-                        {% translate "إتمام الطلب" %}
-                    </a>
-
-                    <a
-                        href="{% url 'catalog:products' %}"
-                        class="btn btn-outline-custom w-100 mt-2"
-                    >
-                        <i class="bi bi-arrow-left me-2"></i>
-                        {% translate "مواصلة التسوق" %}
-                    </a>
 
                 </div>
 
             </div>
 
-        </div>
-
         {% else %}
 
-        <div class="cart-card">
-            <div class="empty-cart">
+            <div class="cart-card">
 
-                <i class="bi bi-cart-x"></i>
+                <div class="empty-cart">
 
-                <h3>
-                    {% translate "السلة فارغة" %}
-                </h3>
+                    <i class="bi bi-cart-x"></i>
 
-                <p class="text-muted">
-                    {% translate "لم تضف أي منتج إلى السلة بعد." %}
-                </p>
+                    <h3>
+                        {% translate "السلة فارغة" %}
+                    </h3>
 
-                <a
-                    href="{% url 'catalog:products' %}"
-                    class="btn btn-primary-custom mt-3"
-                >
-                    <i class="bi bi-grid me-2"></i>
-                    {% translate "تصفح المنتجات" %}
-                </a>
+                    <p class="text-muted">
+                        {% translate "لم تضف أي منتج إلى السلة بعد." %}
+                    </p>
+
+                    <a
+                        href="{% url 'catalog:products' %}"
+                        class="btn btn-primary-custom mt-3"
+                    >
+                        <i class="bi bi-grid me-2"></i>
+                        {% translate "تصفح المنتجات" %}
+                    </a>
+
+                </div>
 
             </div>
-        </div>
 
         {% endif %}
 
@@ -413,24 +419,486 @@
 </section>
 
 <script>
-function changeQuantity(button, change) {
-    const form = button.closest('form');
-    const input = form.querySelector('input[name="quantity"]');
+    function getCsrfToken(form) {
+        const csrfInput = form.querySelector(
+            '[name="csrfmiddlewaretoken"]'
+        );
 
-    let quantity = parseInt(input.value, 10);
-    const min = parseInt(input.min, 10);
-    const max = parseInt(input.max, 10);
+        if (!csrfInput) {
+            throw new Error('CSRF token not found');
+        }
 
-    if (Number.isNaN(quantity)) {
-        quantity = min;
+        return csrfInput.value;
     }
 
-    quantity += change;
-    quantity = Math.max(min, Math.min(max, quantity));
 
-    input.value = quantity;
-    form.submit();
-}
+    function getQuantityInput(button) {
+        const form = button.closest('.quantity-form');
+
+        if (!form) {
+            return null;
+        }
+
+        return form.querySelector(
+            'input[name="quantity"]'
+        );
+    }
+
+
+    async function changeQuantity(button, change) {
+        const cartItem = button.closest('.cart-item');
+        const form = button.closest('.quantity-form');
+        const input = getQuantityInput(button);
+
+        if (!cartItem || !form || !input) {
+            return;
+        }
+
+        let quantity = parseInt(input.value, 10);
+
+        const min = parseInt(input.min, 10) || 1;
+        const max = parseInt(input.max, 10);
+
+        if (Number.isNaN(quantity)) {
+            quantity = min;
+        }
+
+        if (Number.isNaN(max)) {
+            return;
+        }
+
+        const newQuantity = Math.max(
+            min,
+            Math.min(max, quantity + change)
+        );
+
+        if (newQuantity === quantity) {
+            return;
+        }
+
+        await updateCartQuantity(
+            cartItem,
+            form,
+            input,
+            newQuantity
+        );
+    }
+
+
+    async function setQuantity(input) {
+        const cartItem = input.closest('.cart-item');
+        const form = input.closest('.quantity-form');
+
+        if (!cartItem || !form) {
+            return;
+        }
+
+        const min = parseInt(input.min, 10) || 1;
+        const max = parseInt(input.max, 10);
+
+        let quantity = parseInt(input.value, 10);
+
+        /*
+         * Invalid number:
+         * restore the current quantity already stored in the input.
+         */
+        if (Number.isNaN(quantity)) {
+            const currentValue = parseInt(
+                input.dataset.currentValue,
+                10
+            );
+
+            input.value = Number.isNaN(currentValue)
+                ? min
+                : currentValue;
+
+            return;
+        }
+
+        /*
+         * Keep quantity inside the allowed range.
+         */
+        quantity = Math.max(min, quantity);
+
+        if (!Number.isNaN(max)) {
+            quantity = Math.min(max, quantity);
+        }
+
+        input.value = quantity;
+
+        const currentQuantity = parseInt(
+            input.dataset.currentValue,
+            10
+        );
+
+        /*
+         * Nothing changed.
+         */
+        if (
+            !Number.isNaN(currentQuantity) &&
+            quantity === currentQuantity
+        ) {
+            updateQuantityButtons(
+                cartItem,
+                quantity,
+                max
+            );
+
+            return;
+        }
+
+        await updateCartQuantity(
+            cartItem,
+            form,
+            input,
+            quantity
+        );
+    }
+
+
+    function handleQuantityKeydown(event, input) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+
+            input.blur();
+        }
+    }
+
+
+    async function updateCartQuantity(
+        cartItem,
+        form,
+        input,
+        quantity
+    ) {
+        const buttons = form.querySelectorAll(
+            '.quantity-btn'
+        );
+
+        /*
+         * Disable quantity buttons while request is running.
+         */
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
+
+        /*
+         * Disable manual editing while request is running.
+         */
+        input.disabled = true;
+
+        try {
+            const response = await fetch(
+                cartItem.dataset.updateUrl,
+                {
+                    method: 'POST',
+
+                    headers: {
+                        'X-CSRFToken': getCsrfToken(form),
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type':
+                            'application/x-www-form-urlencoded',
+                    },
+
+                    body: new URLSearchParams({
+                        quantity: quantity
+                    })
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    `HTTP error: ${response.status}`
+                );
+            }
+
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(
+                    data.message ||
+                    'Failed to update cart'
+                );
+            }
+
+            /*
+             * Backend may have removed the product.
+             */
+            if (data.removed) {
+                cartItem.remove();
+
+                updateCartTotal(data);
+
+                const remainingItems =
+                    document.querySelectorAll(
+                        '.cart-item'
+                    );
+
+                if (remainingItems.length === 0) {
+                    location.reload();
+                }
+
+                return;
+            }
+
+            /*
+             * Use the actual quantity accepted by the server.
+             */
+            input.value = data.quantity;
+
+            /*
+             * Remember the current server value.
+             * This is useful if the customer types an invalid value later.
+             */
+            input.dataset.currentValue =
+                data.quantity;
+
+            /*
+             * Update maximum stock.
+             */
+            if (
+                data.max_quantity !== undefined &&
+                data.max_quantity !== null
+            ) {
+                input.max = data.max_quantity;
+            }
+
+            /*
+             * Update subtotal.
+             */
+            const subtotal =
+                cartItem.querySelector(
+                    '.cart-subtotal'
+                );
+
+            if (
+                subtotal &&
+                data.subtotal !== undefined
+            ) {
+                subtotal.textContent =
+                    `${data.subtotal} DZD`;
+            }
+
+            /*
+             * Update + and − buttons.
+             */
+            updateQuantityButtons(
+                cartItem,
+                data.quantity,
+                data.max_quantity !== undefined
+                    ? data.max_quantity
+                    : parseInt(input.max, 10)
+            );
+
+            /*
+             * Update cart total and cart count.
+             */
+            updateCartTotal(data);
+
+        } catch (error) {
+            console.error(
+                'Cart quantity update error:',
+                error
+            );
+
+            /*
+             * Restore previous valid quantity.
+             */
+            const previousQuantity =
+                parseInt(
+                    input.dataset.currentValue,
+                    10
+                );
+
+            if (!Number.isNaN(previousQuantity)) {
+                input.value = previousQuantity;
+            }
+
+            updateQuantityButtons(
+                cartItem,
+                parseInt(input.value, 10) || 1,
+                parseInt(input.max, 10)
+            );
+
+            alert(
+                'Unable to update the cart. Please try again.'
+            );
+
+        } finally {
+            /*
+             * Re-enable manual input.
+             */
+            input.disabled = false;
+        }
+    }
+
+
+    function updateQuantityButtons(
+        cartItem,
+        quantity,
+        maxQuantity
+    ) {
+        const form =
+            cartItem.querySelector(
+                '.quantity-form'
+            );
+
+        if (!form) {
+            return;
+        }
+
+        const buttons =
+            form.querySelectorAll(
+                '.quantity-btn'
+            );
+
+        if (buttons.length < 2) {
+            return;
+        }
+
+        buttons[0].disabled =
+            quantity <= 1;
+
+        buttons[1].disabled =
+            quantity >= maxQuantity;
+    }
+
+
+    function updateCartTotal(data) {
+        const totalElement =
+            document.querySelector(
+                '.cart-total'
+            );
+
+        if (
+            totalElement &&
+            data.cart_total !== undefined
+        ) {
+            totalElement.textContent =
+                `${data.cart_total} DZD`;
+        }
+
+        const countElement =
+            document.querySelector(
+                '.cart-count'
+            );
+
+        if (
+            countElement &&
+            data.cart_count !== undefined
+        ) {
+            countElement.textContent =
+                data.cart_count;
+        }
+    }
+
+
+    async function removeCartItem(event, form) {
+        event.preventDefault();
+
+        const cartItem =
+            form.closest('.cart-item');
+
+        if (!cartItem) {
+            return;
+        }
+
+        const button =
+            form.querySelector(
+                'button[type="submit"]'
+            );
+
+        if (button) {
+            button.disabled = true;
+        }
+
+        try {
+            const response = await fetch(
+                cartItem.dataset.removeUrl,
+                {
+                    method: 'POST',
+
+                    headers: {
+                        'X-CSRFToken':
+                            getCsrfToken(form),
+
+                        'X-Requested-With':
+                            'XMLHttpRequest',
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    `HTTP error: ${response.status}`
+                );
+            }
+
+            const data =
+                await response.json();
+
+            if (!data.success) {
+                throw new Error(
+                    data.message ||
+                    'Failed to remove item'
+                );
+            }
+
+            /*
+             * Remove the item from the page.
+             */
+            cartItem.remove();
+
+            /*
+             * Update total and count.
+             */
+            updateCartTotal(data);
+
+            /*
+             * Reload when cart becomes empty.
+             */
+            const remainingItems =
+                document.querySelectorAll(
+                    '.cart-item'
+                );
+
+            if (remainingItems.length === 0) {
+                location.reload();
+            }
+
+        } catch (error) {
+            console.error(
+                'Cart remove error:',
+                error
+            );
+
+            if (button) {
+                button.disabled = false;
+            }
+
+            alert(
+                'Unable to remove the item. Please try again.'
+            );
+        }
+    }
+
+
+    /*
+     * Initialize current values after page load.
+     */
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+            document
+                .querySelectorAll(
+                    '.quantity-input'
+                )
+                .forEach(input => {
+                    input.dataset.currentValue =
+                        input.value;
+                });
+        }
+    );
 </script>
 
 {% endblock %}
